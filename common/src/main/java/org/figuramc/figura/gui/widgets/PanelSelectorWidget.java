@@ -8,7 +8,6 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.figuramc.figura.FiguraMod;
-import org.figuramc.figura.config.Configs;
 import org.figuramc.figura.entries.FiguraScreen;
 import org.figuramc.figura.gui.screens.*;
 import org.figuramc.figura.utils.FiguraIdentifier;
@@ -144,7 +143,7 @@ public class PanelSelectorWidget extends AbstractContainerElement {
         }
     }
 
-    private static class PanelButton extends IconButton {
+    public static class PanelButton extends IconButton {
 
         public static final ResourceLocation TEXTURE = new FiguraIdentifier("textures/gui/panels_button.png");
         public static final ResourceLocation ICONS = new FiguraIdentifier("textures/gui/panels.png");

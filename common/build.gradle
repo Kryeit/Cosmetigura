@@ -34,6 +34,8 @@ dependencies {
     // Do NOT use other classes from fabric loader
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
 
+    modImplementation "dev.architectury:architectury:$rootProject.architectury_api_version"
+
     // Test compile only is used to mount sources on an IDE without overriding vanilla classes with Optifine's
     testCompileOnly fileTree(dir: "$rootProject.projectDir/libs", include: '*.jar')
 }

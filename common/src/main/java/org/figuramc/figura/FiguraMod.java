@@ -13,8 +13,8 @@ import org.figuramc.figura.avatar.local.LocalAvatarLoader;
 import org.figuramc.figura.backend2.NetworkStuff;
 import org.figuramc.figura.compat.GeckoLibCompat;
 import org.figuramc.figura.compat.SimpleVCCompat;
-import org.figuramc.figura.config.ConfigManager;
 import org.figuramc.figura.config.Configs;
+import org.figuramc.figura.cosmetics.network.FiguraNetworkManager;
 import org.figuramc.figura.entries.EntryPointManager;
 import org.figuramc.figura.font.Emojis;
 import org.figuramc.figura.lua.FiguraLuaPrinter;
@@ -34,7 +34,6 @@ import java.util.List;
 import java.util.UUID;
 
 public class FiguraMod {
-
     public static final String MOD_ID = "figura";
     public static final String MOD_NAME = "Figura";
     public static final FiguraModMetadata METADATA = FiguraModMetadata.getMetadataForMod(MOD_ID);
@@ -68,6 +67,8 @@ public class FiguraMod {
 
         GeckoLibCompat.init();
         SimpleVCCompat.init();
+
+        FiguraNetworkManager.init(false);
     }
 
     public static List<FiguraResourceListener> getResourceListeners() {

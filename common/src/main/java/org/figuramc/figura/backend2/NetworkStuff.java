@@ -35,8 +35,6 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.ByteBuffer;
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.BitSet;
@@ -311,7 +309,7 @@ public class NetworkStuff {
 
             JsonObject json = JsonParser.parseString(data).getAsJsonObject();
 
-            //avatars
+            //avatars (hash, (id, owner))
             ArrayList<Pair<String, Pair<String, UUID>>> avatars = new ArrayList<>();
 
             JsonArray equippedAvatars = json.getAsJsonArray("equipped");
@@ -350,7 +348,7 @@ public class NetworkStuff {
         if (avatar == null || avatar.nbt == null)
             return;
 
-        String id = avatar.id == null || true ? "avatar" : avatar.id; //TODO - profile screen
+        String id = "avatar"; //TODO - profile screen
 
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -380,7 +378,7 @@ public class NetworkStuff {
     }
 
     public static void deleteAvatar(String avatar) {
-        String id = avatar == null || true ? "avatar" : avatar; //TODO - profile screen
+        String id = "avatar"; //TODO - profile screen
         queueString(Util.NIL_UUID, api -> api.deleteAvatar(id), (code, data) -> {
             responseDebug("deleteAvatar", code, data);
 

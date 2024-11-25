@@ -5,16 +5,8 @@ import net.minecraft.nbt.*;
 import org.figuramc.figura.FiguraMod;
 import org.figuramc.figura.math.vector.FiguraVec3;
 import org.figuramc.figura.model.ParentType;
-import org.figuramc.figura.utils.IOUtils;
-import org.figuramc.figura.FiguraMod;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.*;
-import java.util.regex.Pattern;
 
 //main class to convert a blockbench model (json) into nbt
 //default fields are omitted from the nbt to save up space
@@ -34,7 +26,7 @@ public class BlockbenchModelParser {
     private final HashMap<Integer, String> textureIdMap = new HashMap<>();
 
     //parser
-    public ModelData parseModel(Path avatarFolder, Path sourceFile, String json, String modelName, String folders) throws Exception {
+    public ModelData parseModel(String json, String modelName, String folders) throws Exception {
         // parse json -> object
         BlockbenchModel model = GSON.fromJson(json, BlockbenchModel.class);
 
@@ -51,13 +43,12 @@ public class BlockbenchModelParser {
         //object -> nbt
         CompoundTag nbt = new CompoundTag();
         nbt.putString("name", modelName);
-        parseParent(modelName, nbt);
 
         //parse textures first
         //we want to save the textures in a separated list
         //we also want to fix the UV mismatch from the resolution and the texture
         //emissive textures are not put into the texture map, so we need to fix parts texture ids
-        parseTextures(avatarFolder, sourceFile, folders, modelName, textures, model.textures, model.resolution);
+        parseTextures(modelName, textures, model.textures, model.resolution);
 
         //parse elements into a map of UUID (String) -> NbtCompound (the element)
         //later when parsing the outliner, we fetch the elements from this map
@@ -89,7 +80,7 @@ public class BlockbenchModelParser {
 
     // -- internal functions -- //
 
-    private void parseTextures(Path avatar, Path sourceFile, String folders, String modelName, CompoundTag texturesNbt, BlockbenchModel.Texture[] textures, BlockbenchModel.Resolution resolution) throws Exception {
+    private void parseTextures(String modelName, CompoundTag texturesNbt, BlockbenchModel.Texture[] textures, BlockbenchModel.Resolution resolution) throws Exception {
         if (textures == null)
             return;
 
@@ -128,59 +119,59 @@ public class BlockbenchModelParser {
             }
 
             //parse the texture data
-            String path;
-            byte[] source;
-            try {
-                // Check the file to load
-                Path p = sourceFile.getParent().resolve(texture.relative_path);
-                if (p.getFileSystem() == FileSystems.getDefault())
-                    p = p.toFile().getCanonicalFile().toPath();
+//            String path;
+//            byte[] source;
+//            try {
+//                // Check the file to load
+//                Path p = sourceFile.getParent().resolve(texture.relative_path);
+//                if (p.getFileSystem() == FileSystems.getDefault())
+//                    p = p.toFile().getCanonicalFile().toPath();
+//
+//                p = p.normalize();
+//
+//                if (!Files.exists(p) || (avatar.getNameCount() > 1 && !p.startsWith(avatar))) {
+//                    // Compatibility with old Blockbench models. (BB 4.9-)
+//                    if (texture.relative_path.startsWith("../")) {
+//                        p = sourceFile.resolve(texture.relative_path);
+//                        if (p.getFileSystem() == FileSystems.getDefault())
+//                            p = p.toFile().getCanonicalFile().toPath();
+//
+//                        p = p.normalize();
+//
+//                        if (!Files.exists(p))
+//                            throw new IllegalStateException("File does not exist!");
+//                    } else {
+//                        throw new IllegalStateException("File does not exist!");
+//                    }
+//                }
+//
+//
+//                // Make sure we are still looking in the avatar's folder
+//                if ((avatar.getNameCount() > 1 && !p.startsWith(avatar)) || p.getFileSystem() != avatar.getFileSystem())
+//                    throw new IllegalStateException("File from outside the avatar folder!");
+//
+//                FiguraMod.debug("path is {}", p.toString());
+//                //load texture
+//                source = IOUtils.readFileBytes(p);
+//                path = avatar.relativize(p)
+//                        .toString()
+//                        .replace(p.getFileSystem().getSeparator(), ".");
+//                path = path.substring(0, path.length() - 4);
+//
+//                //fix name
+//                name = folders + name;
+//
+//                //feedback
+//                FiguraMod.debug("Loaded {} Texture \"{}\" from {}", textureType.toUpperCase(Locale.US), name, p);
+//            } catch (Exception e) {
+//                if (e instanceof IOException)
+//                    FiguraMod.LOGGER.error("", e);
 
-                p = p.normalize();
-
-                if (!Files.exists(p) || (avatar.getNameCount() > 1 && !p.startsWith(avatar))) {
-                    // Compatibility with old Blockbench models. (BB 4.9-)
-                    if (texture.relative_path.startsWith("../")) {
-                        p = sourceFile.resolve(texture.relative_path);
-                        if (p.getFileSystem() == FileSystems.getDefault())
-                            p = p.toFile().getCanonicalFile().toPath();
-
-                        p = p.normalize();
-
-                        if (!Files.exists(p))
-                            throw new IllegalStateException("File does not exist!");
-                    } else {
-                        throw new IllegalStateException("File does not exist!");
-                    }
-                }
-
-
-                // Make sure we are still looking in the avatar's folder
-                if ((avatar.getNameCount() > 1 && !p.startsWith(avatar)) || p.getFileSystem() != avatar.getFileSystem())
-                    throw new IllegalStateException("File from outside the avatar folder!");
-
-                FiguraMod.debug("path is {}", p.toString());
-                //load texture
-                source = IOUtils.readFileBytes(p);
-                path = avatar.relativize(p)
-                        .toString()
-                        .replace(p.getFileSystem().getSeparator(), ".");
-                path = path.substring(0, path.length() - 4);
-
-                //fix name
-                name = folders + name;
-
-                //feedback
-                FiguraMod.debug("Loaded {} Texture \"{}\" from {}", textureType.toUpperCase(Locale.US), name, p);
-            } catch (Exception e) {
-                if (e instanceof IOException)
-                    FiguraMod.LOGGER.error("", e);
-
-                //otherwise, load from the source stored in the model
-                source = Base64.getDecoder().decode(texture.source.substring("data:image/png;base64,".length()));
-                path = folders + modelName + "." + name;
-                FiguraMod.debug("Loaded {} Texture \"{}\" from {}", textureType.toUpperCase(Locale.US), name, path);
-            }
+            //otherwise, load from the source stored in the model
+            byte[] source = Base64.getDecoder().decode(texture.source.substring("data:image/png;base64,".length()));
+            String path = modelName + "." + name;
+            FiguraMod.debug("Loaded {} Texture \"{}\" from {}", textureType.toUpperCase(Locale.US), name, path);
+//            }
 
             //add source nbt
             src.putByteArray(path, source);
@@ -217,8 +208,7 @@ public class BlockbenchModelParser {
                 float[] fixedSize;
                 if (texture.width != null) {
                     fixedSize = new float[]{(float) texture.width / texture.uv_width, (float) texture.height / texture.uv_height};
-                }
-                else {
+                } else {
                     int[] imageSize = getTextureSize(source);
                     fixedSize = new float[]{(float) imageSize[0] / resolution.width, (float) imageSize[1] / resolution.height};
                 }
@@ -293,10 +283,10 @@ public class BlockbenchModelParser {
             //dont add null faces
             if (!faceObj.has("texture"))
                 continue;
-            try{
-            	faceObj.get("texture").getAsNumber();
-            }catch(Exception e){
-            	continue;
+            try {
+                faceObj.get("texture").getAsNumber();
+            } catch (Exception e) {
+                continue;
             }
             BlockbenchModel.CubeFace face = GSON.fromJson(faceObj, BlockbenchModel.CubeFace.class);
 
@@ -426,11 +416,11 @@ public class BlockbenchModelParser {
 
     private static void readVectors(String[] vertexNames, Map<String, Integer> nameToIndex, ListTag vertices) {
         int i = nameToIndex.get(vertexNames[0]);
-        v1.set(vertices.getFloat(3*i), vertices.getFloat(3*i+1), vertices.getFloat(3*i+2));
+        v1.set(vertices.getFloat(3 * i), vertices.getFloat(3 * i + 1), vertices.getFloat(3 * i + 2));
         i = nameToIndex.get(vertexNames[1]);
-        v2.set(vertices.getFloat(3*i), vertices.getFloat(3*i+1), vertices.getFloat(3*i+2));
+        v2.set(vertices.getFloat(3 * i), vertices.getFloat(3 * i + 1), vertices.getFloat(3 * i + 2));
         i = nameToIndex.get(vertexNames[2]);
-        v3.set(vertices.getFloat(3*i), vertices.getFloat(3*i+1), vertices.getFloat(3*i+2));
+        v3.set(vertices.getFloat(3 * i), vertices.getFloat(3 * i + 1), vertices.getFloat(3 * i + 2));
         i = nameToIndex.get(vertexNames[3]);
         v4.set(vertices.getFloat(3 * i), vertices.getFloat(3 * i + 1), vertices.getFloat(3 * i + 2));
     }
@@ -770,8 +760,10 @@ public class BlockbenchModelParser {
     }
 
     //dummy texture data
-    private record TextureData(int id, float[] fixedSize) {}
+    private record TextureData(int id, float[] fixedSize) {
+    }
 
     //dummy class containing the return object of the parser
-    public record ModelData(CompoundTag textures, List<CompoundTag> animationList, CompoundTag modelNbt) {}
+    public record ModelData(CompoundTag textures, List<CompoundTag> animationList, CompoundTag modelNbt) {
+    }
 }

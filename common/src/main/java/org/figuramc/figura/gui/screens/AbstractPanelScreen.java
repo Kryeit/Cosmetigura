@@ -47,14 +47,11 @@ public abstract class AbstractPanelScreen extends Screen {
 
     public Class<? extends Screen> getSelectedPanel() {
         return this.getClass();
-    };
+    }
 
     @Override
     protected void init() {
         super.init();
-
-        // add panel selector
-        this.addRenderableWidget(panels = new PanelSelectorWidget(parentScreen, 0, 0, width, getSelectedPanel()));
 
         // clear overlays
         contextMenu = null;

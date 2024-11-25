@@ -136,14 +136,14 @@ public class LocalAvatarLoader {
                 // metadata
                 loadState = LoadState.METADATA;
                 String _meta = IOUtils.readFile(finalPath.resolve("avatar.json"));
-				var metadata = AvatarMetadataParser.read(_meta);
+                var metadata = AvatarMetadataParser.read(_meta);
 
-				CompoundTag metaNBT = AvatarMetadataParser.parse(metadata,_meta, IOUtils.getFileNameOrEmpty(finalPath));
-				nbt.put("metadata", metaNBT);
-				metaNBT.putString("uuid",target.id.toString());
+                CompoundTag metaNBT = AvatarMetadataParser.parse(metadata, _meta, IOUtils.getFileNameOrEmpty(finalPath));
+                nbt.put("metadata", metaNBT);
+                metaNBT.putString("uuid", target.id.toString());
 
-				AvatarMetadataParser.injectToModels(metadata, models);
-				AvatarMetadataParser.injectToTextures(metadata, textures);
+                AvatarMetadataParser.injectToModels(metadata, models);
+                AvatarMetadataParser.injectToTextures(metadata, textures);
 
                 // return :3
                 if (!models.isEmpty())
@@ -167,6 +167,7 @@ public class LocalAvatarLoader {
             }
         });
     }
+
     private static void loadResources(CompoundTag nbt, ListTag pathsTag, Path parentPath) {
         ArrayList<PathMatcher> pathMatchers = new ArrayList<>();
         FileSystem fs = FileSystems.getDefault();
@@ -176,7 +177,7 @@ public class LocalAvatarLoader {
         Map<String, Path> pathMap = new HashMap<>();
         matchPathsRecursive(pathMap, parentPath, parentPath, pathMatchers);
         CompoundTag resourcesTag = new CompoundTag();
-        for (String p:
+        for (String p :
                 pathMap.keySet()) {
             try (FileInputStream fis = new FileInputStream(pathMap.get(p).toFile())) {
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -188,8 +189,7 @@ public class LocalAvatarLoader {
                 gos.close();
                 resourcesTag.put(unixifyPath(p), new ByteArrayTag(baos.toByteArray()));
                 baos.close();
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
@@ -216,8 +216,7 @@ public class LocalAvatarLoader {
                     break;
                 }
             }
-        }
-        else {
+        } else {
             for (File fl :
                     current.toFile().listFiles()) {
                 matchPathsRecursive(pathMap, parent, fl.toPath(), matchers);
@@ -274,7 +273,7 @@ public class LocalAvatarLoader {
                         children.add(subfolder);
                     }
                 } else if (file.toString().toLowerCase(Locale.US).endsWith(".bbmodel")) {
-                    BlockbenchModelParser.ModelData data = parser.parseModel(avatarFolder, file, IOUtils.readFile(file), name.substring(0, name.length() - 8), folders);
+                    BlockbenchModelParser.ModelData data = parser.parseModel(IOUtils.readFile(file), name.substring(0, name.length() - 8), folders);
                     children.add(data.modelNbt());
                     animations.addAll(data.animationList());
 
@@ -350,7 +349,7 @@ public class LocalAvatarLoader {
     /**
      * register new watch keys
      *
-     * @param path the path to register the watch key
+     * @param path     the path to register the watch key
      * @param consumer a consumer that will process the watch key and its path
      */
     protected static void addWatchKey(Path path, BiConsumer<Path, WatchKey> consumer) {
