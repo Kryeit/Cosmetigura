@@ -8,21 +8,21 @@ import org.figuramc.figura.cosmetics.CosmeticManager;
 public class PutWardrobeEntryS2CPacket implements NetworkManager.NetworkReceiver {
     public static final ResourceLocation ID = new ResourceLocation("figura", "wardrobe_entry");
 
-    public static FriendlyByteBuf write(FriendlyByteBuf buf, long id, CosmeticManager.CosmeticData data) {
+    public static FriendlyByteBuf write(FriendlyByteBuf buf, long id, String name, CosmeticManager.CosmeticType type, byte[] previewImage) {
         buf.writeLong(id);
-        buf.writeByteArray(data.model().getBytes());
-        buf.writeByteArray(data.script().getBytes());
-        buf.writeEnum(data.type());
+        buf.writeUtf(name);
+        buf.writeEnum(type);
+        buf.writeByteArray(previewImage);
         return buf;
     }
 
     @Override
     public void receive(FriendlyByteBuf buf, NetworkManager.PacketContext context) {
         long id = buf.readLong();
-        String model = new String(buf.readByteArray());
-        String script = new String(buf.readByteArray());
+        String name = buf.readUtf();
         CosmeticManager.CosmeticType type = buf.readEnum(CosmeticManager.CosmeticType.class);
+        byte[] previewImage = buf.readByteArray();
 
-        CosmeticManager.cacheData(id, new CosmeticManager.CosmeticData(model, script, type));
+        CosmeticManager.putWardrobeEntry(new CosmeticManager.WardrobeEntry(id, name, type), previewImage);
     }
 }
