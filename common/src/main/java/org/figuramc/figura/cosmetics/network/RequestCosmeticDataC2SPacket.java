@@ -6,7 +6,6 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import org.figuramc.figura.cosmetics.CosmeticBackend;
-import org.figuramc.figura.cosmetics.CosmeticManager;
 
 public class RequestCosmeticDataC2SPacket implements NetworkManager.NetworkReceiver {
     public static final ResourceLocation ID = new ResourceLocation("figura", "request_cosmetic_data");
@@ -20,7 +19,7 @@ public class RequestCosmeticDataC2SPacket implements NetworkManager.NetworkRecei
     public void receive(FriendlyByteBuf buf, NetworkManager.PacketContext context) {
         long id = buf.readLong();
 
-        CosmeticManager.CosmeticData data = CosmeticBackend.getCosmeticData(id);
-        NetworkManager.sendToPlayer((ServerPlayer) context.getPlayer(), CosmeticDataS2CPacket.ID, CosmeticDataS2CPacket.write(new FriendlyByteBuf(Unpooled.buffer()), id, data));
+        CosmeticBackend.getCosmeticData(id).thenAccept(data ->
+                NetworkManager.sendToPlayer((ServerPlayer) context.getPlayer(), CosmeticDataS2CPacket.ID, CosmeticDataS2CPacket.write(new FriendlyByteBuf(Unpooled.buffer()), id, data)));
     }
 }

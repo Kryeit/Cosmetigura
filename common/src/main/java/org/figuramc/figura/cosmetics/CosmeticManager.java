@@ -16,8 +16,6 @@ import org.figuramc.figura.cosmetics.network.RequestCosmeticDataC2SPacket;
 import org.figuramc.figura.parsers.BlockbenchModelParser;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.*;
 
 public class CosmeticManager {
@@ -133,6 +131,10 @@ public class CosmeticManager {
         return result;
     }
 
+    public static void clearWardrobe() {
+        wardrobe.clear();
+    }
+
     public enum CosmeticType {
         BODY,
         HAT;
@@ -152,26 +154,6 @@ public class CosmeticManager {
                 }
                 setEquippedCosmetics(uuid, cosmetics);
             });
-        }
-    }
-
-    static {
-        try {
-            byte[] image = Files.readAllBytes(Path.of("figura", "avatars", "img(1).png"));
-
-            putWardrobeEntry(new WardrobeEntry(
-                    1, "Snowman",
-                    CosmeticType.BODY
-            ), image);
-
-            byte[] image2 = Files.readAllBytes(Path.of("figura", "avatars", "hat.png"));
-
-            putWardrobeEntry(new WardrobeEntry(
-                    2, "Christmas Hat",
-                    CosmeticType.HAT
-            ), image2);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 }

@@ -1,5 +1,6 @@
 package org.figuramc.figura.gui.widgets.lists;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.util.Mth;
@@ -92,6 +93,11 @@ public class AvatarList extends AbstractList {
 
         // reset scissor
         gui.disableScissor();
+
+        if (avatarList.isEmpty()) {
+            gui.drawCenteredString(Minecraft.getInstance().font, "It's looking very empty in here :(", width / 2, 130, 0xAAAAAA);
+            gui.drawCenteredString(Minecraft.getInstance().font, "It's time to fix that ;)", width / 2, 140, 0xAAAAAA);
+        }
 
         // render children
         super.render(gui, mouseX, mouseY, delta);

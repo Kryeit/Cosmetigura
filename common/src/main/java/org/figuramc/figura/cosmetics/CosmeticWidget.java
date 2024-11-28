@@ -56,24 +56,7 @@ public class CosmeticWidget extends AbstractContainerElement {
     }
 
     private boolean toggleEquipped() {
-        long[] equipped = CosmeticManager.getEquippedCosmetics(FiguraMod.getLocalPlayerUUID());
-
-        for (int i = 0; i < equipped.length; i++) {
-            long id = equipped[i];
-            if (cosmetic.id() == id) {
-                long[] newArray = new long[equipped.length - 1];
-                System.arraycopy(equipped, 0, newArray, 0, i);
-                System.arraycopy(equipped, i + 1, newArray, i, equipped.length - i - 1);
-
-                NetworkManager.sendToServer(SelectCosmeticsC2SPacket.ID, SelectCosmeticsC2SPacket.write(new FriendlyByteBuf(Unpooled.buffer()), newArray));
-                return false;
-            }
-        }
-
-        long[] newArray = new long[equipped.length + 1];
-        System.arraycopy(equipped, 0, newArray, 0, equipped.length);
-        newArray[equipped.length] = cosmetic.id();
-        NetworkManager.sendToServer(SelectCosmeticsC2SPacket.ID, SelectCosmeticsC2SPacket.write(new FriendlyByteBuf(Unpooled.buffer()), newArray));
-        return true;
+        NetworkManager.sendToServer(SelectCosmeticsC2SPacket.ID, SelectCosmeticsC2SPacket.write(new FriendlyByteBuf(Unpooled.buffer()), cosmetic.id(), !equipped));
+        return !equipped;
     }
 }

@@ -3,7 +3,6 @@ package org.figuramc.figura.cosmetics;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.util.Properties;
 
 public class BackendConfig {
@@ -14,7 +13,8 @@ public class BackendConfig {
         try {
             Properties prop = new Properties();
             Path path = Path.of("cosmetic-backend-config.properties");
-            prop.load(Files.newInputStream(path, StandardOpenOption.CREATE));
+            path.toFile().createNewFile();
+            prop.load(Files.newInputStream(path));
             prop.putIfAbsent("apiUrl", "");
             prop.putIfAbsent("apiKey", "");
             apiUrl = prop.getProperty("apiUrl").replaceFirst("/*$", "");

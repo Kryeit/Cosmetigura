@@ -4,7 +4,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.MouseHandler;
 import net.minecraft.client.Options;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -129,11 +128,6 @@ public abstract class MinecraftMixin {
         AvatarManager.clearAllAvatars();
         FiguraLuaPrinter.clearPrintQueue();
         NetworkStuff.unsubscribeAll();
-    }
-
-    @Inject(at = @At("RETURN"), method = "setLevel")
-    private void setLevel(ClientLevel world, CallbackInfo ci) {
-        NetworkStuff.auth();
     }
 
     @Inject(at = @At("HEAD"), method = "runTick")

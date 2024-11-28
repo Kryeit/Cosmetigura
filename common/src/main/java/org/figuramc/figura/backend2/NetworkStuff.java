@@ -169,15 +169,15 @@ public class NetworkStuff {
 
 
     public static void auth() {
-        authCheck = RECONNECT;
-        AuthHandler.auth(false);
-        fetchMOTD();
+//        authCheck = RECONNECT;
+//        AuthHandler.auth(false);
+//        fetchMOTD();
     }
 
     public static void reAuth() {
-        authCheck = RECONNECT;
-        AuthHandler.auth(true);
-        fetchMOTD();
+//        authCheck = RECONNECT;
+//        AuthHandler.auth(true);
+//        fetchMOTD();
     }
 
     protected static void authSuccess(String token) {

@@ -1,5 +1,6 @@
 package org.figuramc.figura;
 
+import dev.architectury.event.events.client.ClientLifecycleEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -14,6 +15,7 @@ import org.figuramc.figura.backend2.NetworkStuff;
 import org.figuramc.figura.compat.GeckoLibCompat;
 import org.figuramc.figura.compat.SimpleVCCompat;
 import org.figuramc.figura.config.Configs;
+import org.figuramc.figura.cosmetics.CosmeticManager;
 import org.figuramc.figura.cosmetics.network.FiguraNetworkManager;
 import org.figuramc.figura.entries.EntryPointManager;
 import org.figuramc.figura.font.Emojis;
@@ -69,6 +71,7 @@ public class FiguraMod {
         SimpleVCCompat.init();
 
         FiguraNetworkManager.init(false);
+        ClientLifecycleEvent.CLIENT_LEVEL_LOAD.register(world -> CosmeticManager.clearWardrobe());
     }
 
     public static List<FiguraResourceListener> getResourceListeners() {
