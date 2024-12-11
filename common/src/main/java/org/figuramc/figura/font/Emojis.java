@@ -7,7 +7,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.utils.FiguraResourceListener;
 import org.figuramc.figura.utils.TextUtils;
 
@@ -29,7 +29,7 @@ public class Emojis {
     public static final FiguraResourceListener RESOURCE_LISTENER = FiguraResourceListener.createResourceListener("emojis", manager -> {
         EMOJIS.clear();
 
-        for (Map.Entry<ResourceLocation, Resource> emojis : manager.listResources("emojis", location -> location.getNamespace().equals(FiguraMod.MOD_ID) && location.getPath().endsWith(".json")).entrySet()) {
+        for (Map.Entry<ResourceLocation, Resource> emojis : manager.listResources("emojis", location -> location.getNamespace().equals(CosmetiguraMod.MOD_ID) && location.getPath().endsWith(".json")).entrySet()) {
             ResourceLocation location = emojis.getKey();
             String[] split = location.getPath().split("/", 2);
 
@@ -47,7 +47,7 @@ public class Emojis {
                 container.getLookup().getShortcuts().forEach(shortcut -> SHORTCUT_LOOKUP.put(shortcut, container));
 
             } catch (Exception e) {
-                FiguraMod.LOGGER.error("Failed to load {} emojis", name, e);
+                CosmetiguraMod.LOGGER.error("Failed to load {} emojis", name, e);
             }
         }
 
@@ -78,7 +78,7 @@ public class Emojis {
 
         // Print out each duplicate emoji and which containers it was found in.
         for (String curName : duplicates.keySet()) {
-            FiguraMod.LOGGER.warn("Duplicate emoji \"{}\" found in containers: {}", curName, String.join(", ", duplicates.get(curName)));
+            CosmetiguraMod.LOGGER.warn("Duplicate emoji \"{}\" found in containers: {}", curName, String.join(", ", duplicates.get(curName)));
         }
     });
 

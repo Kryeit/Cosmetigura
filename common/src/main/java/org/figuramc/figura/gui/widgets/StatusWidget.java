@@ -8,7 +8,7 @@ import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.backend2.NetworkStuff;
@@ -57,7 +57,7 @@ public class StatusWidget implements FiguraWidget, FiguraTickable, GuiEventListe
         if (!isVisible()) return;
 
         // update status indicators
-        Avatar avatar = AvatarManager.getAvatarForPlayer(FiguraMod.getLocalPlayerUUID());
+        Avatar avatar = AvatarManager.getAvatarForPlayer(CosmetiguraMod.getLocalPlayerUUID());
         boolean empty = avatar == null || avatar.nbt == null;
 
         status = empty ? 0 : avatar.fileSize > NetworkStuff.getSizeLimit() ? 1 : avatar.fileSize > NetworkStuff.getSizeLimit() * 0.75 ? 2 : 3;

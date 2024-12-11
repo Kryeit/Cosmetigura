@@ -1,7 +1,7 @@
 package org.figuramc.figura.parsers;
 
 import net.minecraft.nbt.ByteArrayTag;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.config.Configs;
 import org.luaj.vm2.ast.Chunk;
 import org.luaj.vm2.ast.NameResolver;
@@ -47,7 +47,7 @@ public class LuaScriptParser {
         };
         ByteArrayTag out;
         if (error) {
-            FiguraMod.LOGGER.warn("Failed to minify the script, likely to be syntax error");
+            CosmetiguraMod.LOGGER.warn("Failed to minify the script, likely to be syntax error");
             out = new ByteArrayTag(script.getBytes(StandardCharsets.UTF_8));
         } else {
             out = new ByteArrayTag(minified.getBytes(StandardCharsets.UTF_8));
@@ -113,7 +113,7 @@ public class LuaScriptParser {
                         if (newline.start() == 0)
                             builder.delete(i, i + newline.end()).insert(i, Optional.ofNullable(newline.group(1)).map(t -> "\n").orElse(" "));
                         else
-                            FiguraMod.LOGGER.warn("script TODO appears to have invalid new line configuration");
+                            CosmetiguraMod.LOGGER.warn("script TODO appears to have invalid new line configuration");
                 }
                 default -> {
                     Matcher word = words.matcher(builder);
@@ -127,7 +127,7 @@ public class LuaScriptParser {
         if (trailingNewline.find())
             builder.replace(trailingNewline.start(), trailingNewline.end(), "\n");
 
-        FiguraMod.debug("Script \"{}\" minified from {} chars to {} chars using LIGHT mode", name, script.length(), builder.length());
+        CosmetiguraMod.debug("Script \"{}\" minified from {} chars to {} chars using LIGHT mode", name, script.length(), builder.length());
 
         error = false;
         return builder.toString();
@@ -165,7 +165,7 @@ public class LuaScriptParser {
             }
         }
 
-        FiguraMod.debug("Script \"{}\" minified from {} chars to {} chars using HEAVY mode", name, script.length(), builder.length());
+        CosmetiguraMod.debug("Script \"{}\" minified from {} chars to {} chars using HEAVY mode", name, script.length(), builder.length());
         return builder.toString();
     }
     
@@ -176,7 +176,7 @@ public class LuaScriptParser {
             LuaScriptBuilderVisitor visitor = new LuaScriptBuilderVisitor();
             chunk.accept(visitor);
             error = false;
-            FiguraMod.debug("Script \"{}\" minified from {} chars to {} chars using AST mode", name, script.length(), visitor.length());
+            CosmetiguraMod.debug("Script \"{}\" minified from {} chars to {} chars using AST mode", name, script.length(), visitor.length());
 
             return visitor.getString();
         } catch (ParseException e) {

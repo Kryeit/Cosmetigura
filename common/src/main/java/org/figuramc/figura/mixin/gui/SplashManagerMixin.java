@@ -5,7 +5,7 @@ import net.minecraft.client.resources.SplashManager;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.util.RandomSource;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Badges;
 import org.figuramc.figura.config.Configs;
 import org.figuramc.figura.utils.ColorUtils;
@@ -37,11 +37,11 @@ public class SplashManagerMixin {
 
     @Inject(at = @At("RETURN"), method = "getSplash")
     private void init(CallbackInfoReturnable<String> cir) {
-        FiguraMod.splashText = null;
+        CosmetiguraMod.splashText = null;
         if (!Configs.EASTER_EGGS.value)
             return;
 
-        Calendar calendar = FiguraMod.CALENDAR;
+        Calendar calendar = CosmetiguraMod.CALENDAR;
         calendar.setTime(new Date());
 
         String who = null;
@@ -49,7 +49,7 @@ public class SplashManagerMixin {
 
         switch (calendar.get(Calendar.MONTH)) {
             case Calendar.MARCH -> {
-                if (day == 24) who = FiguraMod.MOD_NAME;
+                if (day == 24) who = CosmetiguraMod.MOD_NAME;
             }
             case Calendar.JULY -> {
                 if (day == 4) who = "Skylar";
@@ -57,14 +57,14 @@ public class SplashManagerMixin {
         }
 
         if (who != null) {
-            FiguraMod.splashText = Component.literal("Happy birthday " + who + " ")
+            CosmetiguraMod.splashText = Component.literal("Happy birthday " + who + " ")
                     .append(Badges.System.DEFAULT.badge.copy().withStyle(Style.EMPTY.withFont(Badges.FONT).withColor(ColorUtils.Colors.DEFAULT.hex)))
                     .append("!");
         } else {
             int size = this.splashes.size();
             int random = RANDOM.nextInt(size + FIGURA_SPLASHES.size());
             if (random >= size)
-                FiguraMod.splashText = FIGURA_SPLASHES.get(random - size);
+                CosmetiguraMod.splashText = FIGURA_SPLASHES.get(random - size);
         }
     }
 }

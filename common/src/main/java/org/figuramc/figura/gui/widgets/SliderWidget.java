@@ -3,14 +3,14 @@ package org.figuramc.figura.gui.widgets;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import org.figuramc.figura.utils.FiguraIdentifier;
+import org.figuramc.figura.utils.CosmetiguraIdentifier;
 import org.figuramc.figura.utils.ui.UIHelper;
 
 public class SliderWidget extends ScrollBarWidget {
 
     // -- fields -- // 
 
-    public static final ResourceLocation SLIDER_TEXTURE = new FiguraIdentifier("textures/gui/slider.png");
+    public static final ResourceLocation SLIDER_TEXTURE = new CosmetiguraIdentifier("textures/gui/slider.png");
 
     protected final int headHeight = 11;
     protected final int headWidth = 11;

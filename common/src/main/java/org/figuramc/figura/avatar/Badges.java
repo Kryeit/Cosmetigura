@@ -4,13 +4,13 @@ import com.mojang.datafixers.util.Pair;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.*;
 import net.minecraft.resources.ResourceLocation;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.config.Configs;
 import org.figuramc.figura.lua.api.sound.SoundAPI;
 import org.figuramc.figura.permissions.PermissionManager;
 import org.figuramc.figura.permissions.Permissions;
 import org.figuramc.figura.utils.ColorUtils;
-import org.figuramc.figura.utils.FiguraIdentifier;
+import org.figuramc.figura.utils.CosmetiguraIdentifier;
 import org.figuramc.figura.utils.FiguraText;
 import org.figuramc.figura.utils.TextUtils;
 import org.figuramc.figura.utils.ui.UIHelper;
@@ -22,7 +22,7 @@ import java.util.UUID;
 
 public class Badges {
 
-    public static final ResourceLocation FONT = new FiguraIdentifier("badges");
+    public static final ResourceLocation FONT = new CosmetiguraIdentifier("badges");
 
     public static Component fetchBadges(UUID id) {
         if (PermissionManager.get(id).getCategory() == Permissions.Category.BLOCKED)
@@ -42,7 +42,7 @@ public class Badges {
             // -- loading -- // 
 
             if (!avatar.loaded)
-                badges.append(Component.literal(Integer.toHexString(Math.abs(FiguraMod.ticks) % 16)));
+                badges.append(Component.literal(Integer.toHexString(Math.abs(CosmetiguraMod.ticks) % 16)));
 
             // -- mark -- // 
 

@@ -10,7 +10,7 @@ import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.network.chat.Component;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.avatar.Badges;
@@ -104,7 +104,7 @@ public class NetworkStuff {
             processRequests();
 
         //pings counter
-        if (lastPing > 0 && FiguraMod.ticks - lastPing >= 20)
+        if (lastPing > 0 && CosmetiguraMod.ticks - lastPing >= 20)
             lastPing = pingsSent = pingsReceived = 0;
     }
 
@@ -158,7 +158,7 @@ public class NetworkStuff {
 
     private static boolean checkUUID(UUID id) {
         if (id.version() != 4) {
-            FiguraMod.debug("Voiding request for non v4 UUID \"" + id + "\" (v" + id.version() + ")");
+            CosmetiguraMod.debug("Voiding request for non v4 UUID \"" + id + "\" (v" + id.version() + ")");
             return true;
         }
         return false;
@@ -181,13 +181,13 @@ public class NetworkStuff {
     }
 
     protected static void authSuccess(String token) {
-        FiguraMod.LOGGER.info("Successfully authed with the " + FiguraMod.MOD_NAME + " auth server!");
+        CosmetiguraMod.LOGGER.info("Successfully authed with the " + CosmetiguraMod.MOD_NAME + " auth server!");
         disconnectedReason = null;
         connect(token);
     }
 
     protected static void authFail(String reason) {
-        FiguraMod.LOGGER.warn("Failed to auth with the " + FiguraMod.MOD_NAME + " auth server! {}", reason == null ? "" : reason);
+        CosmetiguraMod.LOGGER.warn("Failed to auth with the " + CosmetiguraMod.MOD_NAME + " auth server! {}", reason == null ? "" : reason);
         disconnect(reason);
     }
 
@@ -235,7 +235,7 @@ public class NetworkStuff {
     }
 
     private static void responseDebug(String src, int code, String data) {
-        if (debug) FiguraMod.debug("Got response of \"" + src + "\" with code " + code + ":\n\t" + data);
+        if (debug) CosmetiguraMod.debug("Got response of \"" + src + "\" with code " + code + ":\n\t" + data);
     }
 
     private static void connectAPI(String token) {
@@ -271,7 +271,7 @@ public class NetworkStuff {
             latestVersion = new Version(json.get(config <= 1 ? "release" : "prerelease").getAsString());
             if (config == 0)
                 return;
-            if (latestVersion.compareTo(FiguraMod.VERSION) > 0)
+            if (latestVersion.compareTo(CosmetiguraMod.VERSION) > 0)
                 FiguraToast.sendToast(FiguraText.of("toast.new_version"), latestVersion);
         });
     }
@@ -373,7 +373,7 @@ public class NetworkStuff {
             uploadRate.use();
             baos.close();
         } catch (Exception e) {
-            FiguraMod.LOGGER.error("", e);
+            CosmetiguraMod.LOGGER.error("", e);
         }
     }
 
@@ -430,7 +430,7 @@ public class NetworkStuff {
                 CacheAvatarLoader.save(hash, nbt);
                 target.loadAvatar(nbt);
             } catch (Exception e) {
-                FiguraMod.LOGGER.error("Failed to load avatar for " + target.id, e);
+                CosmetiguraMod.LOGGER.error("Failed to load avatar for " + target.id, e);
             }
         });
         downloadRate.use();
@@ -446,7 +446,7 @@ public class NetworkStuff {
             ws = KeyStoreHelper.websocketWithBackendCertificates(token);
             ws.connect();
         } catch (WebSocketException e) {
-            FiguraMod.LOGGER.error(e.getMessage());
+            CosmetiguraMod.LOGGER.error(e.getMessage());
         }
     }
 
@@ -468,9 +468,9 @@ public class NetworkStuff {
             ws.sendBinary(buffer.array());
 
             pingsSent++;
-            if (lastPing == 0) lastPing = FiguraMod.ticks;
+            if (lastPing == 0) lastPing = CosmetiguraMod.ticks;
         } catch (Exception e) {
-            FiguraMod.LOGGER.error("Failed to send ping", e);
+            CosmetiguraMod.LOGGER.error("Failed to send ping", e);
         }
     }
 
@@ -482,9 +482,9 @@ public class NetworkStuff {
             try {
                 ByteBuffer buffer = C2SMessageHandler.sub(id);
                 client.sendBinary(buffer.array());
-                if (debug) FiguraMod.debug("Subbed to " + id);
+                if (debug) CosmetiguraMod.debug("Subbed to " + id);
             } catch (Exception e) {
-                FiguraMod.LOGGER.error("Failed to subscribe to " + id, e);
+                CosmetiguraMod.LOGGER.error("Failed to subscribe to " + id, e);
             }
         }));
     }
@@ -497,9 +497,9 @@ public class NetworkStuff {
             try {
                 ByteBuffer buffer = C2SMessageHandler.unsub(id);
                 client.sendBinary(buffer.array());
-                if (debug) FiguraMod.debug("Unsubbed to " + id);
+                if (debug) CosmetiguraMod.debug("Unsubbed to " + id);
             } catch (Exception e) {
-                FiguraMod.LOGGER.error("Failed to unsubscribe to " + id, e);
+                CosmetiguraMod.LOGGER.error("Failed to unsubscribe to " + id, e);
             }
         }));
     }

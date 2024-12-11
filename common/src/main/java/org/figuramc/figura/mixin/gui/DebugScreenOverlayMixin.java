@@ -2,7 +2,7 @@ package org.figuramc.figura.mixin.gui;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.components.DebugScreenOverlay;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.backend2.NetworkStuff;
@@ -28,10 +28,10 @@ public class DebugScreenOverlayMixin {
                 break;
         }
 
-        lines.add(++i, ChatFormatting.AQUA + "[" + FiguraMod.MOD_NAME + "]" + ChatFormatting.RESET);
-        lines.add(++i, "Version: " + FiguraMod.VERSION);
+        lines.add(++i, ChatFormatting.AQUA + "[" + CosmetiguraMod.MOD_NAME + "]" + ChatFormatting.RESET);
+        lines.add(++i, "Version: " + CosmetiguraMod.VERSION);
 
-        Avatar avatar = AvatarManager.getAvatarForPlayer(FiguraMod.getLocalPlayerUUID());
+        Avatar avatar = AvatarManager.getAvatarForPlayer(CosmetiguraMod.getLocalPlayerUUID());
         if (avatar != null && avatar.nbt != null) {
             lines.add(++i, String.format("Model Complexity: %d", avatar.complexity.pre));
             lines.add(++i, String.format("Animations Complexity: %d", avatar.animationComplexity));

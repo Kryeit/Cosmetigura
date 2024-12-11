@@ -3,7 +3,7 @@ package org.figuramc.figura.gui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.entity.Entity;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -14,12 +14,12 @@ public class FiguraGui {
         if (AvatarManager.panic)
             return;
 
-        FiguraMod.pushProfiler(FiguraMod.MOD_ID);
+        CosmetiguraMod.pushProfiler(CosmetiguraMod.MOD_ID);
 
         // render popup menu below everything, as if it were in the world
-        FiguraMod.pushProfiler("popupMenu");
+        CosmetiguraMod.pushProfiler("popupMenu");
         PopupMenu.render(guiGraphics);
-        FiguraMod.popProfiler();
+        CosmetiguraMod.popProfiler();
 
         // get avatar
         Entity entity = Minecraft.getInstance().getCameraEntity();
@@ -38,20 +38,20 @@ public class FiguraGui {
             }
         }
 
-        FiguraMod.popProfiler();
+        CosmetiguraMod.popProfiler();
     }
 
     public static void renderOverlays(GuiGraphics guiGraphics) {
-        FiguraMod.pushProfiler(FiguraMod.MOD_ID);
+        CosmetiguraMod.pushProfiler(CosmetiguraMod.MOD_ID);
 
         // render paperdoll
-        FiguraMod.pushProfiler("paperdoll");
+        CosmetiguraMod.pushProfiler("paperdoll");
         PaperDoll.render(guiGraphics, false);
 
         // render wheel
-        FiguraMod.popPushProfiler("actionWheel");
+        CosmetiguraMod.popPushProfiler("actionWheel");
         ActionWheel.render(guiGraphics);
 
-        FiguraMod.popProfiler(2);
+        CosmetiguraMod.popProfiler(2);
     }
 }

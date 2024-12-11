@@ -1,31 +1,31 @@
 modLoader = "javafml"
 loaderVersion = "[47,)"
-issueTrackerURL = "https://github.com/FiguraMC/Figura/issues"
+issueTrackerURL = "https://github.com/Kryeit/Cosmetigura/issues"
 license = "LGPL-2.1"
-displayURL = "https://github.com/FiguraMC/Figura"
+displayURL = "https://github.com/Kryeit/Cosmetigura"
 
 [[mods]]
-modId = "figura"
+modId = "cosmetigura"
 version = "${version}"
-displayName = "Figura"
-logoFile="assets/figura/icon.png"
+displayName = "Cosmetigura"
+logoFile="assets/cosmetigura/icon.png"
 authors = "skyrina, lumelia, UnlikePaladin, omoflop"
 credits = "TooManyLimits, Lexize, KitCat962, Manuel-3, superpowers04, auriafoxgirl, applejuiceyy"
 description = '''
-Extensive customization of the Player model
+A Figura fork bringing cosmetics to servers
 '''
 
-[modproperties.figura]
+[modproperties.cosmetigura]
 assets_version="${assets_version}"
 
-[[dependencies.figura]]
+[[dependencies.cosmetigura]]
 modId = "forge"
 mandatory = true
 versionRange = "[47,)"
 ordering = "NONE"
 side = "CLIENT"
 
-[[dependencies.figura]]
+[[dependencies.cosmetigura]]
 modId = "minecraft"
 mandatory = true
 versionRange = "[${minecraft_version},)"

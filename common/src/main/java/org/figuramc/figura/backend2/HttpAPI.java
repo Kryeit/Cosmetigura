@@ -1,7 +1,7 @@
 package org.figuramc.figura.backend2;
 
 import net.minecraft.client.multiplayer.resolver.ServerAddress;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.config.Configs;
 
 import java.io.InputStream;
@@ -46,7 +46,7 @@ public class HttpAPI {
     protected HttpRequest.Builder header(String url) {
         return HttpRequest
                 .newBuilder(getUri(url))
-                .header("user-agent", FiguraMod.MOD_NAME + "/" + FiguraMod.VERSION)
+                .header("user-agent", CosmetiguraMod.MOD_NAME + "/" + CosmetiguraMod.VERSION)
                 .header("token", token);
     }
 
@@ -63,7 +63,7 @@ public class HttpAPI {
             consumer.accept(code, response.body());
         } catch (Exception e) {
             if (!e.getMessage().contains("GOAWAY received"))
-                FiguraMod.LOGGER.error("", e);
+                CosmetiguraMod.LOGGER.error("", e);
         }
     }
 
@@ -76,7 +76,7 @@ public class HttpAPI {
             consumer.accept(code, response.body());
         } catch (Exception e) {
             if (!e.getMessage().contains("GOAWAY received"))
-                FiguraMod.LOGGER.error("", e);
+                CosmetiguraMod.LOGGER.error("", e);
         }
     }
 
@@ -86,7 +86,7 @@ public class HttpAPI {
 
     private static void requestDebug(HttpRequest msg) {
         if (NetworkStuff.debug)
-            FiguraMod.debug( "Sent Http request:\n\t" + msg.uri().toString() + "\n\t" + msg.headers().map().toString());
+            CosmetiguraMod.debug( "Sent Http request:\n\t" + msg.uri().toString() + "\n\t" + msg.headers().map().toString());
     }
 
 

@@ -14,7 +14,7 @@ import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Style;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.animation.Animation;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
@@ -60,7 +60,7 @@ class DebugCommand {
     private static int commandAction(CommandContext<FiguraClientCommandSource> context) {
         try {
             // get path
-            Path targetPath = FiguraMod.getFiguraDirectory().resolve("debug_data.json");
+            Path targetPath = CosmetiguraMod.getFiguraDirectory().resolve("debug_data.json");
 
             // create file
             if (!Files.exists(targetPath))
@@ -68,7 +68,7 @@ class DebugCommand {
 
             // write file
             OutputStream fs = Files.newOutputStream(targetPath);
-            fs.write(fetchStatus(AvatarManager.getAvatarForPlayer(FiguraMod.getLocalPlayerUUID())).getBytes());
+            fs.write(fetchStatus(AvatarManager.getAvatarForPlayer(CosmetiguraMod.getLocalPlayerUUID())).getBytes());
             fs.close();
 
             // feedback
@@ -82,7 +82,7 @@ class DebugCommand {
             return 1;
         } catch (Exception e) {
             context.getSource().figura$sendError(FiguraText.of("command.debug.error"));
-            FiguraMod.LOGGER.error("Failed to save " + FiguraMod.MOD_NAME + " debug data!", e);
+            CosmetiguraMod.LOGGER.error("Failed to save " + CosmetiguraMod.MOD_NAME + " debug data!", e);
             return 0;
         }
     }
@@ -94,13 +94,13 @@ class DebugCommand {
         // mod meta
         JsonObject meta = new JsonObject();
 
-        meta.addProperty("version", FiguraMod.VERSION.toString());
-        meta.addProperty("localUUID", FiguraMod.getLocalPlayerUUID().toString());
-        meta.addProperty("ticks", FiguraMod.ticks);
-        meta.addProperty("figuraDirectory", FiguraMod.getFiguraDirectory().toString());
+        meta.addProperty("version", CosmetiguraMod.VERSION.toString());
+        meta.addProperty("localUUID", CosmetiguraMod.getLocalPlayerUUID().toString());
+        meta.addProperty("ticks", CosmetiguraMod.ticks);
+        meta.addProperty("figuraDirectory", CosmetiguraMod.getFiguraDirectory().toString());
         meta.addProperty("figuraAvatarDirectory", LocalAvatarFetcher.getLocalAvatarDirectory().toString());
         meta.addProperty("figuraAvatarDataDirectory", ConfigAPI.getConfigDataDir().toString());
-        meta.addProperty("figuraCacheDirectory", FiguraMod.getCacheDirectory().toString());
+        meta.addProperty("figuraCacheDirectory", CosmetiguraMod.getCacheDirectory().toString());
         meta.addProperty("figuraAvatarCacheDirectory", CacheAvatarLoader.getAvatarCacheDirectory().toString());
         meta.addProperty("figuraResourcesDirectory", FiguraRuntimeResources.getRootDirectory().toString());
         meta.addProperty("figuraAssetsDirectory", FiguraRuntimeResources.getAssetsDirectory().toString());

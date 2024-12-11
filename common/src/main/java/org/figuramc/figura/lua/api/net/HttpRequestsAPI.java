@@ -1,7 +1,7 @@
 package org.figuramc.figura.lua.api.net;
 
 import net.minecraft.network.chat.Component;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.lua.api.data.FiguraBuffer;
 import org.figuramc.figura.lua.docs.LuaMethodOverload;
 import org.luaj.vm2.LuaError;
@@ -261,7 +261,7 @@ public class HttpRequestsAPI {
                     getHeaders().entrySet()) {
                 if (disallowedHeaders.stream().anyMatch(s -> s.equalsIgnoreCase(entry.getKey()))) {
                     if (parent.parent.owner.isHost) {
-                        FiguraMod.sendChatMessage(Component.translatable("figura.network.header_disabled", entry.getKey()));
+                        CosmetiguraMod.sendChatMessage(Component.translatable("figura.network.header_disabled", entry.getKey()));
                     }
                     continue;
                 }

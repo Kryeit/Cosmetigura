@@ -3,7 +3,7 @@ package org.figuramc.figura.entries.fabric;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.entrypoint.EntrypointContainer;
 import net.fabricmc.loader.api.metadata.ModMetadata;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -17,7 +17,7 @@ public class EntryPointManagerImpl {
             try {
                 ret.add(entrypoint.getEntrypoint());
             } catch (Exception e) {
-                FiguraMod.LOGGER.error("Failed to load entrypoint of mod {}", modId, e);
+                CosmetiguraMod.LOGGER.error("Failed to load entrypoint of mod {}", modId, e);
             }
         }
 

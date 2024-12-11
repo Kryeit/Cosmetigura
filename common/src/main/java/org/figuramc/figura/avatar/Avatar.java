@@ -28,7 +28,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.animation.Animation;
 import org.figuramc.figura.animation.AnimationPlayer;
 import org.figuramc.figura.backend2.NetworkStuff;
@@ -135,7 +135,7 @@ public class Avatar {
     private Avatar(UUID owner, EntityType<?> type, String name) {
         this.owner = owner;
         this.entityType = type;
-        this.isHost = type == EntityType.PLAYER && FiguraMod.isLocal(owner);
+        this.isHost = type == EntityType.PLAYER && CosmetiguraMod.isLocal(owner);
         this.permissions = type == EntityType.PLAYER ? PermissionManager.get(owner) : PermissionManager.getMobPermissions(owner);
         this.complexity = new Instructions(permissions.get(Permissions.COMPLEXITY));
         this.init = new Instructions(permissions.get(Permissions.INIT_INST));
@@ -220,7 +220,7 @@ public class Avatar {
                 loadCustomSounds();
                 createLuaRuntime();
             } catch (Exception e) {
-                FiguraMod.LOGGER.error("", e);
+                CosmetiguraMod.LOGGER.error("", e);
                 clean();
                 this.nbt = null;
                 this.renderer = null;
@@ -264,15 +264,15 @@ public class Avatar {
         soundsRemaining.tick();
 
         // call events
-        FiguraMod.pushProfiler("worldTick");
+        CosmetiguraMod.pushProfiler("worldTick");
         worldTick.reset(permissions.get(Permissions.WORLD_TICK_INST));
         run("WORLD_TICK", worldTick);
 
-        FiguraMod.popPushProfiler("tick");
+        CosmetiguraMod.popPushProfiler("tick");
         tick.reset(permissions.get(Permissions.TICK_INST));
         tickEvent();
 
-        FiguraMod.popProfiler();
+        CosmetiguraMod.popProfiler();
     }
 
     public void render(float delta) {
@@ -552,9 +552,9 @@ public class Avatar {
         if (renderer == null || !loaded)
             return;
 
-        FiguraMod.pushProfiler(FiguraMod.MOD_ID);
-        FiguraMod.pushProfiler(this);
-        FiguraMod.pushProfiler("capeRender");
+        CosmetiguraMod.pushProfiler(CosmetiguraMod.MOD_ID);
+        CosmetiguraMod.pushProfiler(this);
+        CosmetiguraMod.pushProfiler("capeRender");
 
         renderer.vanillaModelData.update(ParentType.Cape, cloak);
         renderer.entity = entity;
@@ -567,16 +567,16 @@ public class Avatar {
 
         render();
 
-        FiguraMod.popProfiler(3);
+        CosmetiguraMod.popProfiler(3);
     }
 
     public void elytraRender(Entity entity, MultiBufferSource bufferSource, PoseStack stack, int light, float tickDelta, EntityModel<?> model) {
         if (renderer == null || !loaded)
             return;
 
-        FiguraMod.pushProfiler(FiguraMod.MOD_ID);
-        FiguraMod.pushProfiler(this);
-        FiguraMod.pushProfiler("elytraRender");
+        CosmetiguraMod.pushProfiler(CosmetiguraMod.MOD_ID);
+        CosmetiguraMod.pushProfiler(this);
+        CosmetiguraMod.pushProfiler("elytraRender");
 
         renderer.entity = entity;
 
@@ -587,33 +587,33 @@ public class Avatar {
         );
 
         // left
-        FiguraMod.pushProfiler("leftWing");
+        CosmetiguraMod.pushProfiler("leftWing");
         renderer.vanillaModelData.update(ParentType.LeftElytra, model);
         renderer.renderSpecialParts();
 
         // right
-        FiguraMod.popPushProfiler("rightWing");
+        CosmetiguraMod.popPushProfiler("rightWing");
         renderer.vanillaModelData.update(ParentType.RightElytra, model);
         renderer.currentFilterScheme = PartFilterScheme.RIGHT_ELYTRA;
         renderer.renderSpecialParts();
 
-        FiguraMod.popProfiler(4);
+        CosmetiguraMod.popProfiler(4);
     }
 
     public void firstPersonWorldRender(Entity watcher, MultiBufferSource bufferSource, PoseStack matrices, Camera camera, float tickDelta) {
         if (renderer == null || !loaded)
             return;
 
-        FiguraMod.pushProfiler(FiguraMod.MOD_ID);
-        FiguraMod.pushProfiler(this);
-        FiguraMod.pushProfiler("firstPersonWorldRender");
+        CosmetiguraMod.pushProfiler(CosmetiguraMod.MOD_ID);
+        CosmetiguraMod.pushProfiler(this);
+        CosmetiguraMod.pushProfiler("firstPersonWorldRender");
 
         int light = Minecraft.getInstance().getEntityRenderDispatcher().getPackedLightCoords(watcher, tickDelta);
         Vec3 camPos = camera.getPosition();
 
         worldRender(watcher, camPos.x, camPos.y, camPos.z, matrices, bufferSource, light, tickDelta, EntityRenderMode.FIRST_PERSON_WORLD);
 
-        FiguraMod.popProfiler(3);
+        CosmetiguraMod.popProfiler(3);
     }
 
     public void firstPersonRender(PoseStack stack, MultiBufferSource bufferSource, Player player, PlayerRenderer playerRenderer, ModelPart arm, int light, float tickDelta) {
@@ -622,10 +622,10 @@ public class Avatar {
 
         boolean lefty = arm == playerRenderer.getModel().leftArm;
 
-        FiguraMod.pushProfiler(FiguraMod.MOD_ID);
-        FiguraMod.pushProfiler(this);
-        FiguraMod.pushProfiler("firstPersonRender");
-        FiguraMod.pushProfiler(lefty ? "leftArm" : "rightArm");
+        CosmetiguraMod.pushProfiler(CosmetiguraMod.MOD_ID);
+        CosmetiguraMod.pushProfiler(this);
+        CosmetiguraMod.pushProfiler("firstPersonRender");
+        CosmetiguraMod.pushProfiler(lefty ? "leftArm" : "rightArm");
 
         PartFilterScheme filter = lefty ? PartFilterScheme.LEFT_ARM : PartFilterScheme.RIGHT_ARM;
         boolean config = Configs.ALLOW_FP_HANDS.value;
@@ -645,15 +645,15 @@ public class Avatar {
         renderer.allowHiddenTransforms = true;
         renderer.ignoreVanillaVisibility = false;
 
-        FiguraMod.popProfiler(4);
+        CosmetiguraMod.popProfiler(4);
     }
 
     public void hudRender(PoseStack stack, MultiBufferSource bufferSource, Entity entity, float tickDelta) {
         if (renderer == null || !loaded)
             return;
 
-        FiguraMod.pushProfiler(this);
-        FiguraMod.pushProfiler("hudRender");
+        CosmetiguraMod.pushProfiler(this);
+        CosmetiguraMod.pushProfiler("hudRender");
 
         stack.pushPose();
         stack.last().pose().scale(16, 16, -16);
@@ -677,7 +677,7 @@ public class Avatar {
         Lighting.setupFor3DItems();
         stack.popPose();
 
-        FiguraMod.popProfiler(2);
+        CosmetiguraMod.popProfiler(2);
     }
 
     public boolean skullRender(PoseStack stack, MultiBufferSource bufferSource, int light, Direction direction, float yaw) {
@@ -892,16 +892,16 @@ public class Avatar {
         if (renderer == null || !loaded)
             return;
 
-        FiguraMod.pushProfiler(FiguraMod.MOD_ID);
-        FiguraMod.pushProfiler(this);
-        FiguraMod.pushProfiler("updateMatrices");
+        CosmetiguraMod.pushProfiler(CosmetiguraMod.MOD_ID);
+        CosmetiguraMod.pushProfiler(this);
+        CosmetiguraMod.pushProfiler("updateMatrices");
 
         renderer.vanillaModelData.update(entityRenderer);
         renderer.currentFilterScheme = PartFilterScheme.MODEL;
         renderer.setMatrices(stack);
         renderer.updateMatrices();
 
-        FiguraMod.popProfiler(3);
+        CosmetiguraMod.popProfiler(3);
     }
 
 
@@ -985,7 +985,7 @@ public class Avatar {
             NbtIo.writeCompressed(nbt, baos);
             return baos.size();
         } catch (Exception e) {
-            FiguraMod.LOGGER.warn("Failed to generate file size for model " + this.name, e);
+            CosmetiguraMod.LOGGER.warn("Failed to generate file size for model " + this.name, e);
             return 0;
         }
     }
@@ -993,7 +993,7 @@ public class Avatar {
     private int getVersionStatus() {
         if (version == null || (NetworkStuff.latestVersion != null && version.compareTo(NetworkStuff.latestVersion) > 0))
             return 0;
-        return version.compareTo(FiguraMod.VERSION);
+        return version.compareTo(CosmetiguraMod.VERSION);
     }
 
     // -- loading -- // 
@@ -1090,7 +1090,7 @@ public class Avatar {
             try {
                 loadSound(key, root.getByteArray(key));
             } catch (Exception e) {
-                FiguraMod.LOGGER.warn("Failed to load custom sound \"" + key + "\"", e);
+                CosmetiguraMod.LOGGER.warn("Failed to load custom sound \"" + key + "\"", e);
             }
         }
     }
@@ -1102,7 +1102,7 @@ public class Avatar {
                 this.customSounds.put(name, sound);
             }
         } else {
-            FiguraMod.LOGGER.error("Sound is not supported or enabled on this system but a custom sound tried to load anyway, scripts may break.");
+            CosmetiguraMod.LOGGER.error("Sound is not supported or enabled on this system but a custom sound tried to load anyway, scripts may break.");
         }
     }
 

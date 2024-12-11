@@ -2,7 +2,7 @@ package org.figuramc.figura.gui.widgets.permissions;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.backend2.NetworkStuff;
@@ -55,7 +55,7 @@ public class PlayerStatusWidget extends StatusWidget {
         }
 
         // size
-        status = !FiguraMod.isLocal(owner) ? 3 : avatar.fileSize > NetworkStuff.getSizeLimit() ? 1 : avatar.fileSize > NetworkStuff.getSizeLimit() * 0.75 ? 2 : 3;
+        status = !CosmetiguraMod.isLocal(owner) ? 3 : avatar.fileSize > NetworkStuff.getSizeLimit() ? 1 : avatar.fileSize > NetworkStuff.getSizeLimit() * 0.75 ? 2 : 3;
 
         // complexity
         int complexity = avatar.renderer == null ? 0 : avatar.complexity.pre >= avatar.permissions.get(Permissions.COMPLEXITY) ? 1 : 3;

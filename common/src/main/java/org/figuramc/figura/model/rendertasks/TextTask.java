@@ -7,7 +7,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.Badges;
 import org.figuramc.figura.font.Emojis;
@@ -66,7 +66,7 @@ public class TextTask extends RenderTask {
         int out = outlineColor != null ? outlineColor : 0x202020;
         int op = opacity << 24 | 0xFFFFFF;
         Font.DisplayMode displayMode = seeThrough ? Font.DisplayMode.SEE_THROUGH : Font.DisplayMode.POLYGON_OFFSET;
-        float vertexOffset = outline ? FiguraMod.VERTEX_OFFSET : 0f;
+        float vertexOffset = outline ? CosmetiguraMod.VERTEX_OFFSET : 0f;
 
         // background
         if (bg != 0) {

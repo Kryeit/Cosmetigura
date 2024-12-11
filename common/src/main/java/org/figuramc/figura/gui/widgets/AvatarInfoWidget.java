@@ -8,7 +8,7 @@ import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.font.Emojis;
@@ -58,12 +58,12 @@ public class AvatarInfoWidget implements FiguraWidget, FiguraTickable, GuiEventL
     public void tick() {
         if (!visible) return;
 
-        Style accent = FiguraMod.getAccentColor();
+        Style accent = CosmetiguraMod.getAccentColor();
         ELLIPSIS.setStyle(accent);
         UNKNOWN.setStyle(accent);
 
         // update values
-        Avatar avatar = AvatarManager.getAvatarForPlayer(FiguraMod.getLocalPlayerUUID());
+        Avatar avatar = AvatarManager.getAvatarForPlayer(CosmetiguraMod.getLocalPlayerUUID());
         if (avatar != null && avatar.nbt != null) {
             values.set(0, avatar.name == null || avatar.name.isBlank() ? UNKNOWN : Emojis.applyEmojis(Component.literal(avatar.name).setStyle(accent))); // name
             values.set(1, avatar.authors == null || avatar.authors.isBlank() ? UNKNOWN : Emojis.applyEmojis(Component.literal(avatar.authors).setStyle(accent))); // authors

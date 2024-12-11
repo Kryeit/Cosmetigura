@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.world.entity.LivingEntity;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.config.Configs;
@@ -107,23 +107,23 @@ public abstract class LivingEntityRendererMixin<T extends LivingEntity, M extend
         PartFilterScheme filter = invisible ? PartFilterScheme.PIVOTS : PartFilterScheme.MODEL;
         int overlay = getOverlayCoords(entity, getWhiteOverlayProgress(entity, delta));
 
-        FiguraMod.pushProfiler(FiguraMod.MOD_ID);
-        FiguraMod.pushProfiler(currentAvatar);
+        CosmetiguraMod.pushProfiler(CosmetiguraMod.MOD_ID);
+        CosmetiguraMod.pushProfiler(currentAvatar);
 
-        FiguraMod.pushProfiler("calculateMatrix");
+        CosmetiguraMod.pushProfiler("calculateMatrix");
         Matrix4f diff = new Matrix4f(lastPose).invert().mul(poseStack.last().pose());
         FiguraMat4 poseMatrix = new FiguraMat4().set(diff);
 
-        FiguraMod.popPushProfiler("renderEvent");
+        CosmetiguraMod.popPushProfiler("renderEvent");
         currentAvatar.renderEvent(delta, poseMatrix);
 
-        FiguraMod.popPushProfiler("render");
+        CosmetiguraMod.popPushProfiler("render");
         currentAvatar.render(entity, yaw, delta, translucent ? 0.15f : 1f, poseStack, bufferSource, light, overlay, (LivingEntityRenderer<?, ?>) (Object) this, filter, translucent, glowing);
 
-        FiguraMod.popPushProfiler("postRenderEvent");
+        CosmetiguraMod.popPushProfiler("postRenderEvent");
         currentAvatar.postRenderEvent(delta, poseMatrix);
 
-        FiguraMod.popProfiler(3);
+        CosmetiguraMod.popProfiler(3);
 
         if (currentAvatar.luaRuntime != null && currentAvatar.permissions.get(Permissions.VANILLA_MODEL_EDIT) == 1)
             currentAvatar.luaRuntime.vanilla_model.PLAYER.posTransform(getModel());
@@ -151,7 +151,7 @@ public abstract class LivingEntityRendererMixin<T extends LivingEntity, M extend
         else if (!AvatarManager.panic) {
             if (Configs.SELF_NAMEPLATE.value && livingEntity == Minecraft.getInstance().player)
                 cir.setReturnValue(true);
-            else if (Configs.NAMEPLATE_RENDER.value == 2 || (Configs.NAMEPLATE_RENDER.value == 1 && livingEntity != FiguraMod.extendedPickEntity))
+            else if (Configs.NAMEPLATE_RENDER.value == 2 || (Configs.NAMEPLATE_RENDER.value == 1 && livingEntity != CosmetiguraMod.extendedPickEntity))
                 cir.setReturnValue(false);
         }
     }

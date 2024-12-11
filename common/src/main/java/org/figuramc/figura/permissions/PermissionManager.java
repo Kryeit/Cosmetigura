@@ -3,7 +3,7 @@ package org.figuramc.figura.permissions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.config.Configs;
 import org.figuramc.figura.entries.FiguraPermissions;
 import org.figuramc.figura.utils.IOUtils;
@@ -63,7 +63,7 @@ public class PermissionManager {
                 PermissionPack pack = CATEGORIES.get(category);
                 pack.loadNbt(compound);
             } catch (Exception ignored) {
-                FiguraMod.LOGGER.warn("Failed to load permissions for \"{}\"", name);
+                CosmetiguraMod.LOGGER.warn("Failed to load permissions for \"{}\"", name);
             }
         }
 
@@ -85,7 +85,7 @@ public class PermissionManager {
 
                 PLAYERS.put(uuid, pack);
             } catch (Exception ignored) {
-                FiguraMod.LOGGER.warn("Failed to load permissions for \"{}\"", name);
+                CosmetiguraMod.LOGGER.warn("Failed to load permissions for \"{}\"", name);
             }
         }
     }
@@ -123,7 +123,7 @@ public class PermissionManager {
             nbt.put("groups", groupList);
             nbt.put("players", playerList);
 
-            FiguraMod.debug("Saved Permissions");
+            CosmetiguraMod.debug("Saved Permissions");
         });
     }
 
@@ -133,7 +133,7 @@ public class PermissionManager {
             return PLAYERS.get(id);
 
         Permissions.Category category = getDefaultCategory();
-        if (FiguraMod.isLocal(id)) {
+        if (CosmetiguraMod.isLocal(id)) {
             category = Permissions.Category.MAX;
         } else if (category == null) {
             category = Permissions.Category.DEFAULT;
@@ -142,13 +142,13 @@ public class PermissionManager {
         PermissionPack.PlayerPermissionPack pack = new PermissionPack.PlayerPermissionPack(CATEGORIES.get(category), id.toString());
         PLAYERS.put(id, pack);
 
-        FiguraMod.debug("Created Permissions for: " + id);
+        CosmetiguraMod.debug("Created Permissions for: " + id);
         return pack;
     }
 
     public static PermissionPack.PlayerPermissionPack getMobPermissions(UUID id) {
         PermissionPack.PlayerPermissionPack pack = new PermissionPack.PlayerPermissionPack(CATEGORIES.get(Permissions.Category.MAX), id.toString());
-        pack.insert(Permissions.OFFSCREEN_RENDERING, 0, FiguraMod.MOD_ID);
+        pack.insert(Permissions.OFFSCREEN_RENDERING, 0, CosmetiguraMod.MOD_ID);
         return pack;
     }
 
@@ -194,7 +194,7 @@ public class PermissionManager {
         if (canAdd) {
             PermissionPack.PlayerPermissionPack pack = new PermissionPack.PlayerPermissionPack(CATEGORIES.get(defaultCat), id.toString());
             PLAYERS.put(id, pack);
-            FiguraMod.debug("Set permissions of {} to {} based on backend userdata", id, defaultCat.name());
+            CosmetiguraMod.debug("Set permissions of {} to {} based on backend userdata", id, defaultCat.name());
         }
 
         // add this player to not be changed again

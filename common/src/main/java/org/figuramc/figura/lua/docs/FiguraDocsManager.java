@@ -8,7 +8,7 @@ import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.*;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.animation.Animation;
 import org.figuramc.figura.entries.FiguraAPI;
 import org.figuramc.figura.lua.api.*;
@@ -373,7 +373,7 @@ public class FiguraDocsManager {
     private static int exportDocsFunction(CommandContext<FiguraClientCommandSource> context, boolean translate) {
         try {
             // get path
-            Path targetPath = FiguraMod.getFiguraDirectory().resolve("exported_docs.json");
+            Path targetPath = CosmetiguraMod.getFiguraDirectory().resolve("exported_docs.json");
 
             // create file
             if (!Files.exists(targetPath))
@@ -395,7 +395,7 @@ public class FiguraDocsManager {
             return 1;
         } catch (Exception e) {
             context.getSource().figura$sendError(FiguraText.of("command.docs_export.error"));
-            FiguraMod.LOGGER.error("Failed to export docs!", e);
+            CosmetiguraMod.LOGGER.error("Failed to export docs!", e);
             return 0;
         }
     }

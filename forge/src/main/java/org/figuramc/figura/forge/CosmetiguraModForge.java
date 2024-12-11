@@ -4,9 +4,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod("figura")
-public class FiguraModForge {
+public class CosmetiguraModForge {
     // dummy empty mod class, we are client only
-    public FiguraModForge() {
-        MinecraftForge.EVENT_BUS.addListener(FiguraModClientForge::cancelVanillaOverlays);
+    public CosmetiguraModForge() {
+        MinecraftForge.EVENT_BUS.addListener(CosmetiguraModClientForge::cancelVanillaOverlays);
     }
 }

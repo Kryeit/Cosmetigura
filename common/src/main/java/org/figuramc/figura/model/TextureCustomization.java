@@ -2,20 +2,14 @@ package org.figuramc.figura.model;
 
 import com.mojang.blaze3d.platform.NativeImage;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
-import org.figuramc.figura.FiguraMod;
 import org.figuramc.figura.avatar.Avatar;
-import org.figuramc.figura.lua.api.TextureAPI;
 import org.figuramc.figura.mixin.render.MissingTextureAtlasSpriteAccessor;
 import org.figuramc.figura.mixin.render.TextureAtlasAccessor;
-import org.figuramc.figura.model.rendering.ImmediateAvatarRenderer;
 import org.figuramc.figura.model.rendering.texture.FiguraTexture;
 import org.figuramc.figura.model.rendering.texture.FiguraTextureSet;
-import org.figuramc.figura.model.rendering.texture.RenderTypes;
-import org.figuramc.figura.utils.LuaUtils;
 import org.luaj.vm2.LuaError;
 
 import java.util.Optional;

@@ -6,7 +6,7 @@ import net.minecraft.client.GuiMessageTag;
 import net.minecraft.client.gui.components.ChatComponent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MessageSignature;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.avatar.Badges;
@@ -47,7 +47,7 @@ public class ChatComponentMixin {
             return message;
 
         // receive event
-        Avatar localPlayer = AvatarManager.getAvatarForPlayer(FiguraMod.getLocalPlayerUUID());
+        Avatar localPlayer = AvatarManager.getAvatarForPlayer(CosmetiguraMod.getLocalPlayerUUID());
         if (localPlayer != null) {
             String json = Component.Serializer.toJson(message);
 
@@ -66,7 +66,7 @@ public class ChatComponentMixin {
         }
 
         // stop here if we should not parse messages
-        if (!FiguraMod.parseMessages)
+        if (!CosmetiguraMod.parseMessages)
             return message;
 
         // emojis

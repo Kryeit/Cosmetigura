@@ -1,7 +1,7 @@
 package org.figuramc.figura.lua.api;
 
 import com.google.gson.*;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.lua.LuaNotNil;
 import org.figuramc.figura.lua.LuaWhitelist;
@@ -58,7 +58,7 @@ public class ConfigAPI {
 
 
     public static Path getConfigDataDir() {
-        return IOUtils.getOrCreateDir(FiguraMod.getFiguraDirectory(), "config");
+        return IOUtils.getOrCreateDir(CosmetiguraMod.getFiguraDirectory(), "config");
     }
 
     public static void clearAllData() {
@@ -93,7 +93,7 @@ public class ConfigAPI {
         try (OutputStream fs = Files.newOutputStream(path)) {
             fs.write(GSON.toJson(root).getBytes());
         } catch (Exception e) {
-            FiguraMod.LOGGER.error("", e);
+            CosmetiguraMod.LOGGER.error("", e);
             throw new LuaError("Failed to save avatar data file");
         }
     }
@@ -192,7 +192,7 @@ public class ConfigAPI {
             for (String key : root.keySet())
                 luaTable.set(key, readArg(root.get(key), owner));
         } catch (Exception e) {
-            FiguraMod.LOGGER.error("", e);
+            CosmetiguraMod.LOGGER.error("", e);
             throw new LuaError("Failed to load avatar data file");
         }
 

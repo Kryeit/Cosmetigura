@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.PostChain;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.ducks.GameRendererAccessor;
@@ -122,10 +122,10 @@ public abstract class GameRendererMixin implements GameRendererAccessor {
 
     @Inject(method = "pick", at = @At("RETURN"))
     private void pick(float tickDelta, CallbackInfo ci) {
-        FiguraMod.pushProfiler(FiguraMod.MOD_ID);
-        FiguraMod.pushProfiler("extendedPick");
-        FiguraMod.extendedPickEntity = EntityUtils.getViewedEntity(32);
-        FiguraMod.popProfiler(2);
+        CosmetiguraMod.pushProfiler(CosmetiguraMod.MOD_ID);
+        CosmetiguraMod.pushProfiler("extendedPick");
+        CosmetiguraMod.extendedPickEntity = EntityUtils.getViewedEntity(32);
+        CosmetiguraMod.popProfiler(2);
     }
 
     // bobbing fix courtesy of Iris; https://github.com/IrisShaders/Iris/blob/1.20/src/main/java/net/coderbot/iris/mixin/MixinModelViewBobbing.java

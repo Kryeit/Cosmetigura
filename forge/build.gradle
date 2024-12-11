@@ -14,8 +14,8 @@ loom {
         convertAccessWideners = true
         extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
 
-        mixinConfig "figura-common.mixins.json"
-        mixinConfig "figura.mixins.json"
+        mixinConfig "cosmetigura-common.mixins.json"
+        mixinConfig "cosmetigura.mixins.json"
     }
 }
 
@@ -92,36 +92,5 @@ sourcesJar {
 components.java {
     withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
         skip()
-    }
-}
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            artifactId = "${project.archivesBaseName}-${project.name}"
-            version = project.version
-            artifact(remapJar) {
-                builtBy remapJar
-                classifier ''
-            }
-            artifact(sourcesJar) {
-                builtBy sourcesJar
-                classifier 'sources'
-            }
-        }
-    }
-    setupRepositories(repositories)
-}
-
-void setupRepositories(RepositoryHandler repositories) {
-    if (project.hasProperty("mavenUrl")) {
-        repositories.maven {
-            name = "figuraMaven"
-            url project.mavenUrl
-            credentials(PasswordCredentials)
-            authentication {
-                basic(BasicAuthentication)
-            }
-        }
     }
 }

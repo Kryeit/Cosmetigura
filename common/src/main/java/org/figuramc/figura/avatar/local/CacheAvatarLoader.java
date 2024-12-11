@@ -2,7 +2,7 @@ package org.figuramc.figura.avatar.local;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtIo;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.UserData;
 import org.figuramc.figura.utils.IOUtils;
 
@@ -31,13 +31,13 @@ public class CacheAvatarLoader {
                     long elapsed = TimeUnit.MILLISECONDS.toDays(diff);
                     if (elapsed > 7) {
                         if (Files.deleteIfExists(child)) {
-                            FiguraMod.debug("Successfully deleted cache avatar \"{}\" with \"{}\" days old", IOUtils.getFileNameOrEmpty(child), elapsed);
+                            CosmetiguraMod.debug("Successfully deleted cache avatar \"{}\" with \"{}\" days old", IOUtils.getFileNameOrEmpty(child), elapsed);
                         } else {
                             throw new Exception();
                         }
                     }
                 } catch (Exception ignored) {
-                    FiguraMod.debug("Failed to delete cache avatar \"{}\"", IOUtils.getFileNameOrEmpty(child));
+                    CosmetiguraMod.debug("Failed to delete cache avatar \"{}\"", IOUtils.getFileNameOrEmpty(child));
                 }
             }
         });
@@ -60,9 +60,9 @@ public class CacheAvatarLoader {
             Path path = getAvatarCacheDirectory().resolve(hash + ".nbt");
             try {
                 target.loadAvatar(NbtIo.readCompressed(Files.newInputStream(path)));
-                FiguraMod.debug("Loaded avatar \"{}\" from cache to \"{}\"", hash, target.id);
+                CosmetiguraMod.debug("Loaded avatar \"{}\" from cache to \"{}\"", hash, target.id);
             } catch (Exception e) {
-                FiguraMod.LOGGER.error("Failed to load cache avatar: " + hash, e);
+                CosmetiguraMod.LOGGER.error("Failed to load cache avatar: " + hash, e);
             }
         });
     }
@@ -72,9 +72,9 @@ public class CacheAvatarLoader {
             Path file = getAvatarCacheDirectory().resolve(hash + ".nbt");
             try {
                 NbtIo.writeCompressed(nbt, Files.newOutputStream(file));
-                FiguraMod.debug("Saved avatar \"{}\" on cache", hash);
+                CosmetiguraMod.debug("Saved avatar \"{}\" on cache", hash);
             } catch (Exception e) {
-                FiguraMod.LOGGER.error("Failed to save avatar on cache: " + hash, e);
+                CosmetiguraMod.LOGGER.error("Failed to save avatar on cache: " + hash, e);
             }
         });
     }
@@ -95,16 +95,16 @@ public class CacheAvatarLoader {
                     if (!Files.deleteIfExists(child))
                         throw new Exception();
                 } catch (Exception ignored) {
-                    FiguraMod.debug("Failed to delete cache avatar \"{}\"", IOUtils.getFileNameOrEmpty(child));
+                    CosmetiguraMod.debug("Failed to delete cache avatar \"{}\"", IOUtils.getFileNameOrEmpty(child));
                 }
             }
 
-            FiguraMod.debug("Finished clearing avatar cache");
+            CosmetiguraMod.debug("Finished clearing avatar cache");
         });
     }
 
     // cache directory
     public static Path getAvatarCacheDirectory() {
-        return IOUtils.getOrCreateDir(FiguraMod.getCacheDirectory(), "avatars");
+        return IOUtils.getOrCreateDir(CosmetiguraMod.getCacheDirectory(), "avatars");
     }
 }

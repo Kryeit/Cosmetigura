@@ -11,7 +11,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.local.LocalAvatarLoader;
 import org.figuramc.figura.backend2.NetworkStuff;
 import org.figuramc.figura.gui.FiguraToast;
@@ -64,9 +64,9 @@ public class AvatarManager {
         for (UserData user : LOADED_USERS.values()) {
             Avatar avatar = user.getMainAvatar();
             if (avatar != null) {
-                FiguraMod.pushProfiler(avatar);
+                CosmetiguraMod.pushProfiler(avatar);
                 avatar.tick();
-                FiguraMod.popProfiler();
+                CosmetiguraMod.popProfiler();
             }
         }
 
@@ -87,9 +87,9 @@ public class AvatarManager {
         // tick entities
         for (Avatar avatar : LOADED_CEM.values()) {
             if (avatar != null) {
-                FiguraMod.pushProfiler(avatar);
+                CosmetiguraMod.pushProfiler(avatar);
                 avatar.tick();
-                FiguraMod.popProfiler();
+                CosmetiguraMod.popProfiler();
             }
         }
     }
@@ -97,27 +97,27 @@ public class AvatarManager {
     public static void executeAll(String src, Consumer<Avatar> consumer) {
         if (panic) return;
 
-        FiguraMod.pushProfiler(FiguraMod.MOD_ID);
-        FiguraMod.pushProfiler(src);
+        CosmetiguraMod.pushProfiler(CosmetiguraMod.MOD_ID);
+        CosmetiguraMod.pushProfiler(src);
 
         for (UserData user : LOADED_USERS.values()) {
             Avatar avatar = user.getMainAvatar();
             if (avatar != null) {
-                FiguraMod.pushProfiler(avatar);
+                CosmetiguraMod.pushProfiler(avatar);
                 consumer.accept(avatar);
-                FiguraMod.popProfiler();
+                CosmetiguraMod.popProfiler();
             }
         }
 
         for (Avatar avatar : LOADED_CEM.values()) {
             if (avatar != null) {
-                FiguraMod.pushProfiler(avatar);
+                CosmetiguraMod.pushProfiler(avatar);
                 consumer.accept(avatar);
-                FiguraMod.popProfiler();
+                CosmetiguraMod.popProfiler();
             }
         }
 
-        FiguraMod.popProfiler(2);
+        CosmetiguraMod.popProfiler(2);
     }
 
     // -- avatar getters -- // 
@@ -193,7 +193,7 @@ public class AvatarManager {
         if (user != null) user.clear();
 
         NetworkStuff.clear(id);
-        FiguraMod.debug("Cleared avatars of " + id);
+        CosmetiguraMod.debug("Cleared avatars of " + id);
     }
 
     public static void clearCEMAvatars() {
@@ -214,12 +214,12 @@ public class AvatarManager {
         localUploaded = true;
         AvatarList.selectedEntry = null;
         LocalAvatarLoader.loadAvatar(null, null);
-        FiguraMod.LOGGER.info("Cleared all avatars");
+        CosmetiguraMod.LOGGER.info("Cleared all avatars");
     }
 
     // reloads an avatar
     public static void reloadAvatar(UUID id) {
-        if (!localUploaded && FiguraMod.isLocal(id))
+        if (!localUploaded && CosmetiguraMod.isLocal(id))
             loadLocalAvatar(LocalAvatarLoader.getLastLoadedPath());
         else
             clearAvatars(id);
@@ -227,7 +227,7 @@ public class AvatarManager {
 
     // load the local player avatar
     public static void loadLocalAvatar(Path path) {
-        UUID id = FiguraMod.getLocalPlayerUUID();
+        UUID id = CosmetiguraMod.getLocalPlayerUUID();
 
         // clear
         clearAvatars(id);
@@ -256,7 +256,7 @@ public class AvatarManager {
             clearAvatars(id);
             user.loadAvatar(nbt);
         } catch (Exception e) {
-            FiguraMod.LOGGER.error("Failed to set avatar for " + id, e);
+            CosmetiguraMod.LOGGER.error("Failed to set avatar for " + id, e);
         }
     }
 
@@ -268,13 +268,13 @@ public class AvatarManager {
         FETCHED_USERS.add(id);
 
         if (EntityUtils.checkInvalidPlayer(id)) {
-            FiguraMod.debug("Voiding userdata for " + id);
+            CosmetiguraMod.debug("Voiding userdata for " + id);
             return;
         }
 
         UserData user = LOADED_USERS.computeIfAbsent(id, UserData::new);
 
-        FiguraMod.debug("Getting userdata for " + id);
+        CosmetiguraMod.debug("Getting userdata for " + id);
         NetworkStuff.getUser(user);
     }
 
@@ -327,7 +327,7 @@ public class AvatarManager {
 
             if (LOADED_USERS.get(targetUUID) != null) {
                 setAvatar(targetUUID, avatar.nbt);
-                if (FiguraMod.isLocal(targetUUID))
+                if (CosmetiguraMod.isLocal(targetUUID))
                     localUploaded = true;
                 context.getSource().figura$sendFeedback(Component.literal("Set avatar for " + t));
                 return 1;

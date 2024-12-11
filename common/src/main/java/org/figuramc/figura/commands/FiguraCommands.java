@@ -1,7 +1,7 @@
 package org.figuramc.figura.commands;
 
 import com.mojang.brigadier.context.CommandContext;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.lua.FiguraLuaRuntime;
@@ -12,7 +12,7 @@ import org.figuramc.figura.utils.FiguraText;
 public class FiguraCommands {
 
     protected static Avatar checkAvatar(CommandContext<FiguraClientCommandSource> context) {
-        Avatar avatar = AvatarManager.getAvatarForPlayer(FiguraMod.getLocalPlayerUUID());
+        Avatar avatar = AvatarManager.getAvatarForPlayer(CosmetiguraMod.getLocalPlayerUUID());
         if (avatar == null) {
             context.getSource().figura$sendError(FiguraText.of("command.no_avatar_error"));
             return null;

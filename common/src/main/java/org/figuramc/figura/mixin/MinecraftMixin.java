@@ -7,7 +7,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.backend2.NetworkStuff;
@@ -49,7 +49,7 @@ public abstract class MinecraftMixin {
 
         // reload avatar button
         if (Configs.RELOAD_BUTTON.keyBind.consumeClick()) {
-            AvatarManager.reloadAvatar(FiguraMod.getLocalPlayerUUID());
+            AvatarManager.reloadAvatar(CosmetiguraMod.getLocalPlayerUUID());
             FiguraToast.sendToast(FiguraText.of("toast.reload"));
         }
 
@@ -84,7 +84,7 @@ public abstract class MinecraftMixin {
             PopupMenu.setEnabled(true);
 
             if (!PopupMenu.hasEntity()) {
-                Entity target = FiguraMod.extendedPickEntity;
+                Entity target = CosmetiguraMod.extendedPickEntity;
                 if (this.player != null && target instanceof Player && !target.isInvisibleTo(this.player)) {
                     PopupMenu.setEntity(target);
                 } else if (!this.options.getCameraType().isFirstPerson()) {
@@ -96,7 +96,7 @@ public abstract class MinecraftMixin {
         }
 
         // unlock cursor :p
-        Avatar avatar = AvatarManager.getAvatarForPlayer(FiguraMod.getLocalPlayerUUID());
+        Avatar avatar = AvatarManager.getAvatarForPlayer(CosmetiguraMod.getLocalPlayerUUID());
         if (avatar != null && avatar.luaRuntime != null && avatar.luaRuntime.host.unlockCursor) {
             this.mouseHandler.releaseMouse();
             scriptMouseUnlock = true;
@@ -142,8 +142,8 @@ public abstract class MinecraftMixin {
 
     @Inject(at = @At("RETURN"), method = "tick")
     private void startTick(CallbackInfo ci) {
-        FiguraMod.pushProfiler(FiguraMod.MOD_ID);
-        FiguraMod.tick();
-        FiguraMod.popProfiler();
+        CosmetiguraMod.pushProfiler(CosmetiguraMod.MOD_ID);
+        CosmetiguraMod.tick();
+        CosmetiguraMod.popProfiler();
     }
 }

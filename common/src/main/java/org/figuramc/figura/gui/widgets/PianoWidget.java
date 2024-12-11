@@ -8,7 +8,7 @@ import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.phys.Vec3;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.lua.api.sound.LuaSound;
 import org.figuramc.figura.utils.ui.UIHelper;
 
@@ -115,7 +115,7 @@ public class PianoWidget extends AbstractContainerElement {
             UIHelper.blitSliced(gui, getX(), getY(), getWidth(), getHeight(), UIHelper.OUTLINE);
 
             if (isHovered())
-                UIHelper.fillRounded(gui, getX(), getY(), getWidth(), getHeight(), (FiguraMod.getAccentColor().getColor().getValue()) + (0xA0 << 24));
+                UIHelper.fillRounded(gui, getX(), getY(), getWidth(), getHeight(), (CosmetiguraMod.getAccentColor().getColor().getValue()) + (0xA0 << 24));
 
             Font font = Minecraft.getInstance().font;
             Component message = getMessage();

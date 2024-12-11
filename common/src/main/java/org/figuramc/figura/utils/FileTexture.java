@@ -23,7 +23,7 @@ public class FileTexture extends DynamicTexture {
 
     public static FileTexture of(Path path) throws IOException {
         String s = path.toString();
-        ResourceLocation resourceLocation = new FiguraIdentifier("file/" + FiguraIdentifier.formatPath(s));
+        ResourceLocation resourceLocation = new CosmetiguraIdentifier("file/" + CosmetiguraIdentifier.formatPath(s));
         return new FileTexture(readImage(path), resourceLocation);
     }
 

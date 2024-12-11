@@ -8,7 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.SimpleTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.lua.LuaNotNil;
 import org.figuramc.figura.lua.LuaWhitelist;
@@ -21,7 +21,7 @@ import org.figuramc.figura.math.vector.FiguraVec3;
 import org.figuramc.figura.math.vector.FiguraVec4;
 import org.figuramc.figura.mixin.render.TextureManagerAccessor;
 import org.figuramc.figura.utils.ColorUtils;
-import org.figuramc.figura.utils.FiguraIdentifier;
+import org.figuramc.figura.utils.CosmetiguraIdentifier;
 import org.figuramc.figura.utils.LuaUtils;
 import org.luaj.vm2.LuaError;
 import org.luaj.vm2.LuaFunction;
@@ -58,7 +58,7 @@ public class FiguraTexture extends SimpleTexture {
     private boolean isClosed = false;
 
     public FiguraTexture(Avatar owner, String name, byte[] data) {
-        super(new FiguraIdentifier("avatar_tex/" + owner.owner + "/" + UUID.randomUUID()));
+        super(new CosmetiguraIdentifier("avatar_tex/" + owner.owner + "/" + UUID.randomUUID()));
 
         // Read image from wrapper
         NativeImage image;
@@ -68,7 +68,7 @@ public class FiguraTexture extends SimpleTexture {
             wrapper.rewind();
             image = NativeImage.read(wrapper);
         } catch (IOException e) {
-            FiguraMod.LOGGER.error("", e);
+            CosmetiguraMod.LOGGER.error("", e);
             image = new NativeImage(1, 1, true);
         }
 
@@ -78,14 +78,14 @@ public class FiguraTexture extends SimpleTexture {
     }
 
     public FiguraTexture(Avatar owner, String name, int width, int height) {
-        super(new FiguraIdentifier("avatar_tex/" + owner.owner + "/" + UUID.randomUUID()));
+        super(new CosmetiguraIdentifier("avatar_tex/" + owner.owner + "/" + UUID.randomUUID()));
         this.texture = new NativeImage(width, height, true);
         this.name = name;
         this.owner = owner;
     }
 
     public FiguraTexture(Avatar owner, String name, NativeImage image) {
-        super(new FiguraIdentifier("avatar_tex/" + owner.owner + "/custom/" + UUID.randomUUID()));
+        super(new CosmetiguraIdentifier("avatar_tex/" + owner.owner + "/custom/" + UUID.randomUUID()));
         this.texture = image;
         this.name = name;
         this.owner = owner;

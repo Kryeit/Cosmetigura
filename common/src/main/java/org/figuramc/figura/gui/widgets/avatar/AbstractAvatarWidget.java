@@ -6,7 +6,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.local.LocalAvatarFetcher;
 import org.figuramc.figura.gui.FiguraToast;
 import org.figuramc.figura.gui.widgets.AbstractContainerElement;
@@ -54,7 +54,7 @@ public abstract class AbstractAvatarWidget extends AbstractContainerElement impl
             try {
                 Util.getPlatform().openUri(avatar.getFSPath().toUri());
             } catch (Exception e) {
-                FiguraMod.debug("failed to open avatar folder: ", e.getMessage());
+                CosmetiguraMod.debug("failed to open avatar folder: ", e.getMessage());
                 Util.getPlatform().openUri(LocalAvatarFetcher.getLocalAvatarDirectory().toUri());
             }
         });

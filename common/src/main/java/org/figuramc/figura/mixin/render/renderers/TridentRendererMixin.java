@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.projectile.ThrownTrident;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.lua.api.entity.EntityAPI;
@@ -34,19 +34,19 @@ public abstract class TridentRendererMixin<T extends ThrownTrident > extends Ent
         if (avatar == null || avatar.permissions.get(Permissions.VANILLA_MODEL_EDIT) == 0)
             return;
 
-        FiguraMod.pushProfiler(FiguraMod.MOD_ID);
-        FiguraMod.pushProfiler(avatar);
-        FiguraMod.pushProfiler("tridentRender");
+        CosmetiguraMod.pushProfiler(CosmetiguraMod.MOD_ID);
+        CosmetiguraMod.pushProfiler(avatar);
+        CosmetiguraMod.pushProfiler("tridentRender");
 
-        FiguraMod.pushProfiler("event");
+        CosmetiguraMod.pushProfiler("event");
         boolean bool = avatar.tridentRenderEvent(tickDelta, EntityAPI.wrap(abstractTrident));
 
-        FiguraMod.popPushProfiler("render");
+        CosmetiguraMod.popPushProfiler("render");
         if (bool || avatar.renderTrident(poseStack, multiBufferSource, tickDelta, light)) {
             poseStack.popPose();
             ci.cancel();
         }
 
-        FiguraMod.popProfiler(4);
+        CosmetiguraMod.popProfiler(4);
     }
 }

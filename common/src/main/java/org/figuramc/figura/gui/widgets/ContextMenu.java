@@ -9,7 +9,7 @@ import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
-import org.figuramc.figura.utils.FiguraIdentifier;
+import org.figuramc.figura.utils.CosmetiguraIdentifier;
 import org.figuramc.figura.utils.ui.UIHelper;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import java.util.List;
 
 public class ContextMenu extends AbstractContainerElement {
 
-    public static final ResourceLocation BACKGROUND = new FiguraIdentifier("textures/gui/context.png");
+    public static final ResourceLocation BACKGROUND = new CosmetiguraIdentifier("textures/gui/context.png");
 
     private final int minWidth;
     private final List<ContextButton> entries = new ArrayList<>();

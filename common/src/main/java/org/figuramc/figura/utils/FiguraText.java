@@ -2,20 +2,20 @@ package org.figuramc.figura.utils;
 
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.contents.TranslatableContents;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 
 public class FiguraText extends TranslatableContents {
 
     public FiguraText() {
-        super(FiguraMod.MOD_ID, FiguraMod.MOD_NAME, NO_ARGS);
+        super(CosmetiguraMod.MOD_ID, CosmetiguraMod.MOD_NAME, NO_ARGS);
     }
 
     public FiguraText(String string) {
-        super(FiguraMod.MOD_ID + "." + string, null, NO_ARGS);
+        super(CosmetiguraMod.MOD_ID + "." + string, null, NO_ARGS);
     }
 
     public FiguraText(String string, Object... args) {
-        super(FiguraMod.MOD_ID + "." + string, null, args);
+        super(CosmetiguraMod.MOD_ID + "." + string, null, args);
     }
 
     public static MutableComponent of() {

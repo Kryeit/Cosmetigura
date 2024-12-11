@@ -4,7 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.minecraft.server.packs.PathPackResources;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.backend2.NetworkStuff;
 import org.figuramc.figura.config.Configs;
 import org.figuramc.figura.utils.IOUtils;
@@ -21,19 +21,19 @@ import java.util.concurrent.CompletableFuture;
 public class FiguraRuntimeResources {
 
     private static String ASSETS_VERSION;
-    public static final PathPackResources PACK = new PathPackResources(FiguraMod.MOD_NAME + " runtime resource pack", getRootDirectory(), true);
+    public static final PathPackResources PACK = new PathPackResources(CosmetiguraMod.MOD_NAME + " runtime resource pack", getRootDirectory(), true);
 
     public static Path getRootDirectory() {
-        return IOUtils.getOrCreateDir(FiguraMod.getCacheDirectory(), "resources");
+        return IOUtils.getOrCreateDir(CosmetiguraMod.getCacheDirectory(), "resources");
     }
 
     public static Path getAssetsDirectory() {
-        return IOUtils.getOrCreateDir(getRootDirectory(), "assets/" + FiguraMod.MOD_ID);
+        return IOUtils.getOrCreateDir(getRootDirectory(), "assets/" + CosmetiguraMod.MOD_ID);
     }
 
     public static String getAssetsVersion() {
         if (ASSETS_VERSION == null)
-             ASSETS_VERSION = FiguraMod.METADATA.getCustomValueAsString("assets_version");
+             ASSETS_VERSION = CosmetiguraMod.METADATA.getCustomValueAsString("assets_version");
         return ASSETS_VERSION;
     }
 
@@ -45,7 +45,7 @@ public class FiguraRuntimeResources {
 
     public static CompletableFuture<Void> init() {
         return future = CompletableFuture.runAsync(() -> {
-            FiguraMod.LOGGER.info("Fetching backend resources...");
+            CosmetiguraMod.LOGGER.info("Fetching backend resources...");
 
             JsonObject hashes, oldHashes;
 
@@ -67,10 +67,10 @@ public class FiguraRuntimeResources {
                 try (OutputStream fs = Files.newOutputStream(hashesPath)) {
                     fs.write(bytes);
                 } catch (Exception e) {
-                    FiguraMod.LOGGER.error("Failed to save resource hashes", e);
+                    CosmetiguraMod.LOGGER.error("Failed to save resource hashes", e);
                 }
             } catch (Exception ignored) {
-                FiguraMod.LOGGER.warn("Failed to fetch backend resources");
+                CosmetiguraMod.LOGGER.warn("Failed to fetch backend resources");
                 return;
             }
 
@@ -83,7 +83,7 @@ public class FiguraRuntimeResources {
                         getAndSaveResource(key);
                     }
                 } catch (Exception e) {
-                    FiguraMod.debug("Failed to download resource \"" + key + "\"", e);
+                    CosmetiguraMod.debug("Failed to download resource \"" + key + "\"", e);
                 }
             }
             File assetsDirectoryFile = getAssetsDirectory().toFile();
@@ -115,7 +115,7 @@ public class FiguraRuntimeResources {
         IOUtils.createDirIfNeeded(target.getParent());
         try (InputStream resource = NetworkStuff.getResource(getAssetsVersion(), path); OutputStream fs = Files.newOutputStream(target)) {
             fs.write(resource.readAllBytes());
-            FiguraMod.debug("Downloaded resource \"" + path + "\"");
+            CosmetiguraMod.debug("Downloaded resource \"" + path + "\"");
         }
     }
 

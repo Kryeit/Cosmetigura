@@ -5,13 +5,13 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import org.figuramc.figura.utils.FiguraIdentifier;
+import org.figuramc.figura.utils.CosmetiguraIdentifier;
 import org.figuramc.figura.utils.FiguraText;
 import org.figuramc.figura.utils.ui.UIHelper;
 
 public class SwitchButton extends Button {
 
-    public static final ResourceLocation SWITCH_TEXTURE = new FiguraIdentifier("textures/gui/switch.png");
+    public static final ResourceLocation SWITCH_TEXTURE = new CosmetiguraIdentifier("textures/gui/switch.png");
     public static final Component ON = FiguraText.of("gui.on");
     public static final Component OFF = FiguraText.of("gui.off");
 

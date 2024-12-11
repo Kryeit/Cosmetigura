@@ -7,7 +7,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.cosmetics.network.SelectCosmeticsC2SPacket;
 import org.figuramc.figura.gui.widgets.AbstractContainerElement;
 import org.figuramc.figura.gui.widgets.Button;
@@ -26,7 +26,7 @@ public class CosmeticWidget extends AbstractContainerElement {
         this.cosmetic = cosmetic;
         this.thumbnail = new ResourceLocation("figura", "thumbnail_" + cosmetic.id());
 
-        long[] cosmetics = CosmeticManager.getEquippedCosmetics(FiguraMod.getLocalPlayerUUID());
+        long[] cosmetics = CosmeticManager.getEquippedCosmetics(CosmetiguraMod.getLocalPlayerUUID());
         for (long id : cosmetics) {
             if (id == cosmetic.id()) {
                 equipped = true;

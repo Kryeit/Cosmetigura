@@ -4,7 +4,7 @@ import net.minecraft.Util;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.config.Configs;
 import org.figuramc.figura.gui.cards.CardBackground;
 import org.figuramc.figura.parsers.AvatarMetadataParser;
@@ -39,7 +39,7 @@ public class LocalAvatarFetcher {
      */
     public static void loadAvatars() {
         loaded = false;
-        FiguraMod.debug("Reloading Avatar List...");
+        CosmetiguraMod.debug("Reloading Avatar List...");
 
         // load avatars
         FolderPath root = new FolderPath(getLocalAvatarDirectory());
@@ -158,7 +158,7 @@ public class LocalAvatarFetcher {
      * The directory is always under main directory.
      */
     public static Path getLocalAvatarDirectory() {
-        return IOUtils.getOrCreateDir(FiguraMod.getFiguraDirectory(), "avatars");
+        return IOUtils.getOrCreateDir(CosmetiguraMod.getFiguraDirectory(), "avatars");
     }
 
     public static boolean isAvatar(Path path) {
@@ -242,7 +242,7 @@ public class LocalAvatarFetcher {
                     description = metadata.description == null ? "" : metadata.description;
                     bg = CardBackground.parse(metadata.background);
                 } catch (Exception e) {
-                    FiguraMod.LOGGER.error("Failed to load metadata for \"" + path + "\"", e);
+                    CosmetiguraMod.LOGGER.error("Failed to load metadata for \"" + path + "\"", e);
                 }
 
                 // icon
@@ -299,7 +299,7 @@ public class LocalAvatarFetcher {
                     if (iconPath != null)
                         this.iconTexture = FileTexture.of(iconPath);
                 } catch (Exception e) {
-                    FiguraMod.LOGGER.error("Failed to load icon for \"" + path + "\"", e);
+                    CosmetiguraMod.LOGGER.error("Failed to load icon for \"" + path + "\"", e);
                 }
             }
             return iconTexture;

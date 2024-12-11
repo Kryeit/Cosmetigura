@@ -3,10 +3,9 @@ package org.figuramc.figura.gui.widgets.config;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.config.ConfigKeyBind;
 import org.figuramc.figura.config.ConfigType;
-import org.figuramc.figura.config.Configs;
 import org.figuramc.figura.gui.widgets.KeybindWidgetHelper;
 import org.figuramc.figura.gui.widgets.ParentedButton;
 import org.figuramc.figura.gui.widgets.lists.ConfigList;
@@ -24,10 +23,10 @@ public class KeybindElement extends AbstractConfigElement {
         // toggle button
         children.add(0, button = new ParentedButton(0, 0, 90, 20, this.binding.getTranslatedKeyMessage(), this, button -> {
             parentList.focusedBinding = binding;
-            FiguraMod.processingKeybind = true;
+            CosmetiguraMod.processingKeybind = true;
             updateText();
         }));
-        button.setActive(FiguraMod.debugModeEnabled() || !config.disabled);
+        button.setActive(CosmetiguraMod.debugModeEnabled() || !config.disabled);
 
         // overwrite reset button to update the keybind
         children.remove(resetButton);

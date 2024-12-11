@@ -5,14 +5,13 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.config.Configs;
@@ -71,7 +70,7 @@ public abstract class EntityRendererMixin<T extends Entity> implements EntityRen
         FiguraVec3 pivot = FiguraVec3.of(x, y, z);
         if (figura$enabled && figura$avatar != null) {
             // pivot
-            FiguraMod.pushProfiler("pivot");
+            CosmetiguraMod.pushProfiler("pivot");
             if (figura$hasCustomNameplate && figura$custom.getPivot() != null)
                 pivot = figura$custom.getPivot();
         }
@@ -83,7 +82,7 @@ public abstract class EntityRendererMixin<T extends Entity> implements EntityRen
     private void modifyPos(T entity, Component text, PoseStack matrices, MultiBufferSource vertexConsumers, int light, CallbackInfo ci) {
         if (figura$enabled && figura$avatar != null) {
             // pos
-            FiguraMod.popPushProfiler("position");
+            CosmetiguraMod.popPushProfiler("position");
             if (figura$hasCustomNameplate && figura$custom.getPos() != null) {
                 FiguraVec3 pos = figura$custom.getPos();
                 matrices.translate(pos.x, pos.y, pos.z);
@@ -97,7 +96,7 @@ public abstract class EntityRendererMixin<T extends Entity> implements EntityRen
         FiguraVec3 scaleVec = FiguraVec3.of(x, y, z);
         if (figura$enabled && figura$avatar != null) {
             // scale
-            FiguraMod.popPushProfiler("scale");
+            CosmetiguraMod.popPushProfiler("scale");
             if (figura$hasCustomNameplate && figura$custom.getScale() != null)
                 scaleVec.multiply(figura$custom.getScale());
         }

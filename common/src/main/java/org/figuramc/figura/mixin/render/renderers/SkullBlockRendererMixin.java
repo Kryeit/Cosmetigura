@@ -13,7 +13,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.SkullBlock;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.ducks.SkullBlockRendererAccessor;
@@ -58,9 +58,9 @@ public abstract class SkullBlockRendererMixin implements BlockEntityRenderer<Sku
         if (localAvatar == null || localAvatar.permissions.get(Permissions.CUSTOM_SKULL) == 0)
             return;
 
-        FiguraMod.pushProfiler(FiguraMod.MOD_ID);
-        FiguraMod.pushProfiler(localAvatar);
-        FiguraMod.pushProfiler("skullRender");
+        CosmetiguraMod.pushProfiler(CosmetiguraMod.MOD_ID);
+        CosmetiguraMod.pushProfiler(localAvatar);
+        CosmetiguraMod.pushProfiler("skullRender");
 
         // event
         BlockStateAPI b = localBlock == null ? null : new BlockStateAPI(localBlock.getBlockState(), localBlock.getBlockPos());
@@ -68,17 +68,17 @@ public abstract class SkullBlockRendererMixin implements BlockEntityRenderer<Sku
         EntityAPI<?> e = localEntity != null ? EntityAPI.wrap(localEntity) : null;
         String m = localMode.name();
 
-        FiguraMod.pushProfiler(localBlock != null ? localBlock.getBlockPos().toString() : String.valueOf(i));
+        CosmetiguraMod.pushProfiler(localBlock != null ? localBlock.getBlockPos().toString() : String.valueOf(i));
 
-        FiguraMod.pushProfiler("event");
+        CosmetiguraMod.pushProfiler("event");
         boolean bool = localAvatar.skullRenderEvent(Minecraft.getInstance().getFrameTime(), b, i, e, m);
 
         // render skull :3
-        FiguraMod.popPushProfiler("render");
+        CosmetiguraMod.popPushProfiler("render");
         if (bool || localAvatar.skullRender(stack, bufferSource, light, direction, yaw))
             ci.cancel();
 
-        FiguraMod.popProfiler(5);
+        CosmetiguraMod.popProfiler(5);
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/blockentity/SkullBlockRenderer;renderSkull(Lnet/minecraft/core/Direction;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/client/model/SkullModelBase;Lnet/minecraft/client/renderer/RenderType;)V"), method = "render(Lnet/minecraft/world/level/block/entity/SkullBlockEntity;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V")

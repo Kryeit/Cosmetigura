@@ -2,15 +2,12 @@ package org.figuramc.figura.backend2.trust;
 
 import com.neovisionaries.ws.client.*;
 import net.minecraft.client.multiplayer.resolver.ServerAddress;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.backend2.NetworkStuff;
 import org.figuramc.figura.backend2.websocket.FiguraWebSocketAdapter;
 import org.figuramc.figura.config.Configs;
 import org.figuramc.figura.utils.PlatformUtils;
 
-import javax.net.ssl.KeyManagerFactory;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManagerFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -28,7 +25,7 @@ public class KeyStoreHelper {
     private static final char[] password = "figuramc".toCharArray();
 
     public static WebSocket websocketWithBackendCertificates(String token) throws WebSocketException {
-        FiguraMod.LOGGER.info("Initializing custom websocket");
+        CosmetiguraMod.LOGGER.info("Initializing custom websocket");
         try {
             WebSocketFactory wsFactory = new WebSocketFactory();
             String serverName = ServerAddress.parseString(Configs.SERVER_IP.value).getHost();
@@ -38,7 +35,7 @@ public class KeyStoreHelper {
             socket.addExtension(WebSocketExtension.PERMESSAGE_DEFLATE);
             return socket;
         } catch (IOException e) {
-            FiguraMod.LOGGER.error("Failed to load in the backend's certificates during Websocket creation!", e);
+            CosmetiguraMod.LOGGER.error("Failed to load in the backend's certificates during Websocket creation!", e);
             NetworkStuff.disconnect("Failed to load certificates for the backend :c");
         }
         throw new WebSocketException(WebSocketError.SOCKET_CONNECT_ERROR);
@@ -54,7 +51,7 @@ public class KeyStoreHelper {
             try {
                 return jdkKeyStore.getCertificate(alias);
             } catch (KeyStoreException e) {
-                FiguraMod.LOGGER.error("Could not find default certificates!", e);
+                CosmetiguraMod.LOGGER.error("Could not find default certificates!", e);
             }
             return null;
         }));
@@ -70,7 +67,7 @@ public class KeyStoreHelper {
             try {
                 return figuraKeyStore.getCertificate(alias);
             } catch (KeyStoreException e) {
-                FiguraMod.LOGGER.error("Could not find default certificates!", e);
+                CosmetiguraMod.LOGGER.error("Could not find default certificates!", e);
             }
             return null;
         }));

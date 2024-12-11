@@ -2,12 +2,12 @@ package org.figuramc.figura.utils;
 
 import net.minecraft.Util;
 import net.minecraft.resources.ResourceLocation;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 
-public class FiguraIdentifier extends ResourceLocation {
+public class CosmetiguraIdentifier extends ResourceLocation {
 
-    public FiguraIdentifier(String string) {
-        super(FiguraMod.MOD_ID, string);
+    public CosmetiguraIdentifier(String string) {
+        super(CosmetiguraMod.MOD_ID, string);
     }
 
     public static String formatPath(String path) {

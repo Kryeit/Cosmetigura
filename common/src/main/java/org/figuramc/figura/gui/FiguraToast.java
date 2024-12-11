@@ -9,10 +9,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.config.Configs;
 import org.figuramc.figura.utils.ColorUtils;
-import org.figuramc.figura.utils.FiguraIdentifier;
+import org.figuramc.figura.utils.CosmetiguraIdentifier;
 import org.figuramc.figura.utils.ui.UIHelper;
 
 import java.util.Calendar;
@@ -53,7 +53,7 @@ public class FiguraToast implements Toast {
         long timeDiff = startTime - this.startTime;
 
         UIHelper.enableBlend();
-        int frame = Configs.REDUCED_MOTION.value ? 0 : (int) ((FiguraMod.ticks / 5f) % type.frames);
+        int frame = Configs.REDUCED_MOTION.value ? 0 : (int) ((CosmetiguraMod.ticks / 5f) % type.frames);
         gui.blit(type.texture, 0, 0, 0f, frame * height(), width(), height(), width(), height() * type.frames);
 
         Font font = component.getMinecraft().font;
@@ -123,7 +123,7 @@ public class FiguraToast implements Toast {
         Component text2 = message instanceof Component m ? m : Component.translatable(message.toString());
 
         if (type == ToastType.DEFAULT && Configs.EASTER_EGGS.value) {
-            Calendar calendar = FiguraMod.CALENDAR;
+            Calendar calendar = CosmetiguraMod.CALENDAR;
             calendar.setTime(new Date());
 
             if ((calendar.get(Calendar.DAY_OF_MONTH) == 1 && calendar.get(Calendar.MONTH) == Calendar.APRIL) || Math.random() < 0.0001)
@@ -133,7 +133,7 @@ public class FiguraToast implements Toast {
         ToastComponent toasts = Minecraft.getInstance().getToasts();
         FiguraToast toast = toasts.getToast(FiguraToast.class, type);
 
-        FiguraMod.debug("Sent toast: \"{}\", \"{}\" of type: \"{}\"", text.getString(), text2.getString(), type.name());
+        CosmetiguraMod.debug("Sent toast: \"{}\", \"{}\" of type: \"{}\"", text.getString(), text2.getString(), type.name());
 
         if (toast != null)
             toast.update(text, text2, true);
@@ -142,10 +142,10 @@ public class FiguraToast implements Toast {
     }
 
     public enum ToastType {
-        DEFAULT(new FiguraIdentifier("textures/gui/toast/default.png"), 4, 160, 31, 0x55FFFF),
-        WARNING(new FiguraIdentifier("textures/gui/toast/warning.png"), 4, 160, 31, 0xFFFF00),
-        ERROR(new FiguraIdentifier("textures/gui/toast/error.png"), 4, 160, 31, 0xFF0000),
-        CHEESE(new FiguraIdentifier("textures/gui/toast/cheese.png"), 1, 160, 31, ColorUtils.Colors.CHEESE.hex);
+        DEFAULT(new CosmetiguraIdentifier("textures/gui/toast/default.png"), 4, 160, 31, 0x55FFFF),
+        WARNING(new CosmetiguraIdentifier("textures/gui/toast/warning.png"), 4, 160, 31, 0xFFFF00),
+        ERROR(new CosmetiguraIdentifier("textures/gui/toast/error.png"), 4, 160, 31, 0xFF0000),
+        CHEESE(new CosmetiguraIdentifier("textures/gui/toast/cheese.png"), 1, 160, 31, ColorUtils.Colors.CHEESE.hex);
 
         private final ResourceLocation texture;
         private final int frames;

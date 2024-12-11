@@ -1,7 +1,7 @@
 package org.figuramc.figura.utils.fabric;
 
 import net.fabricmc.loader.api.FabricLoader;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.utils.PlatformUtils;
 
 import java.io.File;
@@ -16,7 +16,7 @@ public class PlatformUtilsImpl {
     }
 
     public static String getFiguraModVersionString() {
-        return FabricLoader.getInstance().getModContainer(FiguraMod.MOD_ID).get().getMetadata().getVersion().getFriendlyString();
+        return FabricLoader.getInstance().getModContainer(CosmetiguraMod.MOD_ID).get().getMetadata().getVersion().getFriendlyString();
     }
 
     public static Path getConfigDir() {
@@ -36,7 +36,7 @@ public class PlatformUtilsImpl {
     }
 
     public static InputStream loadFileFromRoot(String path) throws FileNotFoundException {
-        File file = FabricLoader.getInstance().getModContainer(FiguraMod.MOD_ID).get().findPath(path).get().toFile();
+        File file = FabricLoader.getInstance().getModContainer(CosmetiguraMod.MOD_ID).get().findPath(path).get().toFile();
         return new FileInputStream(file);
     }
 }

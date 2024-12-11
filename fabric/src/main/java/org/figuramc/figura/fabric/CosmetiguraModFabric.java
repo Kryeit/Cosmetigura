@@ -3,11 +3,11 @@ package org.figuramc.figura.fabric;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.server.packs.PackType;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.config.ConfigManager;
 import org.figuramc.figura.utils.fabric.FiguraResourceListenerImpl;
 
-public class FiguraModFabric extends FiguraMod implements ClientModInitializer {
+public class CosmetiguraModFabric extends CosmetiguraMod implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         ConfigManager.init();

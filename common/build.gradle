@@ -3,7 +3,7 @@ architectury {
 }
 
 loom {
-    accessWidenerPath = file("src/main/resources/figura.accesswidener")
+    accessWidenerPath = file("src/main/resources/cosmetigura.accesswidener")
 }
 
 repositories {
@@ -38,36 +38,5 @@ dependencies {
 
     // Test compile only is used to mount sources on an IDE without overriding vanilla classes with Optifine's
     testCompileOnly fileTree(dir: "$rootProject.projectDir/libs", include: '*.jar')
-}
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            artifactId = "${project.archivesBaseName}-common-intermediary"
-            version = project.version
-            artifact(remapJar) {
-                builtBy remapJar
-                classifier ''
-            }
-            artifact(sourcesJar) {
-                builtBy sourcesJar
-                classifier 'sources'
-            }
-        }
-    }
-    setupRepositories(repositories)
-}
-
-void setupRepositories(RepositoryHandler repositories) {
-    if (project.hasProperty("mavenUrl")) {
-        repositories.maven {
-            name = "figuraMaven"
-            url project.mavenUrl
-            credentials(PasswordCredentials)
-            authentication {
-                basic(BasicAuthentication)
-            }
-        }
-    }
 }
 

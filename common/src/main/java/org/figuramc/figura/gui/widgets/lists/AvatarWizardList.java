@@ -8,7 +8,7 @@ import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.util.Mth;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.gui.widgets.FiguraWidget;
 import org.figuramc.figura.gui.widgets.SwitchButton;
 import org.figuramc.figura.gui.widgets.TextField;
@@ -159,7 +159,7 @@ public class AvatarWizardList extends AbstractList {
             Font font = Minecraft.getInstance().font;
             MutableComponent name = this.name.copy();
             if (!this.getField().getValue().isBlank())
-                name.setStyle(FiguraMod.getAccentColor());
+                name.setStyle(CosmetiguraMod.getAccentColor());
             gui.drawString(font, name, getX() - getWidth() - 8, (int) (getY() + (getHeight() - font.lineHeight) / 2f), 0xFFFFFF);
         }
 
@@ -203,7 +203,7 @@ public class AvatarWizardList extends AbstractList {
             Font font = Minecraft.getInstance().font;
             MutableComponent name = getMessage().copy();
             if (this.isToggled())
-                name.withStyle(FiguraMod.getAccentColor());
+                name.withStyle(CosmetiguraMod.getAccentColor());
             gui.drawString(font, name, getX() - getWidth() - 8, (int) (getY() + (getHeight() - font.lineHeight) / 2f), 0xFFFFFF);
         }
 

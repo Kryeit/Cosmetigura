@@ -9,7 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.util.Mth;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.gui.widgets.FiguraWidget;
 import org.figuramc.figura.gui.widgets.SliderWidget;
 import org.figuramc.figura.gui.widgets.SwitchButton;
@@ -98,7 +98,7 @@ public class PermissionsList extends AbstractList {
         // add new permissions
 
         // defaults
-        permissions.put(FiguraText.of(), generateWidgets(container, Permissions.DEFAULT, FiguraMod.MOD_ID));
+        permissions.put(FiguraText.of(), generateWidgets(container, Permissions.DEFAULT, CosmetiguraMod.MOD_ID));
 
         // custom
         for (Map.Entry<String, Collection<Permissions>> entry : PermissionManager.CUSTOM_PERMISSIONS.entrySet())
@@ -179,7 +179,7 @@ public class PermissionsList extends AbstractList {
 
             // texts
             MutableComponent name = Component.translatable(this.text);
-            if (changed) name = Component.literal("*").setStyle(FiguraMod.getAccentColor()).append(name).append("*");
+            if (changed) name = Component.literal("*").setStyle(CosmetiguraMod.getAccentColor()).append(name).append("*");
             int valueX = getX() + getWidth() - font.width(value) - 1;
 
             int x = getX() + 1;
@@ -187,7 +187,7 @@ public class PermissionsList extends AbstractList {
             int width = valueX - getX() - 2;
 
             UIHelper.renderScrollingText(gui, name, x, y, width, 0xFFFFFF);
-            gui.drawString(font, value.copy().setStyle(FiguraMod.getAccentColor()), valueX, getY() + 1, 0xFFFFFF);
+            gui.drawString(font, value.copy().setStyle(CosmetiguraMod.getAccentColor()), valueX, getY() + 1, 0xFFFFFF);
 
             if (parent.isInsideScissors(mouseX, mouseY) && UIHelper.isMouseOver(x, y, width, font.lineHeight, mouseX, mouseY))
                 UIHelper.setTooltip(Component.translatable(this.text + ".tooltip"));
@@ -274,12 +274,12 @@ public class PermissionsList extends AbstractList {
 
             // texts
             MutableComponent name = getMessage().copy();
-            if (changed) name = Component.literal("*").setStyle(FiguraMod.getAccentColor()).append(name).append("*");
+            if (changed) name = Component.literal("*").setStyle(CosmetiguraMod.getAccentColor()).append(name).append("*");
             int valueX = getX() + getWidth() - font.width(value) - 1;
             int valueY = getY() + font.lineHeight + 11 - font.lineHeight / 2;
 
             UIHelper.renderScrollingText(gui, name, getX() + 1, getY() + 1, getWidth() - 2, 0xFFFFFF);
-            gui.drawString(font, value.copy().setStyle(FiguraMod.getAccentColor()), valueX, valueY, 0xFFFFFF);
+            gui.drawString(font, value.copy().setStyle(CosmetiguraMod.getAccentColor()), valueX, valueY, 0xFFFFFF);
         }
 
         @Override
@@ -361,7 +361,7 @@ public class PermissionsList extends AbstractList {
             }
             // changed value
             else if (changed) {
-                TextColor textColor = FiguraMod.getAccentColor().getColor();
+                TextColor textColor = CosmetiguraMod.getAccentColor().getColor();
                 color = textColor == null ? ColorUtils.Colors.AWESOME_BLUE.hex : textColor.getValue();
             }
 
@@ -374,7 +374,7 @@ public class PermissionsList extends AbstractList {
 
             // texts
             MutableComponent name = Component.translatable(this.text);
-            if (changed) name = Component.literal("*").setStyle(FiguraMod.getAccentColor()).append(name).append("*");
+            if (changed) name = Component.literal("*").setStyle(CosmetiguraMod.getAccentColor()).append(name).append("*");
             int valueX = getX() + getWidth() - font.width(value) - 1;
 
             int x = getX() + 1;
@@ -382,7 +382,7 @@ public class PermissionsList extends AbstractList {
             int width = valueX - getX() - 2;
 
             UIHelper.renderScrollingText(gui, name, x, y, width, 0xFFFFFF);
-            gui.drawString(font, value.copy().setStyle(FiguraMod.getAccentColor()), valueX, getY() + 1 - font.lineHeight, 0xFFFFFF);
+            gui.drawString(font, value.copy().setStyle(CosmetiguraMod.getAccentColor()), valueX, getY() + 1 - font.lineHeight, 0xFFFFFF);
 
             if (parent.isInsideScissors(mouseX, mouseY) && UIHelper.isMouseOver(x, y, width, font.lineHeight, mouseX, mouseY))
                 UIHelper.setTooltip(Component.translatable(this.text + ".tooltip"));

@@ -21,7 +21,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.avatar.Badges;
@@ -32,7 +32,7 @@ import org.figuramc.figura.gui.widgets.ContextMenu;
 import org.figuramc.figura.gui.widgets.FiguraWidget;
 import org.figuramc.figura.math.vector.FiguraVec4;
 import org.figuramc.figura.model.rendering.EntityRenderMode;
-import org.figuramc.figura.utils.FiguraIdentifier;
+import org.figuramc.figura.utils.CosmetiguraIdentifier;
 import org.figuramc.figura.utils.RenderUtils;
 import org.figuramc.figura.utils.TextUtils;
 import org.joml.Matrix4f;
@@ -50,11 +50,11 @@ public final class UIHelper {
 
     // -- Variables -- // 
 
-    public static final ResourceLocation OUTLINE_FILL = new FiguraIdentifier("textures/gui/outline_fill.png");
-    public static final ResourceLocation OUTLINE = new FiguraIdentifier("textures/gui/outline.png");
-    public static final ResourceLocation TOOLTIP = new FiguraIdentifier("textures/gui/tooltip.png");
-    public static final ResourceLocation UI_FONT = new FiguraIdentifier("ui");
-    public static final ResourceLocation SPECIAL_FONT = new FiguraIdentifier("special");
+    public static final ResourceLocation OUTLINE_FILL = new CosmetiguraIdentifier("textures/gui/outline_fill.png");
+    public static final ResourceLocation OUTLINE = new CosmetiguraIdentifier("textures/gui/outline.png");
+    public static final ResourceLocation TOOLTIP = new CosmetiguraIdentifier("textures/gui/tooltip.png");
+    public static final ResourceLocation UI_FONT = new CosmetiguraIdentifier("ui");
+    public static final ResourceLocation SPECIAL_FONT = new CosmetiguraIdentifier("special");
 
     public static final Component UP_ARROW = Component.literal("^").withStyle(Style.EMPTY.withFont(UI_FONT));
     public static final Component DOWN_ARROW = Component.literal("V").withStyle(Style.EMPTY.withFont(UI_FONT));
@@ -263,7 +263,7 @@ public final class UIHelper {
 
     public static void renderAnimatedBackground(GuiGraphics gui, ResourceLocation texture, float x, float y, float width, float height, float textureWidth, float textureHeight, double speed, float delta) {
         if (speed != 0) {
-            double d = (FiguraMod.ticks + delta) * speed;
+            double d = (CosmetiguraMod.ticks + delta) * speed;
             x -= d % textureWidth;
             y -= d % textureHeight;
         }
@@ -564,7 +564,7 @@ public final class UIHelper {
         int stopDelay = (int) (Configs.TEXT_SCROLL_DELAY.tempValue * speed);
         int time = scrollLen + stopDelay;
         int totalTime = time * 2;
-        int ticks = (int) (FiguraMod.ticks * speed);
+        int ticks = (int) (CosmetiguraMod.ticks * speed);
         int currentTime = ticks % time;
         int dir = (ticks % totalTime) > time - 1 ? 1 : -1;
 
@@ -580,7 +580,7 @@ public final class UIHelper {
     }
 
     public static void renderLoading(GuiGraphics gui, int x, int y) {
-        Component text = Component.literal(Integer.toHexString(Math.abs(FiguraMod.ticks) % 16)).withStyle(Style.EMPTY.withFont(Badges.FONT));
+        Component text = Component.literal(Integer.toHexString(Math.abs(CosmetiguraMod.ticks) % 16)).withStyle(Style.EMPTY.withFont(Badges.FONT));
         Font font = Minecraft.getInstance().font;
         gui.drawString(font, text, x - font.width(text) / 2, y - font.lineHeight / 2, -1, false);
     }

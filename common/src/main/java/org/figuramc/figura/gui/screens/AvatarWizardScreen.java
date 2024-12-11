@@ -1,7 +1,7 @@
 package org.figuramc.figura.gui.screens;
 
 import net.minecraft.client.gui.screens.Screen;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.gui.FiguraToast;
 import org.figuramc.figura.gui.widgets.Button;
 import org.figuramc.figura.gui.widgets.lists.AvatarWizardList;
@@ -41,7 +41,7 @@ public class AvatarWizardScreen extends AbstractPanelScreen {
                 FiguraToast.sendToast(FiguraText.of("toast.avatar_wizard.success"));
             } catch (Exception e) {
                 FiguraToast.sendToast(FiguraText.of("toast.avatar_wizard.error"), FiguraToast.ToastType.ERROR);
-                FiguraMod.LOGGER.error("", e);
+                CosmetiguraMod.LOGGER.error("", e);
             }
 
             onClose();

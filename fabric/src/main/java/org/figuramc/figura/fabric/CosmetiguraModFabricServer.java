@@ -4,7 +4,7 @@ import net.fabricmc.api.DedicatedServerModInitializer;
 import org.figuramc.figura.cosmetics.BackendConfig;
 import org.figuramc.figura.cosmetics.network.FiguraNetworkManager;
 
-public class FiguraModFabricServer implements DedicatedServerModInitializer {
+public class CosmetiguraModFabricServer implements DedicatedServerModInitializer {
     @Override
     public void onInitializeServer() {
         FiguraNetworkManager.init(true);

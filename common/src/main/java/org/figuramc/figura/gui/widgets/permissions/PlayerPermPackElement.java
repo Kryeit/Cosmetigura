@@ -25,7 +25,7 @@ import org.figuramc.figura.permissions.PermissionManager;
 import org.figuramc.figura.permissions.PermissionPack;
 import org.figuramc.figura.permissions.Permissions;
 import org.figuramc.figura.utils.EntityUtils;
-import org.figuramc.figura.utils.FiguraIdentifier;
+import org.figuramc.figura.utils.CosmetiguraIdentifier;
 import org.figuramc.figura.utils.FiguraText;
 import org.figuramc.figura.utils.TextUtils;
 import org.figuramc.figura.utils.ui.UIHelper;
@@ -35,8 +35,8 @@ import java.util.UUID;
 
 public class PlayerPermPackElement extends AbstractPermPackElement {
 
-    public static final ResourceLocation UNKNOWN = new FiguraIdentifier("textures/gui/unknown_portrait.png");
-    private static final ResourceLocation BACKGROUND = new FiguraIdentifier("textures/gui/player_permissions.png");
+    public static final ResourceLocation UNKNOWN = new CosmetiguraIdentifier("textures/gui/unknown_portrait.png");
+    private static final ResourceLocation BACKGROUND = new CosmetiguraIdentifier("textures/gui/player_permissions.png");
     private static final Component DC_TEXT = FiguraText.of("gui.permissions.disconnected").withStyle(ChatFormatting.RED);
 
     private final String name;

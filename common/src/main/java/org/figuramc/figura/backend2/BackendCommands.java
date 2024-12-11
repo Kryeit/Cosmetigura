@@ -6,7 +6,7 @@ import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.resources.FiguraRuntimeResources;
 import org.figuramc.figura.utils.FiguraClientCommandSource;
 
@@ -39,7 +39,7 @@ public class BackendCommands {
         LiteralArgumentBuilder<FiguraClientCommandSource> debug = LiteralArgumentBuilder.literal("debug");
         debug.executes(context -> {
             NetworkStuff.debug = !NetworkStuff.debug;
-            FiguraMod.sendChatMessage(Component.literal("Backend Debug Mode set to: " + NetworkStuff.debug).withStyle(NetworkStuff.debug ? ChatFormatting.GREEN : ChatFormatting.RED));
+            CosmetiguraMod.sendChatMessage(Component.literal("Backend Debug Mode set to: " + NetworkStuff.debug).withStyle(NetworkStuff.debug ? ChatFormatting.GREEN : ChatFormatting.RED));
             return 1;
         });
 
@@ -63,7 +63,7 @@ public class BackendCommands {
         try {
             HttpAPI.runString(
                     NetworkStuff.api.header(request).build(),
-                    (code, data) -> FiguraMod.sendChatMessage(Component.literal(data))
+                    (code, data) -> CosmetiguraMod.sendChatMessage(Component.literal(data))
             );
             return 1;
         } catch (Exception e) {

@@ -3,7 +3,6 @@ package org.figuramc.figura.mixin.render.renderers;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.player.AbstractClientPlayer;
@@ -13,22 +12,18 @@ import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.scores.Objective;
-import net.minecraft.world.scores.Score;
 import net.minecraft.world.scores.Scoreboard;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.avatar.Badges;
-import org.figuramc.figura.compat.SimpleVCCompat;
 import org.figuramc.figura.config.Configs;
 import org.figuramc.figura.ducks.EntityRendererAccessor;
-import org.figuramc.figura.lua.api.ClientAPI;
 import org.figuramc.figura.lua.api.nameplate.EntityNameplateCustomization;
 import org.figuramc.figura.lua.api.vanilla_model.VanillaPart;
 import org.figuramc.figura.permissions.Permissions;
 import org.figuramc.figura.utils.RenderUtils;
 import org.figuramc.figura.utils.TextUtils;
-import org.joml.Matrix4f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -36,7 +31,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.List;
 import java.util.regex.Pattern;
 
 @Mixin(PlayerRenderer.class)
@@ -55,7 +49,7 @@ public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractC
     @Inject(method = "renderNameTag(Lnet/minecraft/client/player/AbstractClientPlayer;Lnet/minecraft/network/chat/Component;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/entity/LivingEntityRenderer;renderNameTag(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/network/chat/Component;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V", ordinal = 1))
     private void enableModifyPlayerName(AbstractClientPlayer player, Component text, PoseStack stack, MultiBufferSource multiBufferSource, int light, CallbackInfo ci) {
         // render name
-        FiguraMod.popPushProfiler("name");
+        CosmetiguraMod.popPushProfiler("name");
         isNameRendering = true;
     }
 
@@ -97,7 +91,7 @@ public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractC
         boolean hasCustom = custom != null && avatar.permissions.get(Permissions.NAMEPLATE_EDIT) == 1;
 
         Component name = Component.literal(player.getName().getString());
-        FiguraMod.popPushProfiler("text");
+        CosmetiguraMod.popPushProfiler("text");
 
         Component replacement = hasCustom && custom.getJson() != null ? custom.getJson().copy() : name;
 
@@ -105,10 +99,10 @@ public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractC
         replacement = TextUtils.replaceInText(replacement, "\\$\\{name\\}", name);
 
         // badges
-        FiguraMod.popPushProfiler("badges");
+        CosmetiguraMod.popPushProfiler("badges");
         replacement = Badges.appendBadges(replacement, player.getUUID(), config > 1);
 
-        FiguraMod.popPushProfiler("applyName");
+        CosmetiguraMod.popPushProfiler("applyName");
         text = TextUtils.replaceInText(text, "\\b" + Pattern.quote(player.getName().getString()) + "\\b", replacement);
 
         return text;
@@ -117,14 +111,14 @@ public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractC
     // Push for scoreboard rendering
     @Inject(method = "renderNameTag(Lnet/minecraft/client/player/AbstractClientPlayer;Lnet/minecraft/network/chat/Component;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;pushPose()V"))
     private void pushProfilerForRender(AbstractClientPlayer player, Component text, PoseStack stack, MultiBufferSource multiBufferSource, int light, CallbackInfo ci) {
-        FiguraMod.popPushProfiler("render");
-        FiguraMod.pushProfiler("scoreboard");
+        CosmetiguraMod.popPushProfiler("render");
+        CosmetiguraMod.pushProfiler("scoreboard");
     }
 
     // Pop the profiler after everything's done
     @Inject(method = "renderNameTag(Lnet/minecraft/client/player/AbstractClientPlayer;Lnet/minecraft/network/chat/Component;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V", at = @At(value = "TAIL"))
     private void popProfiler(AbstractClientPlayer player, Component text, PoseStack stack, MultiBufferSource multiBufferSource, int light, CallbackInfo ci) {
-        FiguraMod.popProfiler(5);
+        CosmetiguraMod.popProfiler(5);
     }
 
     @Inject(method = "renderNameTag(Lnet/minecraft/client/player/AbstractClientPlayer;Lnet/minecraft/network/chat/Component;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V", at = @At("HEAD"), cancellable = true)
@@ -154,9 +148,9 @@ public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractC
 
         // If the user has an avatar equipped, figura nameplate rendering will be enabled so the profiler is pushed
         if (hasCustom) {
-            FiguraMod.pushProfiler(FiguraMod.MOD_ID);
-            FiguraMod.pushProfiler(player.getName().getString());
-            FiguraMod.pushProfiler("nameplate");
+            CosmetiguraMod.pushProfiler(CosmetiguraMod.MOD_ID);
+            CosmetiguraMod.pushProfiler(player.getName().getString());
+            CosmetiguraMod.pushProfiler("nameplate");
         }
     }
 

@@ -7,7 +7,7 @@ import com.google.gson.JsonPrimitive;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.gui.screens.NetworkFilterScreen;
 import org.figuramc.figura.lua.api.net.NetworkingAPI;
 import org.figuramc.figura.math.vector.FiguraVec3;
@@ -56,7 +56,7 @@ public abstract class ConfigType<T> {
         try {
             value = parseValue(newVal);
         } catch (Exception e) {
-            FiguraMod.LOGGER.warn("Failed to set this config (" + id + ") value \"" + value + "\", restoring it to default", e);
+            CosmetiguraMod.LOGGER.warn("Failed to set this config (" + id + ") value \"" + value + "\", restoring it to default", e);
             value = defaultValue;
             change = true;
         }
@@ -66,7 +66,7 @@ public abstract class ConfigType<T> {
             try {
                 onChange();
             } catch (Exception e) {
-                FiguraMod.LOGGER.warn("Failed to run onChange for config \"" + id + "\"", e);
+                CosmetiguraMod.LOGGER.warn("Failed to run onChange for config \"" + id + "\"", e);
             }
         }
     }

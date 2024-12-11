@@ -9,8 +9,8 @@ import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
-import org.figuramc.figura.FiguraMod;
-import org.figuramc.figura.utils.FiguraIdentifier;
+import org.figuramc.figura.CosmetiguraMod;
+import org.figuramc.figura.utils.CosmetiguraIdentifier;
 import org.figuramc.figura.utils.FiguraText;
 import org.figuramc.figura.utils.JsonUtils;
 import org.figuramc.figura.utils.TextUtils;
@@ -41,7 +41,7 @@ public class EmojiContainer {
 
     public EmojiContainer(String containerName, JsonObject data) {
         this.name = containerName;
-        this.font = new FiguraIdentifier("emoji_" + containerName);
+        this.font = new CosmetiguraIdentifier("emoji_" + containerName);
         this.blacklist = data.get("blacklist").getAsString();
 
         // key = emoji unicode, value = array of names
@@ -97,7 +97,7 @@ public class EmojiContainer {
         for (JsonElement element : aliasArray) {
             String alias = element.getAsString();
             if (alias.isBlank() || alias.indexOf(' ') != -1 || alias.indexOf(DELIMITER) != -1) {
-                FiguraMod.LOGGER.warn("Invalid emoji name \"{}\" in container: {}", alias, containerName);
+                CosmetiguraMod.LOGGER.warn("Invalid emoji name \"{}\" in container: {}", alias, containerName);
             } else {
                 consumer.accept(alias);
                 atLeastOne = true;

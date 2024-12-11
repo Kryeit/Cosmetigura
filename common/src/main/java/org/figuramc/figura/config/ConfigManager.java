@@ -2,7 +2,7 @@ package org.figuramc.figura.config;
 
 import com.google.gson.*;
 import com.mojang.blaze3d.platform.InputConstants;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.utils.PlatformUtils;
 
 import java.io.BufferedReader;
@@ -13,7 +13,7 @@ import java.util.*;
 
 public final class ConfigManager {
 
-    private static final File FILE = new File(PlatformUtils.getConfigDir().resolve(FiguraMod.MOD_ID + ".json").toString());
+    private static final File FILE = new File(PlatformUtils.getConfigDir().resolve(CosmetiguraMod.MOD_ID + ".json").toString());
     private static final Gson GSON = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
     public static final List<ConfigType<?>> REGISTRY = new ArrayList<>();
     public static final Map<String, ConfigType.Category> CATEGORIES_REGISTRY = new LinkedHashMap<>();
@@ -58,10 +58,10 @@ public final class ConfigManager {
                 }
 
                 br.close();
-                FiguraMod.debug("Successfully loaded config file");
+                CosmetiguraMod.debug("Successfully loaded config file");
             }
         } catch (Exception e) {
-            FiguraMod.LOGGER.warn("Failed to load config file! Resetting all settings...", e);
+            CosmetiguraMod.LOGGER.warn("Failed to load config file! Resetting all settings...", e);
             setDefaults();
         }
 
@@ -98,9 +98,9 @@ public final class ConfigManager {
             fileWriter.write(jsonString);
             fileWriter.close();
 
-            FiguraMod.debug("Successfully saved config file");
+            CosmetiguraMod.debug("Successfully saved config file");
         } catch (Exception e) {
-            FiguraMod.LOGGER.error("Failed to save config file!", e);
+            CosmetiguraMod.LOGGER.error("Failed to save config file!", e);
         }
     }
 
@@ -134,6 +134,6 @@ public final class ConfigManager {
             config.getKey().setValue(jsonValue);
         }
 
-        FiguraMod.debug("Config updated from version " + version);
+        CosmetiguraMod.debug("Config updated from version " + version);
     }
 }

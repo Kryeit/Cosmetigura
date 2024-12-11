@@ -4,7 +4,7 @@ import net.minecraft.Util;
 import net.minecraft.nbt.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.avatar.UserData;
 import org.figuramc.figura.gui.FiguraToast;
@@ -47,7 +47,7 @@ public class LocalAvatarLoader {
         CEM_AVATARS.clear();
         AvatarManager.clearCEMAvatars();
 
-        for (Map.Entry<ResourceLocation, Resource> cem : manager.listResources("cem", location -> location.getNamespace().equals(FiguraMod.MOD_ID) && location.getPath().endsWith(".nbt")).entrySet()) {
+        for (Map.Entry<ResourceLocation, Resource> cem : manager.listResources("cem", location -> location.getNamespace().equals(CosmetiguraMod.MOD_ID) && location.getPath().endsWith(".nbt")).entrySet()) {
             // id
             ResourceLocation key = cem.getKey();
             String[] split = key.getPath().split("/");
@@ -64,12 +64,12 @@ public class LocalAvatarLoader {
             try {
                 nbt = NbtIo.readCompressed(cem.getValue().open());
             } catch (Exception e) {
-                FiguraMod.LOGGER.error("Failed to load " + id + " avatar", e);
+                CosmetiguraMod.LOGGER.error("Failed to load " + id + " avatar", e);
                 continue;
             }
 
             // insert
-            FiguraMod.LOGGER.info("Loaded CEM model for " + id);
+            CosmetiguraMod.LOGGER.info("Loaded CEM model for " + id);
             CEM_AVATARS.put(id, nbt);
         }
     });
@@ -78,7 +78,7 @@ public class LocalAvatarLoader {
         try {
             watcher = FileSystems.getDefault().newWatchService();
         } catch (Exception e) {
-            FiguraMod.LOGGER.error("Failed to initialize the watcher service", e);
+            CosmetiguraMod.LOGGER.error("Failed to initialize the watcher service", e);
         }
     }
 
@@ -162,7 +162,7 @@ public class LocalAvatarLoader {
                 target.loadAvatar(nbt);
             } catch (Throwable e) {
                 loadError = e.getMessage();
-                FiguraMod.LOGGER.error("Failed to load avatar from " + finalPath, e);
+                CosmetiguraMod.LOGGER.error("Failed to load avatar from " + finalPath, e);
                 FiguraToast.sendToast(FiguraText.of("toast.load_error"), FiguraText.of("gui.load_error." + LocalAvatarLoader.getLoadState()), FiguraToast.ToastType.ERROR);
             }
         });
@@ -334,7 +334,7 @@ public class LocalAvatarLoader {
 
         // reload avatar
         if (reload) {
-            FiguraMod.debug("Detected file changes in the Avatar directory (" + event.context().toString() + "), reloading!");
+            CosmetiguraMod.debug("Detected file changes in the Avatar directory (" + event.context().toString() + "), reloading!");
             AvatarManager.loadLocalAvatar(lastLoadedPath);
         }
     }
@@ -372,7 +372,7 @@ public class LocalAvatarLoader {
             for (Path child : children)
                 addWatchKey(child, consumer);
         } catch (Exception e) {
-            FiguraMod.LOGGER.error("Failed to register watcher for " + path, e);
+            CosmetiguraMod.LOGGER.error("Failed to register watcher for " + path, e);
         }
     }
 

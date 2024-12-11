@@ -6,7 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.lua.api.keybind.FiguraKeybind;
 import org.figuramc.figura.utils.FiguraText;
 import org.figuramc.figura.utils.ui.UIHelper;
@@ -87,7 +87,7 @@ public class KeybindWidgetHelper {
         // button message
         MutableComponent message = initialMessage.copy();
         if (isDefault || isSelected) message.withStyle(ChatFormatting.WHITE);
-        else message.withStyle(FiguraMod.getAccentColor());
+        else message.withStyle(CosmetiguraMod.getAccentColor());
 
         if (isSelected) message.withStyle(ChatFormatting.UNDERLINE);
 
@@ -99,7 +99,7 @@ public class KeybindWidgetHelper {
 
         // selected
         if (isSelected)
-            message = Component.literal("> ").append(message).append(" <").withStyle(FiguraMod.getAccentColor());
+            message = Component.literal("> ").append(message).append(" <").withStyle(CosmetiguraMod.getAccentColor());
 
         return message;
     }

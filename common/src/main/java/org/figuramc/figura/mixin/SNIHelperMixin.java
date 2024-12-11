@@ -1,6 +1,6 @@
 package org.figuramc.figura.mixin;
 
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -25,12 +25,12 @@ public class SNIHelperMixin {
     private static void fixMissingSNI(Socket socket, String[] hostnames, CallbackInfo ci) {
         String version = System.getProperty("java.version");
         if (figura$isOldJavaVersion(version)) {
-            FiguraMod.LOGGER.info("Old Java version (" + version + ") detected, fixing missing SNI...");
+            CosmetiguraMod.LOGGER.info("Old Java version (" + version + ") detected, fixing missing SNI...");
             try {
                 Method setHost = socket.getClass().getMethod("setHost", String.class);
                 setHost.invoke(socket, hostnames[0]);
             } catch (Exception e) {
-                FiguraMod.LOGGER.error("SNI fix failed!", e);
+                CosmetiguraMod.LOGGER.error("SNI fix failed!", e);
             }
             ci.cancel();
         }

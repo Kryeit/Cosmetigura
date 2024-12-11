@@ -3,7 +3,7 @@ package org.figuramc.figura.commands;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.*;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.utils.ColorUtils;
 import org.figuramc.figura.utils.FiguraClientCommandSource;
 import org.figuramc.figura.utils.FiguraText;
@@ -13,16 +13,16 @@ import java.util.List;
 
 class LinkCommand {
 
-    private static final List<FiguraMod.Links> LINKS = new ArrayList<>() {{
-            add(FiguraMod.Links.Wiki);
-            add(FiguraMod.Links.Kofi);
-            add(FiguraMod.Links.OpenCollective);
+    private static final List<CosmetiguraMod.Links> LINKS = new ArrayList<>() {{
+            add(CosmetiguraMod.Links.Wiki);
+            add(CosmetiguraMod.Links.Kofi);
+            add(CosmetiguraMod.Links.OpenCollective);
             add(null);
-            add(FiguraMod.Links.Discord);
-            add(FiguraMod.Links.Github);
+            add(CosmetiguraMod.Links.Discord);
+            add(CosmetiguraMod.Links.Github);
             add(null);
-            add(FiguraMod.Links.Modrinth);
-            add(FiguraMod.Links.Curseforge);
+            add(CosmetiguraMod.Links.Modrinth);
+            add(CosmetiguraMod.Links.Curseforge);
     }};
 
     public static LiteralArgumentBuilder<FiguraClientCommandSource> getCommand() {
@@ -37,7 +37,7 @@ class LinkCommand {
                     .append("\n");
 
             // add links
-            for (FiguraMod.Links link : LINKS) {
+            for (CosmetiguraMod.Links link : LINKS) {
                 message.append("\n");
 
                 if (link == null)
@@ -49,7 +49,7 @@ class LinkCommand {
                         .withStyle(Style.EMPTY.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.literal(link.url)))));
             }
 
-            FiguraMod.sendChatMessage(message);
+            CosmetiguraMod.sendChatMessage(message);
             return 1;
         });
 

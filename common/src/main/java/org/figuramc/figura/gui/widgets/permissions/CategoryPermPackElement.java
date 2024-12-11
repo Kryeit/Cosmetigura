@@ -8,12 +8,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.figuramc.figura.gui.widgets.lists.PlayerList;
 import org.figuramc.figura.permissions.PermissionPack;
-import org.figuramc.figura.utils.FiguraIdentifier;
+import org.figuramc.figura.utils.CosmetiguraIdentifier;
 import org.figuramc.figura.utils.ui.UIHelper;
 
 public class CategoryPermPackElement extends AbstractPermPackElement {
 
-    private static final ResourceLocation BACKGROUND = new FiguraIdentifier("textures/gui/group_permissions.png");
+    private static final ResourceLocation BACKGROUND = new CosmetiguraIdentifier("textures/gui/group_permissions.png");
     private boolean enabled;
 
     public CategoryPermPackElement(int width, PermissionPack pack, PlayerList parent) {

@@ -5,10 +5,10 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.gui.widgets.Button;
 import org.figuramc.figura.gui.widgets.Label;
-import org.figuramc.figura.utils.FiguraIdentifier;
+import org.figuramc.figura.utils.CosmetiguraIdentifier;
 import org.figuramc.figura.utils.FiguraText;
 import org.lwjgl.glfw.GLFW;
 
@@ -42,21 +42,21 @@ public class GameScreen extends AbstractPanelScreen {
         addRenderableOnly(grid = new Grid(width, height));
 
         // back button
-        addRenderableWidget(new Button(this.width - 20, 4, 16, 16, 0, 0, 16, new FiguraIdentifier("textures/gui/search_clear.png"), 48, 16, FiguraText.of("gui.done"), bx -> onClose()));
+        addRenderableWidget(new Button(this.width - 20, 4, 16, 16, 0, 0, 16, new CosmetiguraIdentifier("textures/gui/search_clear.png"), 48, 16, FiguraText.of("gui.done"), bx -> onClose()));
 
         // text
         addRenderableWidget(keys = new Label(
                 Component.empty()
-                        .append(Component.literal("[R]").withStyle(FiguraMod.getAccentColor()))
+                        .append(Component.literal("[R]").withStyle(CosmetiguraMod.getAccentColor()))
                         .append(" restart, ")
-                        .append(Component.literal("[P]").withStyle(FiguraMod.getAccentColor()))
+                        .append(Component.literal("[P]").withStyle(CosmetiguraMod.getAccentColor()))
                         .append(" pause, ")
-                        .append(Component.literal("[SPACE]").withStyle(FiguraMod.getAccentColor()))
+                        .append(Component.literal("[SPACE]").withStyle(CosmetiguraMod.getAccentColor()))
                         .append(" step")
                         .append("\n")
-                        .append(Component.literal("[F1]").withStyle(FiguraMod.getAccentColor()))
+                        .append(Component.literal("[F1]").withStyle(CosmetiguraMod.getAccentColor()))
                         .append(" hide text, ")
-                        .append(Component.literal("[Scroll]").withStyle(FiguraMod.getAccentColor()))
+                        .append(Component.literal("[Scroll]").withStyle(CosmetiguraMod.getAccentColor()))
                         .append(" scale (restarts)"),
                 4, 4, 0)
         );
@@ -69,9 +69,9 @@ public class GameScreen extends AbstractPanelScreen {
         if (!paused) grid.tick();
         stats.setText(
                 Component.literal("Generation")
-                        .append(Component.literal(" " + grid.gen).withStyle(FiguraMod.getAccentColor()))
+                        .append(Component.literal(" " + grid.gen).withStyle(CosmetiguraMod.getAccentColor()))
                         .append(", Scale")
-                        .append(Component.literal(" " + scale).withStyle(FiguraMod.getAccentColor()))
+                        .append(Component.literal(" " + scale).withStyle(CosmetiguraMod.getAccentColor()))
         );
     }
 

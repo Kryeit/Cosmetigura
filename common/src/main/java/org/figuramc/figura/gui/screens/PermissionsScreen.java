@@ -9,9 +9,8 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.AvatarManager;
-import org.figuramc.figura.config.Configs;
 import org.figuramc.figura.gui.FiguraToast;
 import org.figuramc.figura.gui.widgets.Button;
 import org.figuramc.figura.gui.widgets.EntityPreview;
@@ -24,7 +23,7 @@ import org.figuramc.figura.gui.widgets.permissions.PlayerPermPackElement;
 import org.figuramc.figura.permissions.PermissionManager;
 import org.figuramc.figura.permissions.PermissionPack;
 import org.figuramc.figura.permissions.Permissions;
-import org.figuramc.figura.utils.FiguraIdentifier;
+import org.figuramc.figura.utils.CosmetiguraIdentifier;
 import org.figuramc.figura.utils.FiguraText;
 import org.figuramc.figura.utils.MathUtils;
 import org.figuramc.figura.utils.ui.UIHelper;
@@ -66,7 +65,7 @@ public class PermissionsScreen extends AbstractPanelScreen {
         int listWidth = Math.min(middle - 6, 208);
         int lineHeight =  font.lineHeight;
 
-        int entitySize = (int) Math.min(height - 95 - lineHeight * 1.5 - (FiguraMod.debugModeEnabled() ? 24 : 0), listWidth);
+        int entitySize = (int) Math.min(height - 95 - lineHeight * 1.5 - (CosmetiguraMod.debugModeEnabled() ? 24 : 0), listWidth);
         int modelSize = 11 * entitySize / 29;
         int entityX = Math.max(middle + (listWidth - entitySize) / 2 + 1, middle + 2);
 
@@ -135,7 +134,7 @@ public class PermissionsScreen extends AbstractPanelScreen {
         addRenderableWidget(back = new Button(middle + 6 + bottomButtonsWidth, height - 24, bottomButtonsWidth, 20, FiguraText.of("gui.done"), null, bx -> onClose()));
 
         // expand button
-        addRenderableWidget(expandButton = new SwitchButton( middle + listWidth - 18, height - 24, 20, 20, 0, 0, 20, new FiguraIdentifier("textures/gui/expand_v.png"), 60, 40, FiguraText.of("gui.permissions.expand_permissions.tooltip"), btn -> {
+        addRenderableWidget(expandButton = new SwitchButton( middle + listWidth - 18, height - 24, 20, 20, 0, 0, 20, new CosmetiguraIdentifier("textures/gui/expand_v.png"), 60, 40, FiguraText.of("gui.permissions.expand_permissions.tooltip"), btn -> {
             expanded = expandButton.isToggled();
 
             // hide widgets

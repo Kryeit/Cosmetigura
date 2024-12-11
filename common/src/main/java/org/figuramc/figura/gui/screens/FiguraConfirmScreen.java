@@ -4,7 +4,7 @@ import it.unimi.dsi.fastutil.booleans.BooleanConsumer;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.gui.FiguraToast;
 import org.figuramc.figura.gui.widgets.Button;
 import org.figuramc.figura.gui.widgets.Label;
@@ -19,7 +19,7 @@ public class FiguraConfirmScreen extends AbstractPanelScreen {
     public FiguraConfirmScreen(BooleanConsumer callback, Object title, Object message, Screen parentScreen) {
         super(parentScreen, title instanceof Component c ? c : Component.literal(title.toString()));
         this.callback = callback;
-        this.message = message instanceof Component c ? c : Component.literal(message.toString()).withStyle(FiguraMod.getAccentColor());
+        this.message = message instanceof Component c ? c : Component.literal(message.toString()).withStyle(CosmetiguraMod.getAccentColor());
     }
 
     @Override

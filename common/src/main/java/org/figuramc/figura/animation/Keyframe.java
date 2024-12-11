@@ -1,7 +1,7 @@
 package org.figuramc.figura.animation;
 
 import com.mojang.datafixers.util.Pair;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.math.vector.FiguraVec3;
 import org.luaj.vm2.LuaError;
@@ -45,32 +45,32 @@ public class Keyframe implements Comparable<Keyframe> {
     }
 
     private float parseStringData(String data, float delta) {
-        FiguraMod.pushProfiler(data);
+        CosmetiguraMod.pushProfiler(data);
         try {
-            return FiguraMod.popReturnProfiler(Float.parseFloat(data));
+            return CosmetiguraMod.popReturnProfiler(Float.parseFloat(data));
         } catch (Exception ignored) {
             if (data == null)
-                return FiguraMod.popReturnProfiler(0f);
+                return CosmetiguraMod.popReturnProfiler(0f);
 
             try {
                 LuaValue val = owner.loadScript(chunkName, "return " + data);
                 if (val == null)
-                    return FiguraMod.popReturnProfiler(0f);
+                    return CosmetiguraMod.popReturnProfiler(0f);
 
                 Varargs args = owner.run(val, owner.animation, delta, animation);
                 if (args.isnumber(1))
-                    return FiguraMod.popReturnProfiler(args.tofloat(1));
+                    return CosmetiguraMod.popReturnProfiler(args.tofloat(1));
                 else
                     throw new Exception(); // dummy exception
             } catch (Exception ignored2) {
                 try {
                     LuaValue val = owner.loadScript(chunkName, data);
                     if (val == null)
-                        return FiguraMod.popReturnProfiler(0f);
+                        return CosmetiguraMod.popReturnProfiler(0f);
 
                     Varargs args = owner.run(val, owner.animation, delta, animation);
                     if (args.isnumber(1))
-                        return FiguraMod.popReturnProfiler(args.tofloat(1));
+                        return CosmetiguraMod.popReturnProfiler(args.tofloat(1));
                     else
                         throw new LuaError("Failed to parse data from [" + this.chunkName + "], expected number, but got " + args.arg(1).typename());
                 } catch (Exception e) {
@@ -80,7 +80,7 @@ public class Keyframe implements Comparable<Keyframe> {
             }
         }
 
-        return FiguraMod.popReturnProfiler(0f);
+        return CosmetiguraMod.popReturnProfiler(0f);
     }
 
     public float getTime() {

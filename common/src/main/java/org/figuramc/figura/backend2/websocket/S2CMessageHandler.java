@@ -1,7 +1,7 @@
 package org.figuramc.figura.backend2.websocket;
 
 import net.minecraft.network.chat.Component;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.backend2.NetworkStuff;
@@ -31,7 +31,7 @@ public class S2CMessageHandler {
 
         byte b = bytes.get();
         if (NetworkStuff.debug)
-            FiguraMod.debug("Got ws message of type: " + b);
+            CosmetiguraMod.debug("Got ws message of type: " + b);
 
         switch (b) {
             case AUTH -> auth();
@@ -44,7 +44,7 @@ public class S2CMessageHandler {
     }
 
     private static void auth() {
-        FiguraMod.LOGGER.info("Connected to " + FiguraMod.MOD_NAME + " ws backend");
+        CosmetiguraMod.LOGGER.info("Connected to " + CosmetiguraMod.MOD_NAME + " ws backend");
         NetworkStuff.backendStatus = 3;
         NetworkStuff.subscribeAll();
         if (Configs.CONNECTION_TOASTS.value)
@@ -66,7 +66,7 @@ public class S2CMessageHandler {
 
         avatar.runPing(id, data);
         NetworkStuff.pingsReceived++;
-        if (NetworkStuff.lastPing == 0) NetworkStuff.lastPing = FiguraMod.ticks;
+        if (NetworkStuff.lastPing == 0) NetworkStuff.lastPing = CosmetiguraMod.ticks;
     }
 
     private static void event(ByteBuffer bytes) {
@@ -82,7 +82,7 @@ public class S2CMessageHandler {
 
     private static void chat(ByteBuffer bytes) {
         String message = StandardCharsets.UTF_8.decode(bytes).toString();
-        FiguraMod.sendChatMessage(Component.empty().append(Component.literal("-- " + FiguraMod.MOD_NAME + " backend message --\n\n").withStyle(ColorUtils.Colors.SOFT_BLUE.style)).append(TextUtils.tryParseJson(message)));
+        CosmetiguraMod.sendChatMessage(Component.empty().append(Component.literal("-- " + CosmetiguraMod.MOD_NAME + " backend message --\n\n").withStyle(ColorUtils.Colors.SOFT_BLUE.style)).append(TextUtils.tryParseJson(message)));
     }
 
     private static void notice(ByteBuffer bytes) {

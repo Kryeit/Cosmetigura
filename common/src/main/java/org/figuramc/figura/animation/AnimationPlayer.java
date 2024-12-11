@@ -1,7 +1,7 @@
 package org.figuramc.figura.animation;
 
 import net.minecraft.util.Mth;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.math.vector.FiguraVec3;
 import org.figuramc.figura.model.FiguraModelPart;
 
@@ -14,7 +14,7 @@ public class AnimationPlayer {
         if (anim.playState == Animation.PlayState.STOPPED)
             return limit;
 
-        FiguraMod.pushProfiler(anim.name);
+        CosmetiguraMod.pushProfiler(anim.name);
 
         if (anim.playState != Animation.PlayState.PAUSED)
             anim.tick();
@@ -25,7 +25,7 @@ public class AnimationPlayer {
             if (part.lastAnimationPriority > anim.priority)
                 continue;
 
-            FiguraMod.pushProfiler(part.name);
+            CosmetiguraMod.pushProfiler(part.name);
 
             boolean merge = part.lastAnimationPriority == anim.priority;
             part.lastAnimationPriority = anim.priority;
@@ -33,16 +33,16 @@ public class AnimationPlayer {
 
             for (Animation.AnimationChannel channel : entry.getValue()) {
                 if (limit <= 0) {
-                    FiguraMod.popProfiler(2);
+                    CosmetiguraMod.popProfiler(2);
                     return limit;
                 }
 
                 TransformType type = channel.type();
-                FiguraMod.pushProfiler(type.name());
+                CosmetiguraMod.pushProfiler(type.name());
 
                 Keyframe[] keyframes = channel.keyframes();
                 if (keyframes.length == 0) {
-                    FiguraMod.popProfiler(3);
+                    CosmetiguraMod.popProfiler(3);
                     return limit;
                 }
 
@@ -89,13 +89,13 @@ public class AnimationPlayer {
                 }
 
                 limit--;
-                FiguraMod.popProfiler();
+                CosmetiguraMod.popProfiler();
             }
 
-            FiguraMod.popProfiler();
+            CosmetiguraMod.popProfiler();
         }
 
-        FiguraMod.popProfiler();
+        CosmetiguraMod.popProfiler();
         return limit;
     }
 

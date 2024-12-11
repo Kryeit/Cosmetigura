@@ -2,7 +2,7 @@ package org.figuramc.figura.gui.screens;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.gui.screens.Screen;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.gui.widgets.Button;
@@ -30,7 +30,7 @@ public class KeybindScreen extends AbstractPanelScreen {
     protected void init() {
         super.init();
 
-        Avatar owner = AvatarManager.getAvatarForPlayer(FiguraMod.getLocalPlayerUUID());
+        Avatar owner = AvatarManager.getAvatarForPlayer(CosmetiguraMod.getLocalPlayerUUID());
 
         // -- bottom buttons -- // 
 

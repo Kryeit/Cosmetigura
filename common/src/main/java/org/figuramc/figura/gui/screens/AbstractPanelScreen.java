@@ -15,7 +15,7 @@ import org.figuramc.figura.gui.widgets.FiguraTickable;
 import org.figuramc.figura.gui.widgets.PanelSelectorWidget;
 import org.figuramc.figura.lua.api.ClientAPI;
 import org.figuramc.figura.mixin.gui.ScreenAccessor;
-import org.figuramc.figura.utils.FiguraIdentifier;
+import org.figuramc.figura.utils.CosmetiguraIdentifier;
 import org.figuramc.figura.utils.ui.UIHelper;
 
 import java.util.List;
@@ -23,9 +23,9 @@ import java.util.List;
 public abstract class AbstractPanelScreen extends Screen {
 
     public static final List<ResourceLocation> BACKGROUNDS = List.of(
-            new FiguraIdentifier("textures/gui/background/background_0.png"),
-            new FiguraIdentifier("textures/gui/background/background_1.png"),
-            new FiguraIdentifier("textures/gui/background/background_2.png")
+            new CosmetiguraIdentifier("textures/gui/background/background_0.png"),
+            new CosmetiguraIdentifier("textures/gui/background/background_1.png"),
+            new CosmetiguraIdentifier("textures/gui/background/background_2.png")
     );
 
     // variables

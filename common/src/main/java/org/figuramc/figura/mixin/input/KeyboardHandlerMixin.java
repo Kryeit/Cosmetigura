@@ -4,7 +4,7 @@ import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.KeyboardHandler;
 import net.minecraft.client.Minecraft;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.config.Configs;
@@ -31,7 +31,7 @@ public class KeyboardHandlerMixin {
             ci.cancel();
         }
 
-        Avatar avatar = AvatarManager.getAvatarForPlayer(FiguraMod.getLocalPlayerUUID());
+        Avatar avatar = AvatarManager.getAvatarForPlayer(CosmetiguraMod.getLocalPlayerUUID());
         if (avatar == null || avatar.luaRuntime == null)
             return;
 
@@ -48,7 +48,7 @@ public class KeyboardHandlerMixin {
 
     @Inject(method = "charTyped", at = @At("HEAD"))
     private void charTyped(long window, int codePoint, int modifiers, CallbackInfo ci) {
-        Avatar avatar = AvatarManager.getAvatarForPlayer(FiguraMod.getLocalPlayerUUID());
+        Avatar avatar = AvatarManager.getAvatarForPlayer(CosmetiguraMod.getLocalPlayerUUID());
         if (avatar != null)
             avatar.charTypedEvent(Character.toString(codePoint), modifiers, codePoint);
     }

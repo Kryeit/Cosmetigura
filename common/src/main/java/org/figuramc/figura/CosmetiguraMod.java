@@ -35,9 +35,9 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
-public class FiguraMod {
-    public static final String MOD_ID = "figura";
-    public static final String MOD_NAME = "Figura";
+public class CosmetiguraMod {
+    public static final String MOD_ID = "cosmetigura";
+    public static final String MOD_NAME = "Cosmetigura";
     public static final FiguraModMetadata METADATA = FiguraModMetadata.getMetadataForMod(MOD_ID);
     public static final Version VERSION = new Version(PlatformUtils.getFiguraModVersionString());
     public static final Calendar CALENDAR = Calendar.getInstance();
@@ -106,7 +106,7 @@ public class FiguraMod {
 
     // debug print
     public static void debug(String str, Object... args) {
-        if (FiguraMod.debugModeEnabled()) LOGGER.info("[DEBUG] " + str, args);
+        if (CosmetiguraMod.debugModeEnabled()) LOGGER.info("[DEBUG] " + str, args);
         else LOGGER.debug(str, args);
     }
 

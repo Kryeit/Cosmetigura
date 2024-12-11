@@ -3,7 +3,7 @@ package org.figuramc.figura.config;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.avatar.local.CacheAvatarLoader;
 import org.figuramc.figura.avatar.local.LocalAvatarFetcher;
@@ -35,7 +35,7 @@ public class Configs {
     // code to run when the config is initialized
     public static void init() {
         // test for unused configs
-        if (FiguraMod.debugModeEnabled()) {
+        if (CosmetiguraMod.debugModeEnabled()) {
             ConfigType.Category debug = new ConfigType.Category("debug");
             new ConfigType.ColorConfig("color_test", debug, ColorUtils.Colors.AWESOME_BLUE.hex);
             new ConfigType.StringConfig("string_test", debug, "text");
@@ -114,7 +114,7 @@ public class Configs {
                 @Override
                 public void onChange() {
                     if (!AvatarManager.localUploaded)
-                        AvatarManager.reloadAvatar(FiguraMod.getLocalPlayerUUID());
+                        AvatarManager.reloadAvatar(CosmetiguraMod.getLocalPlayerUUID());
                 }
             };
     public static final ConfigType.PositiveIntConfig

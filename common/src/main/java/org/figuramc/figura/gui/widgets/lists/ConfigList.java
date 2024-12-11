@@ -5,7 +5,7 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.util.Mth;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.config.ConfigKeyBind;
 import org.figuramc.figura.config.ConfigManager;
 import org.figuramc.figura.config.ConfigType;
@@ -143,7 +143,7 @@ public class ConfigList extends AbstractList {
             ((ConfigKeyBind)focusedBinding).saveConfigChanges();
 
         focusedBinding = null;
-        FiguraMod.processingKeybind = false;
+        CosmetiguraMod.processingKeybind = false;
 
         updateKeybinds();
         return true;

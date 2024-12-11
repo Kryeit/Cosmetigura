@@ -3,7 +3,7 @@ package org.figuramc.figura.lua;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.entity.Entity;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.lua.api.AvatarAPI;
 import org.figuramc.figura.lua.api.HostAPI;
@@ -126,7 +126,7 @@ public class FiguraLuaRuntime {
 
     private void setupFiguraSandbox() {
         // actual sandbox file
-        try (InputStream inputStream = FiguraMod.class.getResourceAsStream("/assets/" + FiguraMod.MOD_ID + "/scripts/sandbox.lua")) {
+        try (InputStream inputStream = CosmetiguraMod.class.getResourceAsStream("/assets/" + CosmetiguraMod.MOD_ID + "/scripts/sandbox.lua")) {
             if (inputStream == null) throw new IOException("Unable to get resource");
             userGlobals.load(new String(inputStream.readAllBytes()), "sandbox").call();
         } catch (Exception e) {
@@ -156,7 +156,7 @@ public class FiguraLuaRuntime {
         FiguraLuaJson.loadFunctions(this);
 
         // load math library
-        try (InputStream inputStream = FiguraMod.class.getResourceAsStream("/assets/" + FiguraMod.MOD_ID + "/scripts/math.lua")) {
+        try (InputStream inputStream = CosmetiguraMod.class.getResourceAsStream("/assets/" + CosmetiguraMod.MOD_ID + "/scripts/math.lua")) {
             if (inputStream == null) throw new IOException("Unable to get resource");
             userGlobals.load(new String(inputStream.readAllBytes()), "math").call();
         } catch (Exception e) {
@@ -418,7 +418,7 @@ public class FiguraLuaRuntime {
     private final ZeroArgFunction onReachedLimit = new ZeroArgFunction() {
         @Override
         public LuaValue call() {
-            FiguraMod.LOGGER.warn("Avatar {} bypassed resource limits with {} instructions", owner.owner, getInstructions());
+            CosmetiguraMod.LOGGER.warn("Avatar {} bypassed resource limits with {} instructions", owner.owner, getInstructions());
             LuaError error = new LuaError("Script overran resource limits!");
             owner.noPermissions.add(Permissions.INIT_INST);
             setInstructionLimit(1);

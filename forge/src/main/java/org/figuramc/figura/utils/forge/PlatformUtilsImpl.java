@@ -1,11 +1,8 @@
 package org.figuramc.figura.utils.forge;
 
-import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.ModLoader;
 import net.minecraftforge.fml.loading.FMLPaths;
-import net.minecraftforge.fml.loading.moddiscovery.ModInfo;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.utils.PlatformUtils;
 
 import java.io.File;
@@ -20,7 +17,7 @@ public class PlatformUtilsImpl {
     }
 
     public static String getFiguraModVersionString() {
-        return ModList.get().getModContainerById(FiguraMod.MOD_ID).get().getModInfo().getVersion().toString();
+        return ModList.get().getModContainerById(CosmetiguraMod.MOD_ID).get().getModInfo().getVersion().toString();
     }
 
     public static Path getConfigDir() {
@@ -40,7 +37,7 @@ public class PlatformUtilsImpl {
     }
 
     public static InputStream loadFileFromRoot(String path) throws FileNotFoundException {
-        File file = ModList.get().getModFileById(FiguraMod.MOD_ID).getFile().findResource(path).toFile();
+        File file = ModList.get().getModFileById(CosmetiguraMod.MOD_ID).getFile().findResource(path).toFile();
         return new FileInputStream(file);
     }
 }

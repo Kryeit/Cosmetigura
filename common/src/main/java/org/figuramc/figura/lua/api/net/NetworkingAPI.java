@@ -3,7 +3,7 @@ package org.figuramc.figura.lua.api.net;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.lua.docs.LuaMethodOverload;
 import org.figuramc.figura.utils.ColorUtils;
 import org.luaj.vm2.LuaError;
@@ -114,8 +114,8 @@ public class NetworkingAPI {
                         .append(text.copy().withStyle(ChatFormatting.WHITE));
         String logTextString = finalText.getString();
         switch (log) {
-            case 2 -> FiguraMod.sendChatMessage(finalText);
-            case 1 -> FiguraMod.LOGGER.info(logTextString);
+            case 2 -> CosmetiguraMod.sendChatMessage(finalText);
+            case 1 -> CosmetiguraMod.LOGGER.info(logTextString);
         }
         if (logFileOutputStream == null) prepareLogStream();
         try {
@@ -137,8 +137,8 @@ public class NetworkingAPI {
                         .append(text.copy().withStyle(ChatFormatting.WHITE));
         String logTextString = finalText.getString();
         switch (log) {
-            case 2 -> FiguraMod.sendChatMessage(finalText);
-            case 1 -> FiguraMod.LOGGER.error(logTextString);
+            case 2 -> CosmetiguraMod.sendChatMessage(finalText);
+            case 1 -> CosmetiguraMod.LOGGER.error(logTextString);
         }
         if (logFileOutputStream == null) prepareLogStream();
         try {
@@ -157,7 +157,7 @@ public class NetworkingAPI {
 
     private static void prepareLogStream() {
         try {
-            Path p = FiguraMod.getFiguraDirectory().resolve("logs");
+            Path p = CosmetiguraMod.getFiguraDirectory().resolve("logs");
             File folder = p.toFile();
             folder.mkdirs();
             LocalDate d = LocalDate.now();

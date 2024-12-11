@@ -2,7 +2,7 @@ package org.figuramc.figura.avatar;
 
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.nbt.CompoundTag;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.local.CacheAvatarLoader;
 import org.figuramc.figura.backend2.NetworkStuff;
 
@@ -37,7 +37,7 @@ public class UserData {
         Avatar avatar = new Avatar(id);
         this.avatars.add(avatar);
         avatar.load(nbt);
-        FiguraMod.debug("Loaded avatar for " + id);
+        CosmetiguraMod.debug("Loaded avatar for " + id);
     }
 
     public void loadBadges(Pair<BitSet, BitSet> pair) {

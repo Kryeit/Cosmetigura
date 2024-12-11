@@ -2,9 +2,8 @@ package org.figuramc.figura.gui.widgets.config;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.config.ConfigType;
-import org.figuramc.figura.config.Configs;
 import org.figuramc.figura.gui.widgets.ParentedButton;
 import org.figuramc.figura.gui.widgets.SwitchButton;
 import org.figuramc.figura.gui.widgets.lists.ConfigList;
@@ -18,7 +17,7 @@ public class BooleanElement extends AbstractConfigElement {
 
         // button
         children.add(0, button = new ParentedButton(0, 0, 90, 20, config.tempValue ? SwitchButton.ON : SwitchButton.OFF, this, button -> config.tempValue = !(boolean) config.tempValue));
-        button.setActive(FiguraMod.debugModeEnabled() || !config.disabled);
+        button.setActive(CosmetiguraMod.debugModeEnabled() || !config.disabled);
     }
 
     @Override
@@ -33,7 +32,7 @@ public class BooleanElement extends AbstractConfigElement {
 
         // edited colour
         if (isChanged())
-            text = text.copy().setStyle(FiguraMod.getAccentColor());
+            text = text.copy().setStyle(CosmetiguraMod.getAccentColor());
 
         // set text
         this.button.setMessage(text);

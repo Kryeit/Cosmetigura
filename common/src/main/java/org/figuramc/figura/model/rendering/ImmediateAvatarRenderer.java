@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.config.Configs;
 import org.figuramc.figura.lua.api.ClientAPI;
@@ -157,12 +157,12 @@ public class ImmediateAvatarRenderer extends AvatarRenderer {
             }
 
             // push vertices to vertex consumer
-            FiguraMod.pushProfiler("draw");
-            FiguraMod.pushProfiler("primary");
+            CosmetiguraMod.pushProfiler("draw");
+            CosmetiguraMod.pushProfiler("primary");
             VERTEX_BUFFER.consume(true, bufferSource);
-            FiguraMod.popPushProfiler("secondary");
+            CosmetiguraMod.popPushProfiler("secondary");
             VERTEX_BUFFER.consume(false, bufferSource);
-            FiguraMod.popProfiler(2);
+            CosmetiguraMod.popProfiler(2);
 
             // finish rendering
             checkEmpty();
@@ -201,44 +201,44 @@ public class ImmediateAvatarRenderer extends AvatarRenderer {
     }
 
     protected boolean renderPart(FiguraModelPart part, int[] remainingComplexity, boolean prevPredicate) {
-        FiguraMod.pushProfiler(part.name);
+        CosmetiguraMod.pushProfiler(part.name);
 
         PartCustomization custom = part.customization;
 
         // test the current filter scheme
-        FiguraMod.pushProfiler("predicate");
+        CosmetiguraMod.pushProfiler("predicate");
         Boolean thisPassedPredicate = currentFilterScheme.test(part.parentType, prevPredicate);
         if (thisPassedPredicate == null || (custom.visible != null && !custom.visible)) {
             if (part.parentType.isRenderLayer)
                 part.savedCustomization = customizationStack.peek();
-            FiguraMod.popProfiler(2);
+            CosmetiguraMod.popProfiler(2);
             return true;
         }
 
         // calculate part transforms
 
         // calculate vanilla parent
-        FiguraMod.popPushProfiler("copyVanillaPart");
+        CosmetiguraMod.popPushProfiler("copyVanillaPart");
         part.applyVanillaTransforms(vanillaModelData);
         part.applyExtraTransforms(customizationStack.peek());
 
         // visibility
-        FiguraMod.popPushProfiler("checkVanillaVisible");
+        CosmetiguraMod.popPushProfiler("checkVanillaVisible");
         if (!ignoreVanillaVisibility && custom.vanillaVisible != null && !custom.vanillaVisible) {
-            FiguraMod.popPushProfiler("removeVanillaTransforms");
+            CosmetiguraMod.popPushProfiler("removeVanillaTransforms");
             part.resetVanillaTransforms();
-            FiguraMod.popProfiler(2);
+            CosmetiguraMod.popProfiler(2);
             return true;
         }
 
         // pre render function
         if (part.preRender != null) {
-            FiguraMod.popPushProfiler("preRenderFunction");
+            CosmetiguraMod.popPushProfiler("preRenderFunction");
             avatar.run(part.preRender, avatar.render, tickDelta, avatar.renderMode.name(), part);
         }
 
         // recalculate stuff
-        FiguraMod.popPushProfiler("calculatePartMatrices");
+        CosmetiguraMod.popPushProfiler("calculatePartMatrices");
         custom.recalculate();
 
         // void blocked matrices
@@ -247,7 +247,7 @@ public class ImmediateAvatarRenderer extends AvatarRenderer {
         FiguraMat3 normalCopy = null;
         boolean voidMatrices = !allowHiddenTransforms && !prevPredicate;
         if (voidMatrices) {
-            FiguraMod.popPushProfiler("clearMatrices");
+            CosmetiguraMod.popPushProfiler("clearMatrices");
             positionCopy = custom.positionMatrix.copy();
             normalCopy = custom.normalMatrix.copy();
             custom.positionMatrix.reset();
@@ -255,26 +255,26 @@ public class ImmediateAvatarRenderer extends AvatarRenderer {
         }
 
         // push stack
-        FiguraMod.popPushProfiler("pushCustomizationStack");
+        CosmetiguraMod.popPushProfiler("pushCustomizationStack");
         customizationStack.push(custom);
 
         // restore variables
         if (voidMatrices) {
-            FiguraMod.popPushProfiler("restoreMatrices");
+            CosmetiguraMod.popPushProfiler("restoreMatrices");
             custom.positionMatrix.set(positionCopy);
             custom.normalMatrix.set(normalCopy);
         }
 
         if (thisPassedPredicate) {
             // recalculate world matrices
-            FiguraMod.popPushProfiler("worldMatrices");
+            CosmetiguraMod.popPushProfiler("worldMatrices");
             if (allowMatrixUpdate) {
                 FiguraMat4 mat = partToWorldMatrices(custom);
                 part.savedPartToWorldMat.set(mat);
             }
 
             // recalculate light
-            FiguraMod.popPushProfiler("calculateLight");
+            CosmetiguraMod.popPushProfiler("calculateLight");
             Level l;
             if (custom.light != null) {
                 updateLight = false;
@@ -296,16 +296,16 @@ public class ImmediateAvatarRenderer extends AvatarRenderer {
 
         // mid render function
         if (part.midRender != null) {
-            FiguraMod.popPushProfiler("midRenderFunction");
+            CosmetiguraMod.popPushProfiler("midRenderFunction");
             avatar.run(part.midRender, avatar.render, tickDelta, avatar.renderMode.name(), part);
         }
 
         // render this
-        FiguraMod.popPushProfiler("pushVertices");
+        CosmetiguraMod.popPushProfiler("pushVertices");
         boolean breakRender = thisPassedPredicate && !part.pushVerticesImmediate(this, remainingComplexity);
 
         // render extras
-        FiguraMod.popPushProfiler("extras");
+        CosmetiguraMod.popPushProfiler("extras");
         if (!breakRender && thisPassedPredicate) {
             boolean renderPivot = shouldRenderPivots > 0;
             boolean renderTasks = !part.renderTasks.isEmpty();
@@ -313,7 +313,7 @@ public class ImmediateAvatarRenderer extends AvatarRenderer {
 
             if (renderPivot || renderTasks || renderPivotParts) {
                 // fix pivots
-                FiguraMod.pushProfiler("fixMatricesPivot");
+                CosmetiguraMod.pushProfiler("fixMatricesPivot");
 
                 FiguraVec3 pivot = custom.getPivot().copy().add(custom.getOffsetPivot());
                 pivotOffsetter.setPos(pivot);
@@ -324,13 +324,13 @@ public class ImmediateAvatarRenderer extends AvatarRenderer {
 
                 // render pivot indicators
                 if (renderPivot) {
-                    FiguraMod.popPushProfiler("renderPivotCube");
+                    CosmetiguraMod.popPushProfiler("renderPivotCube");
                     renderPivot(part, peek);
                 }
 
                 // render tasks
                 if (renderTasks) {
-                    FiguraMod.popPushProfiler("renderTasks");
+                    CosmetiguraMod.popPushProfiler("renderTasks");
                     int light = peek.light;
                     int overlay = peek.overlay;
                     interceptRendersIntoFigura = false;
@@ -340,27 +340,27 @@ public class ImmediateAvatarRenderer extends AvatarRenderer {
                         int neededComplexity = task.getComplexity();
                         if (neededComplexity > remainingComplexity[0])
                             break;
-                        FiguraMod.pushProfiler(task.getName());
+                        CosmetiguraMod.pushProfiler(task.getName());
                         task.render(customizationStack, bufferSource, light, overlay);
                         remainingComplexity[0] -= neededComplexity;
-                        FiguraMod.popProfiler();
+                        CosmetiguraMod.popProfiler();
                     }
                     interceptRendersIntoFigura = true;
                 }
 
                 // render pivot parts
                 if (renderPivotParts && part.parentType.isPivot) {
-                    FiguraMod.popPushProfiler("savePivotParts");
+                    CosmetiguraMod.popPushProfiler("savePivotParts");
                     savePivotTransform(part.parentType, peek);
                 }
 
                 customizationStack.pop();
-                FiguraMod.popProfiler();
+                CosmetiguraMod.popProfiler();
             }
         }
 
         // render children
-        FiguraMod.popPushProfiler("children");
+        CosmetiguraMod.popPushProfiler("children");
         for (FiguraModelPart child : List.copyOf(part.children)) {
             if (!renderPart(child, remainingComplexity, thisPassedPredicate)) {
                 breakRender = true;
@@ -369,18 +369,18 @@ public class ImmediateAvatarRenderer extends AvatarRenderer {
         }
 
         // reset the parent
-        FiguraMod.popPushProfiler("removeVanillaTransforms");
+        CosmetiguraMod.popPushProfiler("removeVanillaTransforms");
         part.resetVanillaTransforms();
 
         // post render function
         if (part.postRender != null) {
-            FiguraMod.popPushProfiler("postRenderFunction");
+            CosmetiguraMod.popPushProfiler("postRenderFunction");
             avatar.run(part.postRender, avatar.render, tickDelta, avatar.renderMode.name(), part);
         }
 
         // pop
         customizationStack.pop();
-        FiguraMod.popProfiler(2);
+        CosmetiguraMod.popProfiler(2);
 
         return !breakRender;
     }
@@ -419,41 +419,41 @@ public class ImmediateAvatarRenderer extends AvatarRenderer {
     }
 
     protected void calculatePartMatrices(FiguraModelPart part) {
-        FiguraMod.pushProfiler(part.name);
+        CosmetiguraMod.pushProfiler(part.name);
 
         PartCustomization custom = part.customization;
 
         // Store old visibility, but overwrite it in case we only want to render certain parts
-        FiguraMod.pushProfiler("predicate");
+        CosmetiguraMod.pushProfiler("predicate");
         Boolean thisPassedPredicate = currentFilterScheme.test(part.parentType, true);
         if (thisPassedPredicate == null) {
-            FiguraMod.popProfiler(2);
+            CosmetiguraMod.popProfiler(2);
             return;
         }
 
         // calculate part transforms
 
         // calculate vanilla parent
-        FiguraMod.popPushProfiler("copyVanillaPart");
+        CosmetiguraMod.popPushProfiler("copyVanillaPart");
         part.applyVanillaTransforms(vanillaModelData);
         part.applyExtraTransforms(customizationStack.peek());
 
         // push customization stack
-        FiguraMod.popPushProfiler("calculatePartMatrices");
+        CosmetiguraMod.popPushProfiler("calculatePartMatrices");
         custom.recalculate();
-        FiguraMod.popPushProfiler("applyOnStack");
+        CosmetiguraMod.popPushProfiler("applyOnStack");
         customizationStack.push(custom);
 
         // render extras
         if (thisPassedPredicate) {
             // part to world matrices
-            FiguraMod.popPushProfiler("worldMatrices");
+            CosmetiguraMod.popPushProfiler("worldMatrices");
             FiguraMat4 mat = partToWorldMatrices(custom);
             part.savedPartToWorldMat.set(mat);
         }
 
         // render children
-        FiguraMod.popPushProfiler("children");
+        CosmetiguraMod.popPushProfiler("children");
         for (FiguraModelPart child : part.children)
             calculatePartMatrices(child);
 
@@ -462,7 +462,7 @@ public class ImmediateAvatarRenderer extends AvatarRenderer {
 
         // pop
         customizationStack.pop();
-        FiguraMod.popProfiler(2);
+        CosmetiguraMod.popProfiler(2);
     }
 
     public void pushFaces(int faceCount, int[] remainingComplexity, FiguraTextureSet textureSet, List<Vertex> vertices) {
@@ -519,7 +519,7 @@ public class ImmediateAvatarRenderer extends AvatarRenderer {
             return ret;
 
         if (offsetRenderLayers && !primary && types.isOffset())
-            ret.vertexOffset = FiguraMod.VERTEX_OFFSET;
+            ret.vertexOffset = CosmetiguraMod.VERTEX_OFFSET;
 
         // Switch to cutout with fullbright if the iris emissive fix is enabled
         if (doIrisEmissiveFix && types == RenderTypes.EMISSIVE) {

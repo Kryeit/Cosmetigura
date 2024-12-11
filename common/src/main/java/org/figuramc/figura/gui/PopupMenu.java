@@ -12,7 +12,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.entity.Entity;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.avatar.Badges;
@@ -21,7 +21,7 @@ import org.figuramc.figura.math.vector.FiguraVec3;
 import org.figuramc.figura.math.vector.FiguraVec4;
 import org.figuramc.figura.permissions.PermissionManager;
 import org.figuramc.figura.permissions.PermissionPack;
-import org.figuramc.figura.utils.FiguraIdentifier;
+import org.figuramc.figura.utils.CosmetiguraIdentifier;
 import org.figuramc.figura.utils.FiguraText;
 import org.figuramc.figura.utils.MathUtils;
 import org.figuramc.figura.utils.ui.UIHelper;
@@ -32,8 +32,8 @@ import java.util.function.Consumer;
 
 public class PopupMenu {
 
-    private static final FiguraIdentifier BACKGROUND = new FiguraIdentifier("textures/gui/popup.png");
-    private static final FiguraIdentifier ICONS = new FiguraIdentifier("textures/gui/popup_icons.png");
+    private static final CosmetiguraIdentifier BACKGROUND = new CosmetiguraIdentifier("textures/gui/popup.png");
+    private static final CosmetiguraIdentifier ICONS = new CosmetiguraIdentifier("textures/gui/popup_icons.png");
 
     private static final MutableComponent VERSION_WARN = Component.empty()
             .append(Badges.System.WARNING.badge.copy().withStyle(Style.EMPTY.withFont(Badges.FONT)))
@@ -112,7 +112,7 @@ public class PopupMenu {
         int width = LENGTH * 18;
 
         UIHelper.enableBlend();
-        int frame = Configs.REDUCED_MOTION.value ? 0 : (int) ((FiguraMod.ticks / 5f) % 4);
+        int frame = Configs.REDUCED_MOTION.value ? 0 : (int) ((CosmetiguraMod.ticks / 5f) % 4);
         gui.blit(BACKGROUND, width / -2, -24, width, 26, 0, frame * 26, width, 26, width, 104);
 
         // icons

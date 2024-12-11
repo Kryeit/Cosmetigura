@@ -5,7 +5,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.utils.TextUtils;
@@ -33,14 +33,14 @@ public class ScreenMixin {
         } else if (event.getAction() == ClickEvent.Action.getByName("figura_function")) {
             cir.setReturnValue(true);
 
-            Avatar avatar = AvatarManager.getAvatarForPlayer(FiguraMod.getLocalPlayerUUID());
+            Avatar avatar = AvatarManager.getAvatarForPlayer(CosmetiguraMod.getLocalPlayerUUID());
             if (avatar == null)
                 return;
             LuaValue value = null;
             try {
                 value = avatar.loadScript("figura_function", event.getValue());
             } catch (Exception e) {
-                FiguraMod.sendChatMessage(Component.literal(e.getMessage()).withStyle(Style.EMPTY.withColor(ChatFormatting.RED).withBold(true)));
+                CosmetiguraMod.sendChatMessage(Component.literal(e.getMessage()).withStyle(Style.EMPTY.withColor(ChatFormatting.RED).withBold(true)));
             }
             if (value != null)
                 avatar.run(value, avatar.tick);

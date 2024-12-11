@@ -11,14 +11,14 @@ import org.figuramc.figura.avatar.local.LocalAvatarFetcher;
 import org.figuramc.figura.font.Emojis;
 import org.figuramc.figura.gui.widgets.Button;
 import org.figuramc.figura.gui.widgets.lists.AvatarList;
-import org.figuramc.figura.utils.FiguraIdentifier;
+import org.figuramc.figura.utils.CosmetiguraIdentifier;
 import org.figuramc.figura.utils.FileTexture;
 import org.figuramc.figura.utils.TextUtils;
 import org.figuramc.figura.utils.ui.UIHelper;
 
 public class AvatarWidget extends AbstractAvatarWidget {
 
-    public static final ResourceLocation MISSING_ICON = new FiguraIdentifier("textures/gui/unknown_icon.png");
+    public static final ResourceLocation MISSING_ICON = new CosmetiguraIdentifier("textures/gui/unknown_icon.png");
 
     public AvatarWidget(int depth, int width, LocalAvatarFetcher.AvatarPath avatar, AvatarList parent) {
         super(depth, width, 24, avatar, parent);

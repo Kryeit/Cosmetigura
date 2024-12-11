@@ -33,7 +33,7 @@ public class WardrobeScreen extends AbstractPanelScreen {
         AvatarList avatarList = new AvatarList(4, 20, panels, height - 32, this);
         addRenderableWidget(avatarList);
 
-        Button storeButton = new Button(20, 40, 130, 20, Component.literal("Open Cosmetic Shop <3").withStyle(ChatFormatting.DARK_PURPLE), null, button -> Util.getPlatform().openUri("https://kryeit.com/store"));
+        Button storeButton = new Button(20, 40, 130, 20, Component.literal("Open store").withStyle(ChatFormatting.DARK_PURPLE), null, button -> Util.getPlatform().openUri("https://kryeit.com/store"));
         addRenderableWidget(storeButton);
 
         // -- middle -- // 

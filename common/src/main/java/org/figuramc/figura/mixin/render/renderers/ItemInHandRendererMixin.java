@@ -13,7 +13,7 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.AbstractSkullBlock;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.ducks.SkullBlockRendererAccessor;
@@ -42,12 +42,12 @@ public abstract class ItemInHandRendererMixin {
         if (avatar == null)
             return;
 
-        FiguraMod.pushProfiler(FiguraMod.MOD_ID);
-        FiguraMod.pushProfiler(avatar);
-        FiguraMod.pushProfiler("renderEvent");
+        CosmetiguraMod.pushProfiler(CosmetiguraMod.MOD_ID);
+        CosmetiguraMod.pushProfiler(avatar);
+        CosmetiguraMod.pushProfiler("renderEvent");
         avatar.renderMode = EntityRenderMode.FIRST_PERSON;
         avatar.renderEvent(tickDelta, new FiguraMat4().set(matrices.last().pose()));
-        FiguraMod.popProfiler(3);
+        CosmetiguraMod.popProfiler(3);
     }
 
     @Inject(method = "renderHandsWithItems", at = @At("RETURN"))
@@ -55,12 +55,12 @@ public abstract class ItemInHandRendererMixin {
         if (avatar == null)
             return;
 
-        FiguraMod.pushProfiler(FiguraMod.MOD_ID);
-        FiguraMod.pushProfiler(avatar);
-        FiguraMod.pushProfiler("postRenderEvent");
+        CosmetiguraMod.pushProfiler(CosmetiguraMod.MOD_ID);
+        CosmetiguraMod.pushProfiler(avatar);
+        CosmetiguraMod.pushProfiler("postRenderEvent");
         avatar.postRenderEvent(tickDelta, new FiguraMat4().set(matrices.last().pose()));
         avatar = null;
-        FiguraMod.popProfiler(3);
+        CosmetiguraMod.popProfiler(3);
     }
 
     @Inject(method = "renderArmWithItem", at = @At("HEAD"), cancellable = true)

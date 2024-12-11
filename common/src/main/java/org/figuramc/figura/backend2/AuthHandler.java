@@ -7,7 +7,7 @@ import com.mojang.authlib.exceptions.UserBannedException;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.User;
 import net.minecraft.network.chat.Component;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -20,7 +20,7 @@ public class AuthHandler {
             if (!reAuth && NetworkStuff.isConnected())
                 return;
 
-            FiguraMod.LOGGER.info("Authenticating with " + FiguraMod.MOD_NAME + " server...");
+            CosmetiguraMod.LOGGER.info("Authenticating with " + CosmetiguraMod.MOD_NAME + " server...");
             NetworkStuff.backendStatus = 2;
 
             Minecraft minecraft = Minecraft.getInstance();
@@ -28,7 +28,7 @@ public class AuthHandler {
             try {
                 String username = user.getName();
                 String serverID = getServerID(username);
-                FiguraMod.debug("Joining \"{}\" on server \"{}\"", username, serverID);
+                CosmetiguraMod.debug("Joining \"{}\" on server \"{}\"", username, serverID);
                 minecraft.getMinecraftSessionService().joinServer(user.getGameProfile(), user.getAccessToken(), serverID);
                 NetworkStuff.authSuccess(getToken(serverID));
             // cringe exceptions

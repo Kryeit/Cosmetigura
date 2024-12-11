@@ -3,7 +3,7 @@ package org.figuramc.figura.mixin.input;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.MouseHandler;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.gui.ActionWheel;
@@ -30,7 +30,7 @@ public class MouseHandlerMixin {
         if (window != this.minecraft.getWindow().getWindow())
             return;
 
-        Avatar avatar = AvatarManager.getAvatarForPlayer(FiguraMod.getLocalPlayerUUID());
+        Avatar avatar = AvatarManager.getAvatarForPlayer(CosmetiguraMod.getLocalPlayerUUID());
         if (avatar == null || avatar.luaRuntime == null)
             return;
 
@@ -55,7 +55,7 @@ public class MouseHandlerMixin {
 
     @Inject(method = "onScroll", at = @At("HEAD"), cancellable = true)
     private void onScroll(long window, double scrollDeltaX, double scrollDeltaY, CallbackInfo ci) {
-        Avatar avatar = AvatarManager.getAvatarForPlayer(FiguraMod.getLocalPlayerUUID());
+        Avatar avatar = AvatarManager.getAvatarForPlayer(CosmetiguraMod.getLocalPlayerUUID());
         if (avatar != null && avatar.mouseScrollEvent(scrollDeltaY) && (this.mouseGrabbed || this.minecraft.screen == null)) {
             ci.cancel();
             return;
@@ -72,7 +72,7 @@ public class MouseHandlerMixin {
 
     @Inject(method = "onMove", at = @At("HEAD"), cancellable = true)
     private void onMove(long window, double x, double y, CallbackInfo ci) {
-        Avatar avatar = AvatarManager.getAvatarForPlayer(FiguraMod.getLocalPlayerUUID());
+        Avatar avatar = AvatarManager.getAvatarForPlayer(CosmetiguraMod.getLocalPlayerUUID());
         if (avatar != null && avatar.mouseMoveEvent(x - this.xpos, y - this.ypos) && (this.mouseGrabbed || this.minecraft.screen == null)) {
             this.xpos = x;
             this.ypos = y;
@@ -82,7 +82,7 @@ public class MouseHandlerMixin {
 
     @Inject(method = "grabMouse", at = @At("HEAD"), cancellable = true)
     private void grabMouse(CallbackInfo ci) {
-        Avatar avatar = AvatarManager.getAvatarForPlayer(FiguraMod.getLocalPlayerUUID());
+        Avatar avatar = AvatarManager.getAvatarForPlayer(CosmetiguraMod.getLocalPlayerUUID());
         if (ActionWheel.isEnabled() || (avatar != null && avatar.luaRuntime != null && avatar.luaRuntime.host.unlockCursor))
             ci.cancel();
     }

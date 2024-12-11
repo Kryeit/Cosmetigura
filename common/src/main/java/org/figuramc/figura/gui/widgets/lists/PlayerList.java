@@ -7,7 +7,7 @@ import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.gui.screens.PermissionsScreen;
@@ -18,7 +18,7 @@ import org.figuramc.figura.gui.widgets.permissions.CategoryPermPackElement;
 import org.figuramc.figura.gui.widgets.permissions.PlayerPermPackElement;
 import org.figuramc.figura.permissions.PermissionManager;
 import org.figuramc.figura.permissions.PermissionPack;
-import org.figuramc.figura.utils.FiguraIdentifier;
+import org.figuramc.figura.utils.CosmetiguraIdentifier;
 import org.figuramc.figura.utils.FiguraText;
 import org.figuramc.figura.utils.ui.UIHelper;
 
@@ -61,11 +61,11 @@ public class PlayerList extends AbstractList {
         }));
 
         // show figura only button
-        children.add(showFigura = new SwitchButton(x + width - 48, y + 4, 20, 20, 0, 0, 20, new FiguraIdentifier("textures/gui/show_figura.png"), 60, 40, FiguraText.of("gui.permissions.figura_only.tooltip"), button -> showFiguraBl = ((SwitchButton) button).isToggled()));
+        children.add(showFigura = new SwitchButton(x + width - 48, y + 4, 20, 20, 0, 0, 20, new CosmetiguraIdentifier("textures/gui/show_figura.png"), 60, 40, FiguraText.of("gui.permissions.figura_only.tooltip"), button -> showFiguraBl = ((SwitchButton) button).isToggled()));
         showFigura.setToggled(showFiguraBl);
 
         // show disconnected button
-        children.add(showDisconnected = new SwitchButton(x + width - 24, y + 4, 20, 20, 0, 0, 20, new FiguraIdentifier("textures/gui/show_disconnected.png"), 60, 40, FiguraText.of("gui.permissions.disconnected.tooltip"), button -> showDisconnectedBl = ((SwitchButton) button).isToggled()));
+        children.add(showDisconnected = new SwitchButton(x + width - 24, y + 4, 20, 20, 0, 0, 20, new CosmetiguraIdentifier("textures/gui/show_disconnected.png"), 60, 40, FiguraText.of("gui.permissions.disconnected.tooltip"), button -> showDisconnectedBl = ((SwitchButton) button).isToggled()));
         showDisconnected.setToggled(showDisconnectedBl);
 
         // initial load
@@ -168,7 +168,7 @@ public class PlayerList extends AbstractList {
             Avatar avatar = AvatarManager.getAvatarForPlayer(uuid);
 
             // filter check
-            if ((!name.toLowerCase(Locale.US).contains(filter.toLowerCase(Locale.US)) && !uuid.toString().contains(filter.toLowerCase(Locale.US))) || (showFigura.isToggled() && !FiguraMod.isLocal(uuid) && (avatar == null || avatar.nbt == null)))
+            if ((!name.toLowerCase(Locale.US).contains(filter.toLowerCase(Locale.US)) && !uuid.toString().contains(filter.toLowerCase(Locale.US))) || (showFigura.isToggled() && !CosmetiguraMod.isLocal(uuid) && (avatar == null || avatar.nbt == null)))
                 continue;
 
             // player is not missing

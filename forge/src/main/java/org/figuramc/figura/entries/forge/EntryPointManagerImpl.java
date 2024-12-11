@@ -2,7 +2,7 @@ package org.figuramc.figura.entries.forge;
 
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.forgespi.language.ModFileScanData;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.entries.annotations.*;
 import org.objectweb.asm.Type;
 
@@ -44,7 +44,7 @@ public class EntryPointManagerImpl {
                     T instance = constructor.newInstance();
                     ret.add(instance);
                 } catch (ReflectiveOperationException | LinkageError e) {
-                    FiguraMod.LOGGER.error("Failed to load entrypoint: {}", className, e);
+                    CosmetiguraMod.LOGGER.error("Failed to load entrypoint: {}", className, e);
                 }
             }
         }

@@ -7,17 +7,17 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.gui.screens.AvatarScreen;
 import org.figuramc.figura.model.rendering.EntityRenderMode;
-import org.figuramc.figura.utils.FiguraIdentifier;
+import org.figuramc.figura.utils.CosmetiguraIdentifier;
 import org.figuramc.figura.utils.FiguraText;
 import org.figuramc.figura.utils.ui.UIHelper;
 
 public class EntityPreview extends AbstractContainerElement {
 
-    public static final ResourceLocation UNKNOWN = new FiguraIdentifier("textures/gui/unknown_entity.png");
-    public static final ResourceLocation OVERLAY = new FiguraIdentifier("textures/gui/entity_overlay.png");
+    public static final ResourceLocation UNKNOWN = new CosmetiguraIdentifier("textures/gui/unknown_entity.png");
+    public static final ResourceLocation OVERLAY = new CosmetiguraIdentifier("textures/gui/entity_overlay.png");
 
     // properties
     private LivingEntity entity;
@@ -59,7 +59,7 @@ public class EntityPreview extends AbstractContainerElement {
         children.add(button = new SwitchButton(
                 x + 4, y + 4, 16, 16,
                 0, 0, 16,
-                new FiguraIdentifier("textures/gui/expand.png"),
+                new CosmetiguraIdentifier("textures/gui/expand.png"),
                 48, 32,
                 FiguraText.of("gui.expand"),
                 bx -> {
@@ -102,7 +102,7 @@ public class EntityPreview extends AbstractContainerElement {
             // draw
             int s = Math.min(width, height) * 2 / 3;
             UIHelper.enableBlend();
-            gui.blit(UNKNOWN, x + (width - s) / 2, y + (height - s) / 2, s, s, 0f, 64 * ((int) (FiguraMod.ticks / 3f) % 8), 64, 64, 64, 512);
+            gui.blit(UNKNOWN, x + (width - s) / 2, y + (height - s) / 2, s, s, 0f, 64 * ((int) (CosmetiguraMod.ticks / 3f) % 8), 64, 64, 64, 512);
         }
 
         gui.disableScissor();

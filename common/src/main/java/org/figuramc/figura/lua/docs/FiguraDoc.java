@@ -7,7 +7,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.utils.ColorUtils;
 import org.figuramc.figura.utils.FiguraClientCommandSource;
 import org.figuramc.figura.utils.FiguraText;
@@ -46,14 +46,14 @@ public abstract class FiguraDoc {
     public JsonObject toJson(boolean translate) {
         JsonObject json = new JsonObject();
         json.addProperty("name", name);
-        json.addProperty("description", translate ? Language.getInstance().getOrDefault(FiguraText.of("docs." + description).getString()) : FiguraMod.MOD_ID + "." + "docs." + description);
+        json.addProperty("description", translate ? Language.getInstance().getOrDefault(FiguraText.of("docs." + description).getString()) : CosmetiguraMod.MOD_ID + "." + "docs." + description);
         return json;
     }
 
     // -- Special prints :p -- // 
 
     public static int printRoot() {
-        FiguraMod.sendChatMessage(HEADER.copy()
+        CosmetiguraMod.sendChatMessage(HEADER.copy()
                 .append("\n\n")
                 .append(FiguraText.of("docs").withStyle(ColorUtils.Colors.BLUE.style)));
 
@@ -156,7 +156,7 @@ public abstract class FiguraDoc {
                 descText.append("\n\t").append("• ").append(component);
             message.append(descText);
 
-            FiguraMod.sendChatMessage(message);
+            CosmetiguraMod.sendChatMessage(message);
             return 1;
         }
 
@@ -305,7 +305,7 @@ public abstract class FiguraDoc {
                 descText.append("\n\t").append("• ").append(component);
             message.append(descText);
 
-            FiguraMod.sendChatMessage(message);
+            CosmetiguraMod.sendChatMessage(message);
             return 1;
         }
 
@@ -406,7 +406,7 @@ public abstract class FiguraDoc {
                 descText.append("\n\t").append("• ").append(component);
             message.append(descText);
 
-            FiguraMod.sendChatMessage(message);
+            CosmetiguraMod.sendChatMessage(message);
             return 1;
         }
 

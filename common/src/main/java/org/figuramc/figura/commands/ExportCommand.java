@@ -5,7 +5,7 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.nbt.NbtIo;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.lua.docs.FiguraDocsManager;
 import org.figuramc.figura.model.rendering.AvatarRenderer;
@@ -56,7 +56,7 @@ class ExportCommand {
             if (texture == null)
                 throw new Exception();
 
-            texture.writeTexture(FiguraMod.getFiguraDirectory().resolve(filename + ".png"));
+            texture.writeTexture(CosmetiguraMod.getFiguraDirectory().resolve(filename + ".png"));
 
             context.getSource().figura$sendFeedback(FiguraText.of("command.export_texture.success"));
             return 1;
@@ -86,7 +86,7 @@ class ExportCommand {
             if (avatar.nbt == null)
                 throw new Exception();
 
-            NbtIo.writeCompressed(avatar.nbt, FiguraMod.getFiguraDirectory().resolve(filename + ".nbt").toFile());
+            NbtIo.writeCompressed(avatar.nbt, CosmetiguraMod.getFiguraDirectory().resolve(filename + ".nbt").toFile());
 
             context.getSource().figura$sendFeedback(FiguraText.of("command.export_avatar.success"));
             return 1;

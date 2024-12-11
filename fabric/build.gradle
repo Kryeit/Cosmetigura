@@ -116,34 +116,3 @@ components.java {
         skip()
     }
 }
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            artifactId = "${project.archivesBaseName}-${project.name}"
-            version = project.version
-            artifact(remapJar) {
-                builtBy remapJar
-                classifier ''
-            }
-            artifact(sourcesJar) {
-                builtBy sourcesJar
-                classifier 'sources'
-            }
-        }
-    }
-    setupRepositories(repositories)
-}
-
-void setupRepositories(RepositoryHandler repositories) {
-    if (project.hasProperty("mavenUrl")) {
-        repositories.maven {
-            name = "figuraMaven"
-            url project.mavenUrl
-            credentials(PasswordCredentials)
-            authentication {
-                basic(BasicAuthentication)
-            }
-        }
-    }
-}

@@ -1,6 +1,6 @@
 package org.figuramc.figura.lua.api.ping;
 
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.math.matrix.FiguraMatrix;
 import org.figuramc.figura.math.vector.FiguraVector;
@@ -147,7 +147,7 @@ public class PingArg {
 
             return luaValues.toArray(new LuaValue[0]);
         } catch (Exception e) {
-            FiguraMod.LOGGER.warn("Failed to read " + owner.owner + " ping!", e);
+            CosmetiguraMod.LOGGER.warn("Failed to read " + owner.owner + " ping!", e);
             return null;
         }
     }

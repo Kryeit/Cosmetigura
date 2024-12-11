@@ -4,7 +4,7 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.network.protocol.game.ClientboundEntityEventPacket;
 import net.minecraft.world.level.Level;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.spongepowered.asm.mixin.Mixin;
@@ -21,7 +21,7 @@ public abstract class ClientPacketListenerMixin {
 
     @Inject(at = @At("HEAD"), method = "sendUnsignedCommand", cancellable = true)
     private void sendUnsignedCommand(String command, CallbackInfoReturnable<Boolean> cir) {
-        if (command.startsWith(FiguraMod.MOD_ID))
+        if (command.startsWith(CosmetiguraMod.MOD_ID))
             cir.setReturnValue(false);
     }
 

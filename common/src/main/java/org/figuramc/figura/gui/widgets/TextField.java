@@ -9,7 +9,7 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import org.figuramc.figura.utils.FiguraIdentifier;
+import org.figuramc.figura.utils.CosmetiguraIdentifier;
 import org.figuramc.figura.utils.FiguraText;
 import org.figuramc.figura.utils.TextUtils;
 import org.figuramc.figura.utils.ui.UIHelper;
@@ -19,7 +19,7 @@ import java.util.function.Consumer;
 
 public class TextField extends AbstractContainerElement {
 
-    public static final ResourceLocation BACKGROUND = new FiguraIdentifier("textures/gui/text_field.png");
+    public static final ResourceLocation BACKGROUND = new CosmetiguraIdentifier("textures/gui/text_field.png");
     public static final int ENABLED_COLOR = ChatFormatting.WHITE.getColor();
     public static final int DISABLED_COLOR = ChatFormatting.DARK_GRAY.getColor();
 

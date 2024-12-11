@@ -6,9 +6,8 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.network.chat.Component;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.config.ConfigType;
-import org.figuramc.figura.config.Configs;
 import org.figuramc.figura.gui.widgets.ContextMenu;
 import org.figuramc.figura.gui.widgets.ParentedButton;
 import org.figuramc.figura.gui.widgets.lists.ConfigList;
@@ -62,7 +61,7 @@ public class EnumElement extends AbstractConfigElement {
                 super.setHovered(hovered);
             }
         });
-        button.setActive(FiguraMod.debugModeEnabled() || !config.disabled);
+        button.setActive(CosmetiguraMod.debugModeEnabled() || !config.disabled);
         if (config.enumTooltip != null)
             button.setTooltip(config.enumTooltip.get(selectedIndex));
 
@@ -88,7 +87,7 @@ public class EnumElement extends AbstractConfigElement {
 
         // edited colour
         if (this.isChanged())
-            text = text.copy().setStyle(FiguraMod.getAccentColor());
+            text = text.copy().setStyle(CosmetiguraMod.getAccentColor());
 
         // set text
         this.button.setMessage(text);
@@ -136,7 +135,7 @@ public class EnumElement extends AbstractConfigElement {
 
             // selected entry
             if (i == (int) this.config.tempValue % this.names.size())
-                text = Component.empty().setStyle(FiguraMod.getAccentColor()).withStyle(ChatFormatting.UNDERLINE).append(text);
+                text = Component.empty().setStyle(CosmetiguraMod.getAccentColor()).withStyle(ChatFormatting.UNDERLINE).append(text);
 
             // apply text
             entries.get(i).setMessage(text);

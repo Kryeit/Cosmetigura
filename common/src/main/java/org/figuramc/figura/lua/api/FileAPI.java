@@ -1,6 +1,6 @@
 package org.figuramc.figura.lua.api;
 
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.lua.LuaNotNil;
 import org.figuramc.figura.lua.LuaWhitelist;
@@ -40,7 +40,7 @@ public class FileAPI {
     }
 
     private static Path dataPath() {
-        return FiguraMod.getFiguraDirectory().resolve("data").toAbsolutePath()
+        return CosmetiguraMod.getFiguraDirectory().resolve("data").toAbsolutePath()
                 .normalize();
     }
 

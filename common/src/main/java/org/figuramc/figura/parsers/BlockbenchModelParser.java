@@ -2,7 +2,7 @@ package org.figuramc.figura.parsers;
 
 import com.google.gson.*;
 import net.minecraft.nbt.*;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.math.vector.FiguraVec3;
 import org.figuramc.figura.model.ParentType;
 
@@ -31,8 +31,8 @@ public class BlockbenchModelParser {
         BlockbenchModel model = GSON.fromJson(json, BlockbenchModel.class);
 
         //meta check
-        if (!model.meta.model_format.equals("free") && !model.meta.model_format.contains(FiguraMod.MOD_ID))
-            throw new Exception("Model \"" + modelName + "\" have an incompatible model format. Compatibility is limited to \"Generic Model\" format and third-party " + FiguraMod.MOD_NAME + " specific formats");
+        if (!model.meta.model_format.equals("free") && !model.meta.model_format.contains(CosmetiguraMod.MOD_ID))
+            throw new Exception("Model \"" + modelName + "\" have an incompatible model format. Compatibility is limited to \"Generic Model\" format and third-party " + CosmetiguraMod.MOD_NAME + " specific formats");
         if (Integer.parseInt(model.meta.format_version.split("\\.")[0]) < 4)
             throw new Exception("Model \"" + modelName + "\" was created using a version too old (" + model.meta.format_version + ") of Blockbench. Minimum compatible version is 4.0");
 
@@ -170,7 +170,7 @@ public class BlockbenchModelParser {
             //otherwise, load from the source stored in the model
             byte[] source = Base64.getDecoder().decode(texture.source.substring("data:image/png;base64,".length()));
             String path = modelName + "." + name;
-            FiguraMod.debug("Loaded {} Texture \"{}\" from {}", textureType.toUpperCase(Locale.US), name, path);
+            CosmetiguraMod.debug("Loaded {} Texture \"{}\" from {}", textureType.toUpperCase(Locale.US), name, path);
 //            }
 
             //add source nbt

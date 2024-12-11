@@ -6,7 +6,7 @@ import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.entity.EntityType;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.config.Configs;
 import org.figuramc.figura.permissions.Permissions;
@@ -63,7 +63,7 @@ public class FiguraLuaPrinter {
         if (Configs.LOG_LOCATION.value == 0)
             sendLuaChatMessage(component);
         else
-            FiguraMod.LOGGER.info(component.getString());
+            CosmetiguraMod.LOGGER.info(component.getString());
     }
 
     // print an error, errors should always show up on chat
@@ -114,11 +114,11 @@ public class FiguraLuaPrinter {
 
         owner.errorText = TextUtils.replaceTabs(Component.literal(message).withStyle(ColorUtils.Colors.LUA_ERROR.style));
 
-        if ((owner.entityType == EntityType.PLAYER && !Configs.LOG_OTHERS.value && !FiguraMod.isLocal(owner.owner)) || owner.permissions.getCategory() == Permissions.Category.BLOCKED)
+        if ((owner.entityType == EntityType.PLAYER && !Configs.LOG_OTHERS.value && !CosmetiguraMod.isLocal(owner.owner)) || owner.permissions.getCategory() == Permissions.Category.BLOCKED)
             return;
 
         chatQueue.offer(component); // bypass the char limit filter
-        FiguraMod.LOGGER.error("", error);
+        CosmetiguraMod.LOGGER.error("", error);
     }
 
     // print an ping!
@@ -146,14 +146,14 @@ public class FiguraLuaPrinter {
         if (Configs.LOG_LOCATION.value == 0)
             sendLuaChatMessage(text);
         else
-            FiguraMod.LOGGER.info(text.getString());
+            CosmetiguraMod.LOGGER.info(text.getString());
     }
 
     // print functions
     private static final Function<FiguraLuaRuntime, LuaValue> PRINT_FUNCTION = runtime -> new VarArgFunction() {
         @Override
         public Varargs invoke(Varargs args) {
-            if (!Configs.LOG_OTHERS.value && !FiguraMod.isLocal(runtime.owner.owner))
+            if (!Configs.LOG_OTHERS.value && !CosmetiguraMod.isLocal(runtime.owner.owner))
                 return NIL;
 
             MutableComponent text = Component.empty();
@@ -175,7 +175,7 @@ public class FiguraLuaPrinter {
     private static final Function<FiguraLuaRuntime, LuaValue> PRINT_JSON_FUNCTION = runtime -> new VarArgFunction() {
         @Override
         public Varargs invoke(Varargs args) {
-            boolean local = FiguraMod.isLocal(runtime.owner.owner);
+            boolean local = CosmetiguraMod.isLocal(runtime.owner.owner);
             if (!Configs.LOG_OTHERS.value && !local)
                 return NIL;
 
@@ -205,7 +205,7 @@ public class FiguraLuaPrinter {
     private static final Function<FiguraLuaRuntime, LuaValue> PRINT_TABLE_FUNCTION = runtime -> new VarArgFunction() {
         @Override
         public Varargs invoke(Varargs args) {
-            if (!Configs.LOG_OTHERS.value && !FiguraMod.isLocal(runtime.owner.owner))
+            if (!Configs.LOG_OTHERS.value && !CosmetiguraMod.isLocal(runtime.owner.owner))
                 return NIL;
 
             boolean silent = false;
@@ -281,7 +281,7 @@ public class FiguraLuaPrinter {
                     text.append(getTableEntry(typeManager, spacing, LuaValue.valueOf(name), typeManager.javaToLua(obj).arg1(), hasTooltip, depth, indent));
                     fields.add(name);
                 } catch (Exception e) {
-                    FiguraMod.LOGGER.error("", e);
+                    CosmetiguraMod.LOGGER.error("", e);
                 }
             }
 
@@ -415,7 +415,7 @@ public class FiguraLuaPrinter {
         String print = toPrint.getString();
         if (!print.isEmpty()) {
             charsQueued -= print.length();
-            FiguraMod.sendChatMessage(print.endsWith("\n") ? TextUtils.substring(toPrint, 0, print.length() - 1) : toPrint);
+            CosmetiguraMod.sendChatMessage(print.endsWith("\n") ? TextUtils.substring(toPrint, 0, print.length() - 1) : toPrint);
         }
     }
 }

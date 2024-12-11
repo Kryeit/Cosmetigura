@@ -1,7 +1,7 @@
 package org.figuramc.figura.lua.api.event;
 
 import com.google.common.collect.HashMultimap;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.lua.LuaNotNil;
 import org.figuramc.figura.lua.LuaWhitelist;
 import org.figuramc.figura.lua.docs.LuaMetamethodDoc;
@@ -63,11 +63,11 @@ public class LuaEvent {
 
         LuaTable result = new LuaTable();
         for (LuaFunction function : functions) {
-            FiguraMod.pushProfiler(function.name());
+            CosmetiguraMod.pushProfiler(function.name());
             Varargs val = function.invoke(args);
             for (int i = 0; i < val.narg(); i++)
                 result.insert(0, val.arg(i + 1));
-            FiguraMod.popProfiler();
+            CosmetiguraMod.popProfiler();
         }
         return result.unpack();
     }
@@ -75,9 +75,9 @@ public class LuaEvent {
     private Varargs callPiped(Varargs args) {
         Varargs vars = args;
         for (LuaFunction function : functions) {
-            FiguraMod.pushProfiler(function.name());
+            CosmetiguraMod.pushProfiler(function.name());
             vars = function.invoke(vars);
-            FiguraMod.popProfiler();
+            CosmetiguraMod.popProfiler();
         }
         return vars;
     }

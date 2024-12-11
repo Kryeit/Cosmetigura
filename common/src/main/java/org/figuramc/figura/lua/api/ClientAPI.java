@@ -22,7 +22,7 @@ import net.minecraft.world.scores.Objective;
 import net.minecraft.world.scores.PlayerTeam;
 import net.minecraft.world.scores.Score;
 import net.minecraft.world.scores.Scoreboard;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.lua.LuaNotNil;
 import org.figuramc.figura.lua.LuaWhitelist;
 import org.figuramc.figura.lua.api.entity.EntityAPI;
@@ -419,7 +419,7 @@ public class ClientAPI {
     @LuaWhitelist
     @LuaMethodDoc("client.get_figura_version")
     public static String getFiguraVersion() {
-        return FiguraMod.VERSION.toString();
+        return CosmetiguraMod.VERSION.toString();
     }
 
     @LuaWhitelist
@@ -527,7 +527,7 @@ public class ClientAPI {
     public static Map<String, Object> getDate() {
         Map<String, Object> map = new HashMap<>();
 
-        Calendar calendar = FiguraMod.CALENDAR;
+        Calendar calendar = CosmetiguraMod.CALENDAR;
         Date date = new Date();
         calendar.setTime(date);
 

@@ -2,7 +2,7 @@ package org.figuramc.figura.utils;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtIo;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -44,7 +44,7 @@ public class IOUtils {
         try (InputStream stream = Files.newInputStream(file)) {
             return new String(stream.readAllBytes(), StandardCharsets.UTF_8);
         } catch (IOException e) {
-            FiguraMod.LOGGER.error("Failed to read File: " + file);
+            CosmetiguraMod.LOGGER.error("Failed to read File: " + file);
             throw e;
         }
     }
@@ -53,7 +53,7 @@ public class IOUtils {
         try (InputStream stream = Files.newInputStream(file)) {
             return stream.readAllBytes();
         } catch (IOException e) {
-            FiguraMod.LOGGER.error("Failed to read File: " + file);
+            CosmetiguraMod.LOGGER.error("Failed to read File: " + file);
             throw e;
         }
     }
@@ -61,7 +61,7 @@ public class IOUtils {
     public static void readCacheFile(String name, Consumer<CompoundTag> consumer) {
         try {
             // get file
-            Path path = FiguraMod.getCacheDirectory().resolve(name + ".nbt");
+            Path path = CosmetiguraMod.getCacheDirectory().resolve(name + ".nbt");
 
             if (!Files.exists(path))
                 return;
@@ -72,7 +72,7 @@ public class IOUtils {
             consumer.accept(nbt);
             fis.close();
         } catch (Exception e) {
-            FiguraMod.LOGGER.error("", e);
+            CosmetiguraMod.LOGGER.error("", e);
         }
     }
 
@@ -83,7 +83,7 @@ public class IOUtils {
             consumer.accept(nbt);
 
             // create file
-            Path path = FiguraMod.getCacheDirectory().resolve(name + ".nbt");
+            Path path = CosmetiguraMod.getCacheDirectory().resolve(name + ".nbt");
 
             if (!Files.exists(path))
                 Files.createFile(path);
@@ -93,12 +93,12 @@ public class IOUtils {
             NbtIo.writeCompressed(nbt, fs);
             fs.close();
         } catch (Exception e) {
-            FiguraMod.LOGGER.error("", e);
+            CosmetiguraMod.LOGGER.error("", e);
         }
     }
 
     public static void deleteCacheFile(String name) {
-        Path path = FiguraMod.getCacheDirectory().resolve(name + ".nbt");
+        Path path = CosmetiguraMod.getCacheDirectory().resolve(name + ".nbt");
         deleteFile(path);
     }
 
@@ -111,7 +111,7 @@ public class IOUtils {
             Files.createDirectories(path);
         } catch (FileAlreadyExistsException ignored) {
         } catch (Exception e) {
-            FiguraMod.LOGGER.error("Failed to create directory", e);
+            CosmetiguraMod.LOGGER.error("Failed to create directory", e);
         }
 
         return path;
@@ -130,7 +130,7 @@ public class IOUtils {
             }
             Files.delete(file);
         } catch (Exception e) {
-            FiguraMod.LOGGER.error("Failed to delete " + file, e);
+            CosmetiguraMod.LOGGER.error("Failed to delete " + file, e);
         }
     }
 
@@ -161,7 +161,7 @@ public class IOUtils {
         try {
             hidden = Files.isHidden(path);
         } catch (IOException e) {
-            FiguraMod.LOGGER.error("Failed to get if \"" + path + "\" is hidden", e);
+            CosmetiguraMod.LOGGER.error("Failed to get if \"" + path + "\" is hidden", e);
             hidden = false;
         }
         return hidden || getFileNameOrEmpty(path).startsWith(".");
@@ -179,7 +179,7 @@ public class IOUtils {
      * @return {@code true} if given file is hidden
      */
     public static boolean isHiddenAvatarResource(@NotNull Path path) {
-        final Path avatarsDirectory = FiguraMod.getFiguraDirectory().resolve("avatars");
+        final Path avatarsDirectory = CosmetiguraMod.getFiguraDirectory().resolve("avatars");
         if (!path.startsWith(avatarsDirectory))
             return true;
 
@@ -195,7 +195,7 @@ public class IOUtils {
             }
             return false;
         } catch (IOException e) {
-            FiguraMod.LOGGER.error("Failed to get if \"" + path + "\" is hidden", e);
+            CosmetiguraMod.LOGGER.error("Failed to get if \"" + path + "\" is hidden", e);
             return false;
         }
     }

@@ -6,13 +6,13 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import org.figuramc.figura.utils.FiguraIdentifier;
+import org.figuramc.figura.utils.CosmetiguraIdentifier;
 import org.figuramc.figura.utils.ui.UIHelper;
 
 public class Button extends net.minecraft.client.gui.components.Button implements FiguraWidget {
 
     // default textures
-    private static final ResourceLocation TEXTURE = new FiguraIdentifier("textures/gui/button.png");
+    private static final ResourceLocation TEXTURE = new CosmetiguraIdentifier("textures/gui/button.png");
 
     // texture data
     protected Integer u;

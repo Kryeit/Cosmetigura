@@ -12,7 +12,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.config.Configs;
@@ -20,7 +20,7 @@ import org.figuramc.figura.font.Emojis;
 import org.figuramc.figura.lua.api.action_wheel.Action;
 import org.figuramc.figura.lua.api.action_wheel.Page;
 import org.figuramc.figura.math.vector.FiguraVec3;
-import org.figuramc.figura.utils.FiguraIdentifier;
+import org.figuramc.figura.utils.CosmetiguraIdentifier;
 import org.figuramc.figura.utils.FiguraText;
 import org.figuramc.figura.utils.TextUtils;
 import org.figuramc.figura.utils.ui.UIHelper;
@@ -30,8 +30,8 @@ import java.util.function.Function;
 
 public class ActionWheel {
 
-    private static final ResourceLocation TEXTURE = new FiguraIdentifier("textures/gui/action_wheel.png");
-    private static final ResourceLocation ICONS = new FiguraIdentifier("textures/gui/action_wheel_icons.png");
+    private static final ResourceLocation TEXTURE = new CosmetiguraIdentifier("textures/gui/action_wheel.png");
+    private static final ResourceLocation ICONS = new CosmetiguraIdentifier("textures/gui/action_wheel_icons.png");
     private static final double DISTANCE = 41;
     private static final double DEADZONE = 19;
 
@@ -61,7 +61,7 @@ public class ActionWheel {
         scale = Configs.ACTION_WHEEL_SCALE.value;
         pose.scale(scale, scale, scale);
 
-        Avatar avatar = AvatarManager.getAvatarForPlayer(FiguraMod.getLocalPlayerUUID());
+        Avatar avatar = AvatarManager.getAvatarForPlayer(CosmetiguraMod.getLocalPlayerUUID());
         Page currentPage;
         if (avatar == null || avatar.luaRuntime == null || (currentPage = avatar.luaRuntime.action_wheel.currentPage) == null) {
             // this also pops the stack
@@ -78,27 +78,27 @@ public class ActionWheel {
         mouseY = minecraft.mouseHandler.ypos() * window.getGuiScaledHeight() / window.getScreenHeight();
 
         // calculate selected slot
-        FiguraMod.pushProfiler("selectedSlot");
+        CosmetiguraMod.pushProfiler("selectedSlot");
         calculateSelected();
 
         // render overlays
-        FiguraMod.popPushProfiler("wheel");
+        CosmetiguraMod.popPushProfiler("wheel");
         renderTextures(gui, currentPage);
 
         // reset colours
         RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
 
         // render items
-        FiguraMod.popPushProfiler("items");
+        CosmetiguraMod.popPushProfiler("items");
         renderItemsAndIcons(gui, currentPage);
 
         pose.popPose();
 
         // render title
-        FiguraMod.popPushProfiler("texts");
+        CosmetiguraMod.popPushProfiler("texts");
         renderTexts(gui, currentPage);
 
-        FiguraMod.popProfiler();
+        CosmetiguraMod.popProfiler();
     }
 
     // -- render helpers -- // 
@@ -252,9 +252,9 @@ public class ActionWheel {
             }
             // text
             indicator.append(FiguraText.of("gui.action_wheel.slots_indicator",
-                    Component.literal(String.valueOf((index - 1) * 8 + 1)).withStyle(FiguraMod.getAccentColor()),
-                    Component.literal(String.valueOf(Math.min(index * 8, greatest))).withStyle(FiguraMod.getAccentColor()),
-                    Component.literal(String.valueOf(greatest)).withStyle(FiguraMod.getAccentColor())
+                    Component.literal(String.valueOf((index - 1) * 8 + 1)).withStyle(CosmetiguraMod.getAccentColor()),
+                    Component.literal(String.valueOf(Math.min(index * 8, greatest))).withStyle(CosmetiguraMod.getAccentColor()),
+                    Component.literal(String.valueOf(greatest)).withStyle(CosmetiguraMod.getAccentColor())
             ));
             // up arrow
             if (index < groupCount) {
@@ -341,7 +341,7 @@ public class ActionWheel {
 
     public static void execute(int index, boolean left) {
         Avatar avatar;
-        if (!isEnabled() || (avatar = AvatarManager.getAvatarForPlayer(FiguraMod.getLocalPlayerUUID())) == null || avatar.luaRuntime == null) {
+        if (!isEnabled() || (avatar = AvatarManager.getAvatarForPlayer(CosmetiguraMod.getLocalPlayerUUID())) == null || avatar.luaRuntime == null) {
             selected = -1;
             return;
         }
@@ -369,7 +369,7 @@ public class ActionWheel {
 
     public static void scroll(double delta) {
         Avatar avatar;
-        if (!isEnabled() || (avatar = AvatarManager.getAvatarForPlayer(FiguraMod.getLocalPlayerUUID())) == null || avatar.luaRuntime == null)
+        if (!isEnabled() || (avatar = AvatarManager.getAvatarForPlayer(CosmetiguraMod.getLocalPlayerUUID())) == null || avatar.luaRuntime == null)
             return;
 
         // wheel scroll action

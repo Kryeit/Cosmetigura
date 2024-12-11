@@ -7,7 +7,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
-import org.figuramc.figura.utils.FiguraIdentifier;
+import org.figuramc.figura.utils.CosmetiguraIdentifier;
 import org.figuramc.figura.utils.FiguraText;
 import org.figuramc.figura.utils.ui.UIHelper;
 
@@ -15,7 +15,7 @@ import java.util.function.Consumer;
 
 public class SearchBar extends TextField {
 
-    public static final ResourceLocation CLEAR_TEXTURE = new FiguraIdentifier("textures/gui/search_clear.png");
+    public static final ResourceLocation CLEAR_TEXTURE = new CosmetiguraIdentifier("textures/gui/search_clear.png");
     public static final Component SEARCH_ICON = Component.literal("\uD83D\uDD0E").withStyle(Style.EMPTY.withFont(UIHelper.UI_FONT).applyFormats(ChatFormatting.DARK_GRAY));
 
     private final Button clearButton;

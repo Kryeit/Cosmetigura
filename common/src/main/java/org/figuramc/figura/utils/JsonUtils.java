@@ -4,7 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 
@@ -17,7 +17,7 @@ public class JsonUtils {
 
     public static boolean validate(JsonObject object, String fieldName, Function<JsonElement, Boolean> validator, String warningMessage, Object... params) {
         if (!validate(object, fieldName, validator)) {
-            FiguraMod.LOGGER.warn(warningMessage, params);
+            CosmetiguraMod.LOGGER.warn(warningMessage, params);
             return false;
         }
         return true;

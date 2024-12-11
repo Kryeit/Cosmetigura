@@ -5,17 +5,17 @@ import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 
 public class ConfigKeyBind extends KeyMapping {
 
     private final ConfigType.KeybindConfig config;
 
     public ConfigKeyBind(String translationKey, InputConstants.Key key, ConfigType.KeybindConfig config) {
-        super(translationKey, key.getType(), key.getValue(), FiguraMod.MOD_ID);
+        super(translationKey, key.getType(), key.getValue(), CosmetiguraMod.MOD_ID);
         this.config = config;
 
-        if (FiguraMod.debugModeEnabled() || !config.disabled)
+        if (CosmetiguraMod.debugModeEnabled() || !config.disabled)
            addKeyBind(this);
     }
 

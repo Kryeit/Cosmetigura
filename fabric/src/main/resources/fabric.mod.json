@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "id": "figura",
+  "id": "cosmetigura",
   "version": "${version}",
 
-  "name": "Figura",
-  "description": "Extensive customization of the Player model",
+  "name": "Cosmetigura",
+  "description": "A Figura fork bringing cosmetics to servers",
   "authors": [
     "skyrina", "lumelia", "UnlikePaladin", "omoflop"
   ],
@@ -12,27 +12,27 @@
     "TooManyLimits", "Lexize", "KitCat962", "Manuel-3", "superpowers04", "auriafoxgirl", "applejuiceyy"
   ],
   "contact": {
-    "homepage": "https://github.com/FiguraMC/Figura",
-    "issues": "https://github.com/FiguraMC/Figura/issues"
+    "homepage": "https://github.com/Kryeit/Cosmetigura",
+    "issues": "https://github.com/Kryeit/Cosmetigura/issues"
   },
 
   "license": "LGPL-2.1",
-  "icon": "assets/figura/icon.png",
+  "icon": "assets/cosmetigura/icon.png",
   "environment": "*",
   "entrypoints": {
     "client": [
-      "org.figuramc.figura.fabric.FiguraModFabric"
+      "org.figuramc.figura.fabric.CosmetiguraModFabric"
     ],
     "server": [
-      "org.figuramc.figura.fabric.FiguraModFabricServer"
+      "org.figuramc.figura.fabric.CosmetiguraModFabricServer"
     ],
     "modmenu": [
       "org.figuramc.figura.config.fabric.ModMenuConfig"
     ]
   },
   "mixins": [
-    "figura.mixins.json",
-    "figura-common.mixins.json"
+    "cosmetigura.mixins.json",
+    "cosmetigura-common.mixins.json"
   ],
   "depends": {
     "java": ">=${java_version}",

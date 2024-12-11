@@ -7,7 +7,7 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import org.figuramc.figura.utils.FiguraIdentifier;
+import org.figuramc.figura.utils.CosmetiguraIdentifier;
 import org.figuramc.figura.utils.MathUtils;
 import org.figuramc.figura.utils.ui.UIHelper;
 
@@ -15,7 +15,7 @@ public class ScrollBarWidget extends AbstractWidget implements FiguraWidget {
 
     // -- fields -- // 
 
-    public static final ResourceLocation SCROLLBAR_TEXTURE = new FiguraIdentifier("textures/gui/scrollbar.png");
+    public static final ResourceLocation SCROLLBAR_TEXTURE = new CosmetiguraIdentifier("textures/gui/scrollbar.png");
 
     protected final int headHeight = 20;
     protected final int headWidth = 10;

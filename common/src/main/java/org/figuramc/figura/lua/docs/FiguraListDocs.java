@@ -17,7 +17,7 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.ClipContext;
 
 import net.minecraft.world.level.levelgen.Heightmap;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.animation.Animation;
 import org.figuramc.figura.mixin.input.KeyMappingAccessor;
 import org.figuramc.figura.mixin.render.GameRendererAccessor;
@@ -29,7 +29,6 @@ import org.figuramc.figura.utils.ColorUtils;
 import org.figuramc.figura.utils.FiguraClientCommandSource;
 import org.figuramc.figura.utils.FiguraText;
 
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.function.Supplier;
 
@@ -166,7 +165,7 @@ public class FiguraListDocs {
 
             // list properties
             object.addProperty("name", name);
-            object.addProperty("description", translate ? Language.getInstance().getOrDefault(FiguraText.of("docs.enum." + id).getString()) : FiguraMod.MOD_ID + "." + "docs.enum." + id);
+            object.addProperty("description", translate ? Language.getInstance().getOrDefault(FiguraText.of("docs.enum." + id).getString()) : CosmetiguraMod.MOD_ID + "." + "docs.enum." + id);
 
             // list entries
             Collection<?> coll = get();
@@ -196,7 +195,7 @@ public class FiguraListDocs {
             command.executes(context -> {
                 Collection<?> coll = get();
                 if (coll.size() == 0) {
-                    FiguraMod.sendChatMessage(FiguraText.of("docs.enum.empty"));
+                    CosmetiguraMod.sendChatMessage(FiguraText.of("docs.enum.empty"));
                     return 0;
                 }
 
@@ -235,7 +234,7 @@ public class FiguraListDocs {
                     i++;
                 }
 
-                FiguraMod.sendChatMessage(text);
+                CosmetiguraMod.sendChatMessage(text);
                 return 1;
             });
 
@@ -245,7 +244,7 @@ public class FiguraListDocs {
                 String text = o instanceof Map.Entry e ? e.getKey().toString() : o.toString();
                 LiteralArgumentBuilder<FiguraClientCommandSource> entry = LiteralArgumentBuilder.literal(text);
                 entry.executes(context -> {
-                    FiguraMod.sendChatMessage(Component.literal(text).withStyle(ColorUtils.Colors.AWESOME_BLUE.style));
+                    CosmetiguraMod.sendChatMessage(Component.literal(text).withStyle(ColorUtils.Colors.AWESOME_BLUE.style));
                     return 1;
                 });
 
@@ -253,7 +252,7 @@ public class FiguraListDocs {
                     for (String s : (List<String>) e.getValue()) {
                         LiteralArgumentBuilder<FiguraClientCommandSource> child = LiteralArgumentBuilder.literal(s);
                         child.executes(context -> {
-                            FiguraMod.sendChatMessage(Component.literal(s).withStyle(ColorUtils.Colors.AWESOME_BLUE.style));
+                            CosmetiguraMod.sendChatMessage(Component.literal(s).withStyle(ColorUtils.Colors.AWESOME_BLUE.style));
                             return 1;
                         });
                         entry.then(child);
@@ -274,7 +273,7 @@ public class FiguraListDocs {
         // self
         LiteralArgumentBuilder<FiguraClientCommandSource> root = LiteralArgumentBuilder.literal("enums");
         root.executes(context -> {
-            FiguraMod.sendChatMessage(FiguraDoc.HEADER.copy()
+            CosmetiguraMod.sendChatMessage(FiguraDoc.HEADER.copy()
                     .append("\n\n")
                     .append(Component.literal("• ")
                             .append(FiguraText.of("docs.text.type"))

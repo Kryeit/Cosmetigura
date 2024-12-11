@@ -4,7 +4,7 @@ import com.neovisionaries.ws.client.WebSocket;
 import com.neovisionaries.ws.client.WebSocketAdapter;
 import com.neovisionaries.ws.client.WebSocketFrame;
 import net.minecraft.client.multiplayer.resolver.ServerAddress;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.backend2.NetworkStuff;
 import org.figuramc.figura.config.Configs;
 import org.figuramc.figura.gui.FiguraToast;
@@ -45,7 +45,7 @@ public class FiguraWebSocketAdapter extends WebSocketAdapter {
 
     @Override
     public void onConnected(WebSocket websocket, Map<String, List<String>> headers) throws Exception {
-        FiguraMod.LOGGER.info("Connecting to " + FiguraMod.MOD_NAME + " ws backend (" + getBackendAddress() + ")");
+        CosmetiguraMod.LOGGER.info("Connecting to " + CosmetiguraMod.MOD_NAME + " ws backend (" + getBackendAddress() + ")");
         super.onConnected(websocket, headers);
         try {
             websocket.sendBinary(C2SMessageHandler.auth(token).array());
@@ -73,11 +73,11 @@ public class FiguraWebSocketAdapter extends WebSocketAdapter {
     public void onBinaryMessage(WebSocket websocket, byte[] binary) throws Exception {
         super.onBinaryMessage(websocket, binary);
         if (NetworkStuff.debug)
-            FiguraMod.debug("Received raw ws message of " + binary.length + "b");
+            CosmetiguraMod.debug("Received raw ws message of " + binary.length + "b");
         try {
             S2CMessageHandler.handle(ByteBuffer.wrap(binary));
         } catch (Exception e) {
-            FiguraMod.LOGGER.error("Failed to handle ws message", e);
+            CosmetiguraMod.LOGGER.error("Failed to handle ws message", e);
         }
     }
 
@@ -95,7 +95,7 @@ public class FiguraWebSocketAdapter extends WebSocketAdapter {
     @Override
     public void handleCallbackError(WebSocket websocket, Throwable cause) throws Exception {
         super.handleCallbackError(websocket, cause);
-        FiguraMod.LOGGER.error("Failed to handle ws message", cause);
+        CosmetiguraMod.LOGGER.error("Failed to handle ws message", cause);
     }
 
     @Override
@@ -106,15 +106,15 @@ public class FiguraWebSocketAdapter extends WebSocketAdapter {
             reason = "Unknown!";
         int code = serverCloseFrame.getCloseCode();
         reason = reason.trim().isEmpty() ? ERROR_CODES.getOrDefault(code, "Unknown") : reason;
-        FiguraMod.LOGGER.info("Closed connection: " + reason + ", Code: " + code + ", Remote: " + remote);
+        CosmetiguraMod.LOGGER.info("Closed connection: " + reason + ", Code: " + code + ", Remote: " + remote);
 
-        handleClose(code, reason + (FiguraMod.debugModeEnabled() ? "\n\nCode: " + code + "\nRemote: " + remote : ""));
+        handleClose(code, reason + (CosmetiguraMod.debugModeEnabled() ? "\n\nCode: " + code + "\nRemote: " + remote : ""));
     }
 
     @Override
     public void onSendingFrame(WebSocket websocket, WebSocketFrame frame) throws Exception {
         if (NetworkStuff.debug && frame.getPayload() != null)
-            FiguraMod.debug("Sent raw ws message of " + frame.getPayload().length + "b");
+            CosmetiguraMod.debug("Sent raw ws message of " + frame.getPayload().length + "b");
         super.onSendingFrame(websocket, frame);
     }
 

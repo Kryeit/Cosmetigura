@@ -19,7 +19,7 @@ import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.config.Configs;
@@ -369,7 +369,7 @@ public class HostAPI {
     @LuaWhitelist
     public HostAPI setBadge(int index, boolean value, boolean pride) {
         if (!isHost()) return this;
-        if (!FiguraMod.debugModeEnabled())
+        if (!CosmetiguraMod.debugModeEnabled())
             throw new LuaError("Congrats, you found this debug easter egg!");
 
         Pair<BitSet, BitSet> badges = AvatarManager.getBadges(owner.owner);
@@ -629,7 +629,7 @@ public class HostAPI {
     )
     public void writeToLog(@LuaNotNil String string) {
         if (!isHost()) return;
-        FiguraMod.LOGGER.info("[FIGURA/LUA] -- " + string);
+        CosmetiguraMod.LOGGER.info("[FIGURA/LUA] -- " + string);
     }
 
     @LuaWhitelist
@@ -641,7 +641,7 @@ public class HostAPI {
     )
     public void warnToLog(@LuaNotNil String string) {
         if (!isHost()) return;
-        FiguraMod.LOGGER.warn("[FIGURA/LUA] -- " + string);
+        CosmetiguraMod.LOGGER.warn("[FIGURA/LUA] -- " + string);
     }
 
     public Object __index(String arg) {

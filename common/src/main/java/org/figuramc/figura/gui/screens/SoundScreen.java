@@ -1,7 +1,7 @@
 package org.figuramc.figura.gui.screens;
 
 import net.minecraft.client.gui.screens.Screen;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.gui.widgets.Button;
@@ -28,7 +28,7 @@ public class SoundScreen extends AbstractPanelScreen {
     protected void init() {
         super.init();
 
-        Avatar owner = AvatarManager.getAvatarForPlayer(FiguraMod.getLocalPlayerUUID());
+        Avatar owner = AvatarManager.getAvatarForPlayer(CosmetiguraMod.getLocalPlayerUUID());
 
         // list
         int listWidth = Math.min(this.width - 8, 420);

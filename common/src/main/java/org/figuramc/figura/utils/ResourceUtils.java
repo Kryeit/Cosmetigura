@@ -3,7 +3,7 @@ package org.figuramc.figura.utils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 
 import java.io.InputStream;
 import java.util.Optional;
@@ -16,7 +16,7 @@ public class ResourceUtils {
             try (InputStream is = optional.get().open()) {
                 return is.readAllBytes();
             } catch (Exception e) {
-                FiguraMod.LOGGER.error("", e);
+                CosmetiguraMod.LOGGER.error("", e);
             }
         }
         return null;

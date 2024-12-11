@@ -3,7 +3,7 @@ package org.figuramc.figura.gui.widgets;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.network.chat.Component;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.utils.FiguraText;
 import org.figuramc.figura.utils.ui.UIHelper;
 
@@ -85,7 +85,7 @@ public class EnumButton extends AbstractContainerElement {
 
             // selected entry
             if (i == (int) this.value % this.names.size())
-                text = Component.empty().setStyle(FiguraMod.getAccentColor()).withStyle(ChatFormatting.UNDERLINE).append(text);
+                text = Component.empty().setStyle(CosmetiguraMod.getAccentColor()).withStyle(ChatFormatting.UNDERLINE).append(text);
 
             // apply text
             entries.get(i).setMessage(text);

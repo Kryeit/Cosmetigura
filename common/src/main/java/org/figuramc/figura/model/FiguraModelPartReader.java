@@ -7,7 +7,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.util.Mth;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.animation.Animation;
 import org.figuramc.figura.animation.Interpolation;
 import org.figuramc.figura.animation.Keyframe;
@@ -136,8 +136,8 @@ public class FiguraModelPartReader {
                         try {
                             interpolation = Interpolation.valueOf(keyframeNbt.getString("int").toUpperCase(Locale.US));
                         } catch (Exception e) {
-                            FiguraMod.LOGGER.error("Invalid interpolation type in the model {}, something is wrong with this model!", keyframeNbt.getString("int"));
-                            FiguraMod.LOGGER.error("", e);
+                            CosmetiguraMod.LOGGER.error("Invalid interpolation type in the model {}, something is wrong with this model!", keyframeNbt.getString("int"));
+                            CosmetiguraMod.LOGGER.error("", e);
                             continue;
                         }
 

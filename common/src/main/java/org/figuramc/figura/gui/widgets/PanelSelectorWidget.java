@@ -7,10 +7,10 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.entries.FiguraScreen;
 import org.figuramc.figura.gui.screens.*;
-import org.figuramc.figura.utils.FiguraIdentifier;
+import org.figuramc.figura.utils.CosmetiguraIdentifier;
 import org.figuramc.figura.utils.ui.UIHelper;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import java.util.function.Function;
 
 public class PanelSelectorWidget extends AbstractContainerElement {
 
-    public static final ResourceLocation BACKGROUND = new FiguraIdentifier("textures/gui/panels_background.png");
+    public static final ResourceLocation BACKGROUND = new CosmetiguraIdentifier("textures/gui/panels_background.png");
 
     private static final List<Function<Screen, Pair<Screen, PanelIcon>>> PANELS = new ArrayList<>() {{
                 add(s -> Pair.of(new ProfileScreen(s), PanelIcon.PROFILE));
@@ -44,13 +44,13 @@ public class PanelSelectorWidget extends AbstractContainerElement {
         // buttons
 
         // size variables
-        int buttonCount = PANELS.size() - (FiguraMod.debugModeEnabled() ? 0 : PANELS_BLACKLIST.size());
+        int buttonCount = PANELS.size() - (CosmetiguraMod.debugModeEnabled() ? 0 : PANELS_BLACKLIST.size());
         int buttonWidth = Math.min(Math.max((width - 4) / buttonCount - 4, 24), 96) + 4;
         int spacing = (width - (4 + buttonWidth * buttonCount)) / 2;
 
         for (int i = 0; i < PANELS.size(); i++) {
             // skip blacklist
-            if (!FiguraMod.debugModeEnabled() && PANELS_BLACKLIST.contains(i))
+            if (!CosmetiguraMod.debugModeEnabled() && PANELS_BLACKLIST.contains(i))
                 continue;
 
             // get button data
@@ -64,7 +64,7 @@ public class PanelSelectorWidget extends AbstractContainerElement {
         }
 
         // locked buttons
-        if (FiguraMod.debugModeEnabled()) {
+        if (CosmetiguraMod.debugModeEnabled()) {
             for (int i : PANELS_BLACKLIST) {
                 PanelButton button = buttons.get(i);
                 button.setMessage(button.getMessage().copy().withStyle(ChatFormatting.RED));
@@ -145,8 +145,8 @@ public class PanelSelectorWidget extends AbstractContainerElement {
 
     public static class PanelButton extends IconButton {
 
-        public static final ResourceLocation TEXTURE = new FiguraIdentifier("textures/gui/panels_button.png");
-        public static final ResourceLocation ICONS = new FiguraIdentifier("textures/gui/panels.png");
+        public static final ResourceLocation TEXTURE = new CosmetiguraIdentifier("textures/gui/panels_button.png");
+        public static final ResourceLocation ICONS = new CosmetiguraIdentifier("textures/gui/panels.png");
 
         private final PanelSelectorWidget parent;
 

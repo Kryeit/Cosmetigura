@@ -6,7 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import net.minecraft.nbt.*;
 
-import org.figuramc.figura.FiguraMod;
+import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.config.Configs;
 import org.figuramc.figura.model.ParentType;
 import org.figuramc.figura.model.rendering.texture.RenderTypes;
@@ -51,7 +51,7 @@ public class AvatarMetadataParser {
         // version
         Version version = new Version(metadata.version);
         if (version.invalid)
-            version = FiguraMod.VERSION;
+            version = CosmetiguraMod.VERSION;
 
         nbt.putString("name", metadata.name == null || metadata.name.isBlank() ? filename : metadata.name);
         nbt.putString("ver", version.toString());
