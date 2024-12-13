@@ -95,7 +95,7 @@ public class AvatarList extends AbstractList {
         gui.disableScissor();
 
         if (avatarList.isEmpty()) {
-            gui.drawCenteredString(Minecraft.getInstance().font, "It's looking very empty in here :(", width / 2, 130, 0xAAAAAA);
+            gui.drawCenteredString(Minecraft.getInstance().font, "You have no cosmetics available", width / 2, 130, 0xAAAAAA);
             gui.drawCenteredString(Minecraft.getInstance().font, "It's time to fix that ;)", width / 2, 140, 0xAAAAAA);
         }
 
