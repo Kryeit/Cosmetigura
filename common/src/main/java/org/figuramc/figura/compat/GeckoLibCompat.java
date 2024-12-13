@@ -1,12 +1,10 @@
 package org.figuramc.figura.compat;
 
-import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import org.figuramc.figura.compat.wrappers.ClassWrapper;
 import org.figuramc.figura.compat.wrappers.FieldWrapper;
 import org.figuramc.figura.compat.wrappers.MethodWrapper;
+
 import java.util.Map;
 
 public class GeckoLibCompat {

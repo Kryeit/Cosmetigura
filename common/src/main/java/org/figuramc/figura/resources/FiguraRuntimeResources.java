@@ -2,17 +2,11 @@ package org.figuramc.figura.resources;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import net.minecraft.server.packs.PathPackResources;
 import org.figuramc.figura.CosmetiguraMod;
-import org.figuramc.figura.config.Configs;
 import org.figuramc.figura.utils.IOUtils;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;

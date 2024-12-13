@@ -57,9 +57,6 @@ public class AbstractPermPackElement extends Button implements Comparable<Abstra
     public void onPress() {
         // set selected entry
         parent.selectedEntry = this;
-
-        // update permissions widgets
-        parent.parent.updatePermissions(this.pack);
     }
 
     public PermissionPack getPack() {

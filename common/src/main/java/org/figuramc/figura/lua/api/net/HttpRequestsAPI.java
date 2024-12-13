@@ -2,18 +2,18 @@ package org.figuramc.figura.lua.api.net;
 
 import net.minecraft.network.chat.Component;
 import org.figuramc.figura.CosmetiguraMod;
-import org.figuramc.figura.lua.api.data.FiguraBuffer;
-import org.figuramc.figura.lua.docs.LuaMethodOverload;
-import org.luaj.vm2.LuaError;
-import org.luaj.vm2.LuaTable;
-import org.luaj.vm2.LuaValue;
 import org.figuramc.figura.lua.LuaNotNil;
 import org.figuramc.figura.lua.LuaWhitelist;
 import org.figuramc.figura.lua.ReadOnlyLuaTable;
+import org.figuramc.figura.lua.api.data.FiguraBuffer;
 import org.figuramc.figura.lua.api.data.FiguraFuture;
 import org.figuramc.figura.lua.api.data.FiguraInputStream;
 import org.figuramc.figura.lua.docs.LuaMethodDoc;
+import org.figuramc.figura.lua.docs.LuaMethodOverload;
 import org.figuramc.figura.lua.docs.LuaTypeDoc;
+import org.luaj.vm2.LuaError;
+import org.luaj.vm2.LuaTable;
+import org.luaj.vm2.LuaValue;
 
 import java.io.InputStream;
 import java.net.URI;

@@ -6,7 +6,6 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.config.Configs;
-import org.figuramc.figura.gui.cards.CardBackground;
 import org.figuramc.figura.parsers.AvatarMetadataParser;
 import org.figuramc.figura.utils.FileTexture;
 import org.figuramc.figura.utils.IOUtils;
@@ -196,7 +195,6 @@ public class LocalAvatarFetcher {
         // im going insane... or better saying, crazy, speaking of which, I was crazy once
         protected final Path path, folder, theActualPathForThis; // murder, why does everything needs to be protected/private :sob:
         protected final String name, description;
-        protected final CardBackground background;
         protected Properties properties;
         // icon
         protected final Path iconPath;
@@ -209,7 +207,6 @@ public class LocalAvatarFetcher {
             this.theActualPathForThis = theActualPathForThis;
             this.name = name;
             this.description = "";
-            this.background = CardBackground.DEFAULT;
             this.iconPath = null;
             this.properties = SAVED_DATA.computeIfAbsent(path.toAbsolutePath().toString(), __ -> new Properties());
         }
@@ -229,7 +226,6 @@ public class LocalAvatarFetcher {
 
             String name = filename;
             String description = "";
-            CardBackground bg = CardBackground.DEFAULT;
             Path iconPath = null;
 
             if (!(this instanceof FolderPath)) {
@@ -240,7 +236,6 @@ public class LocalAvatarFetcher {
 
                     name = Configs.WARDROBE_FILE_NAMES.value || metadata.name == null || metadata.name.isBlank() ? filename : metadata.name;
                     description = metadata.description == null ? "" : metadata.description;
-                    bg = CardBackground.parse(metadata.background);
                 } catch (Exception e) {
                     CosmetiguraMod.LOGGER.error("Failed to load metadata for \"" + path + "\"", e);
                 }
@@ -253,7 +248,6 @@ public class LocalAvatarFetcher {
 
             this.name = name;
             this.description = description;
-            this.background = bg;
             this.iconPath = iconPath;
         }
 
@@ -288,9 +282,6 @@ public class LocalAvatarFetcher {
             return description;
         }
 
-        public CardBackground getBackground() {
-            return background;
-        }
 
         public FileTexture getIcon() {
             if (!iconLoaded) {

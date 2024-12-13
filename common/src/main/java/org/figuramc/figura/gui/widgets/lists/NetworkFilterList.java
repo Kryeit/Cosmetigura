@@ -1,7 +1,6 @@
 package org.figuramc.figura.gui.widgets.lists;
 
 import net.minecraft.client.gui.GuiGraphics;
-
 import net.minecraft.resources.ResourceLocation;
 import org.figuramc.figura.config.ConfigType;
 import org.figuramc.figura.gui.widgets.*;

@@ -9,7 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.entries.FiguraScreen;
-import org.figuramc.figura.gui.screens.*;
+import org.figuramc.figura.gui.screens.WardrobeScreen;
 import org.figuramc.figura.utils.CosmetiguraIdentifier;
 import org.figuramc.figura.utils.ui.UIHelper;
 
@@ -23,12 +23,7 @@ public class PanelSelectorWidget extends AbstractContainerElement {
     public static final ResourceLocation BACKGROUND = new CosmetiguraIdentifier("textures/gui/panels_background.png");
 
     private static final List<Function<Screen, Pair<Screen, PanelIcon>>> PANELS = new ArrayList<>() {{
-                add(s -> Pair.of(new ProfileScreen(s), PanelIcon.PROFILE));
-                add(s -> Pair.of(new BrowserScreen(s), PanelIcon.BROWSER));
                 add(s -> Pair.of(new WardrobeScreen(s), PanelIcon.WARDROBE));
-                add(s -> Pair.of(new PermissionsScreen(s), PanelIcon.PERMISSIONS));
-                add(s -> Pair.of(new ConfigScreen(s), PanelIcon.SETTINGS));
-                add(s -> Pair.of(new HelpScreen(s), PanelIcon.HELP));
     }};
 
     // TODO - remove this when we actually implement those panels
@@ -128,13 +123,8 @@ public class PanelSelectorWidget extends AbstractContainerElement {
     }
 
     public enum PanelIcon {
-        PROFILE(0),
-        BROWSER(1),
-        WARDROBE(2),
-        PERMISSIONS(3),
-        SETTINGS(4),
-        HELP(5),
-        OTHER(6);
+        WARDROBE(0),
+        OTHER(1);
 
         public final int uv;
 

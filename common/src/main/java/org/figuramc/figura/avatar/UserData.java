@@ -3,9 +3,7 @@ package org.figuramc.figura.avatar;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.nbt.CompoundTag;
 import org.figuramc.figura.CosmetiguraMod;
-import org.figuramc.figura.avatar.local.CacheAvatarLoader;
 
-import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.Queue;
 import java.util.UUID;

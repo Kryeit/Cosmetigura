@@ -1,9 +1,13 @@
 package org.figuramc.figura.lua;
 
-import com.google.gson.*;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import org.figuramc.figura.utils.JsonUtils;
 import org.figuramc.figura.utils.LuaUtils;
-import org.luaj.vm2.*;
+import org.luaj.vm2.LuaError;
+import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.Varargs;
 import org.luaj.vm2.lib.VarArgFunction;
 
 import java.util.Objects;

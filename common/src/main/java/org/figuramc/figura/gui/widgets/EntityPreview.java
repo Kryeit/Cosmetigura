@@ -8,7 +8,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import org.figuramc.figura.CosmetiguraMod;
-import org.figuramc.figura.gui.screens.AvatarScreen;
 import org.figuramc.figura.model.rendering.EntityRenderMode;
 import org.figuramc.figura.utils.CosmetiguraIdentifier;
 import org.figuramc.figura.utils.FiguraText;
@@ -62,13 +61,8 @@ public class EntityPreview extends AbstractContainerElement {
                 new CosmetiguraIdentifier("textures/gui/expand.png"),
                 48, 32,
                 FiguraText.of("gui.expand"),
-                bx -> {
-                    if (button.isToggled()) {
-                        Minecraft.getInstance().setScreen(new AvatarScreen(scale, pitch, yaw, this.entity, parentScreen));
-                    } else {
-                        Minecraft.getInstance().setScreen(parentScreen);
-                    }
-                }));
+                bx -> Minecraft.getInstance().setScreen(parentScreen)
+        ));
     }
 
     @Override

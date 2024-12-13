@@ -24,8 +24,8 @@ import org.figuramc.figura.lua.api.nameplate.NameplateCustomization;
 import org.figuramc.figura.permissions.PermissionManager;
 import org.figuramc.figura.permissions.PermissionPack;
 import org.figuramc.figura.permissions.Permissions;
-import org.figuramc.figura.utils.EntityUtils;
 import org.figuramc.figura.utils.CosmetiguraIdentifier;
+import org.figuramc.figura.utils.EntityUtils;
 import org.figuramc.figura.utils.FiguraText;
 import org.figuramc.figura.utils.TextUtils;
 import org.figuramc.figura.utils.ui.UIHelper;
@@ -89,8 +89,6 @@ public class PlayerPermPackElement extends AbstractPermPackElement {
             PermissionPack.CategoryPermissionPack categoryPack = PermissionManager.CATEGORIES.get(category);
             permissionsContext.addAction(categoryPack.getCategoryName(), null, button -> {
                 pack.setCategory(categoryPack);
-                if (parent.selectedEntry == this)
-                    parent.parent.updatePermissions(pack);
             });
         }
         context.addTab(FiguraText.of("gui.context.set_permissions"), null, permissionsContext);

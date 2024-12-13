@@ -24,10 +24,8 @@ import net.minecraft.world.entity.LivingEntity;
 import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
-import org.figuramc.figura.avatar.Badges;
 import org.figuramc.figura.config.Configs;
 import org.figuramc.figura.gui.screens.AbstractPanelScreen;
-import org.figuramc.figura.gui.screens.FiguraConfirmScreen;
 import org.figuramc.figura.gui.widgets.ContextMenu;
 import org.figuramc.figura.gui.widgets.FiguraWidget;
 import org.figuramc.figura.math.vector.FiguraVec4;
@@ -570,19 +568,6 @@ public final class UIHelper {
 
         int clamp = Math.min(Math.max(currentTime - stopDelay, 0), scrollLen);
         return (startingOffset - clamp) * dir - (centered ? 0 : startingOffset);
-    }
-
-    public static Runnable openURL(String url) {
-        Minecraft minecraft = Minecraft.getInstance();
-        return () -> minecraft.setScreen(new FiguraConfirmScreen.FiguraConfirmLinkScreen((bl) -> {
-            if (bl) Util.getPlatform().openUri(url);
-        }, url, minecraft.screen));
-    }
-
-    public static void renderLoading(GuiGraphics gui, int x, int y) {
-        Component text = Component.literal(Integer.toHexString(Math.abs(CosmetiguraMod.ticks) % 16)).withStyle(Style.EMPTY.withFont(Badges.FONT));
-        Font font = Minecraft.getInstance().font;
-        gui.drawString(font, text, x - font.width(text) / 2, y - font.lineHeight / 2, -1, false);
     }
 
     public static void setContext(ContextMenu context) {

@@ -9,7 +9,6 @@ import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.config.ConfigKeyBind;
 import org.figuramc.figura.config.ConfigManager;
 import org.figuramc.figura.config.ConfigType;
-import org.figuramc.figura.gui.screens.ConfigScreen;
 import org.figuramc.figura.gui.widgets.TextField;
 import org.figuramc.figura.gui.widgets.config.CategoryWidget;
 import org.figuramc.figura.gui.widgets.config.InputElement;
@@ -21,14 +20,12 @@ import java.util.List;
 public class ConfigList extends AbstractList {
 
     private final List<CategoryWidget> configs = new ArrayList<>();
-    public final ConfigScreen parentScreen;
     public KeyMapping focusedBinding;
 
     private int totalHeight = 0;
 
-    public ConfigList(int x, int y, int width, int height, ConfigScreen parentScreen) {
+    public ConfigList(int x, int y, int width, int height) {
         super(x, y, width, height);
-        this.parentScreen = parentScreen;
         updateList();
     }
 

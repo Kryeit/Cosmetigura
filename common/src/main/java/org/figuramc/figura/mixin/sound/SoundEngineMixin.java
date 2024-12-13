@@ -3,7 +3,6 @@ package org.figuramc.figura.mixin.sound;
 import com.mojang.blaze3d.audio.Channel;
 import com.mojang.blaze3d.audio.Library;
 import com.mojang.blaze3d.audio.Listener;
-
 import net.minecraft.client.Options;
 import net.minecraft.client.gui.components.SubtitleOverlay;
 import net.minecraft.client.resources.sounds.SoundInstance;
@@ -13,7 +12,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceProvider;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.phys.Vec3;
-
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.ducks.ChannelHandleAccessor;
 import org.figuramc.figura.ducks.SoundEngineAccessor;

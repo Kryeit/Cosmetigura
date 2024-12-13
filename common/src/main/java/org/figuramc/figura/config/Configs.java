@@ -9,7 +9,6 @@ import org.figuramc.figura.avatar.local.CacheAvatarLoader;
 import org.figuramc.figura.avatar.local.LocalAvatarFetcher;
 import org.figuramc.figura.entries.EntryPointManager;
 import org.figuramc.figura.gui.FiguraToast;
-import org.figuramc.figura.gui.screens.ConfigScreen;
 import org.figuramc.figura.lua.FiguraLuaPrinter;
 import org.figuramc.figura.lua.api.ConfigAPI;
 import org.figuramc.figura.permissions.PermissionManager;
@@ -273,7 +272,7 @@ public class Configs {
             CLEAR_CACHE = new ConfigType.ButtonConfig("clear_cache", DEV, () -> {
         CacheAvatarLoader.clearCache();
         LocalAvatarFetcher.clearCache();
-        ConfigScreen.clearCache();
+
         FiguraRuntimeResources.clearCache();
         FiguraToast.sendToast(FiguraText.of("toast.cache_clear"));
     }),

@@ -7,7 +7,10 @@ import net.minecraft.network.chat.*;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector4i;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
 
 public class ClickableTextHelper {
     protected TextLine[] lines;

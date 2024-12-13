@@ -212,10 +212,6 @@ public abstract class AbstractPanelScreen extends Screen {
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
         egg += (char) keyCode;
         egg = egg.substring(1);
-        if (EGG.equals(egg)) {
-            Minecraft.getInstance().setScreen(new GameScreen(this));
-            return true;
-        }
 
         if (children().contains(panels) && panels.cycleTab(keyCode))
             return true;

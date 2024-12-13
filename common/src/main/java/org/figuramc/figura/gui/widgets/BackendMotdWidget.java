@@ -86,10 +86,6 @@ public class BackendMotdWidget extends AbstractScrollWidget {
                 UIHelper.setTooltip(tooltip);
 
             if (mouseDown) {
-                String link = textHelper.getClickLink(xx, yy, mouseX, mouseY + scroll);
-                if (link != null)
-                    UIHelper.openURL(link).run();
-
                 mouseDown = false;
             }
         }

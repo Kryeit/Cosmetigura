@@ -4,8 +4,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.config.ConfigType;
-import org.figuramc.figura.config.Configs;
-import org.figuramc.figura.gui.screens.ConfigScreen;
 import org.figuramc.figura.gui.widgets.AbstractContainerElement;
 import org.figuramc.figura.gui.widgets.ContainerButton;
 import org.figuramc.figura.gui.widgets.lists.ConfigList;
@@ -29,12 +27,9 @@ public class CategoryWidget extends AbstractContainerElement {
         this.parentConfig = new ContainerButton(parent, 0, 0, width, 20, config == null ? Component.empty() : config.name, config == null ? null : config.tooltip, button -> {
             boolean toggled = this.parentConfig.isToggled();
             setShowChildren(toggled);
-            ConfigScreen.CATEGORY_DATA.put(config, toggled);
             parent.updateScroll();
         });
 
-        Boolean expanded = ConfigScreen.CATEGORY_DATA.get(config);
-        this.parentConfig.setToggled(expanded == null || expanded);
         this.parentConfig.shouldHaveBackground(false);
         children.add(this.parentConfig);
     }
@@ -47,9 +42,6 @@ public class CategoryWidget extends AbstractContainerElement {
         // children background
         if (parentConfig.isToggled() && entries.size() > 0)
             gui.fill(getX(), getY() + 21, getX() + getWidth(), getY() + getHeight(), 0x11FFFFFF);
-
-        if (config == Configs.PAPERDOLL)
-            parent.parentScreen.renderPaperdoll = parentConfig.isToggled() && parent.isMouseOver(mouseX, mouseY) && isMouseOver(mouseX, mouseY);
 
         // children
         super.render(gui, mouseX, mouseY, delta);

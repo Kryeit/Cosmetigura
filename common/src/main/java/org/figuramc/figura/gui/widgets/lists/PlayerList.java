@@ -10,7 +10,6 @@ import net.minecraft.util.Mth;
 import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
-import org.figuramc.figura.gui.screens.PermissionsScreen;
 import org.figuramc.figura.gui.widgets.SearchBar;
 import org.figuramc.figura.gui.widgets.SwitchButton;
 import org.figuramc.figura.gui.widgets.permissions.AbstractPermPackElement;
@@ -31,7 +30,6 @@ public class PlayerList extends AbstractList {
 
     private final ArrayList<AbstractPermPackElement> permissionsList = new ArrayList<>();
 
-    public final PermissionsScreen parent;
     private final SearchBar searchBar;
     private final SwitchButton showFigura, showDisconnected;
     private static boolean showFiguraBl, showDisconnectedBl;
@@ -42,11 +40,10 @@ public class PlayerList extends AbstractList {
     public AbstractPermPackElement selectedEntry;
     private String filter = "";
 
-    public PlayerList(int x, int y, int width, int height, PermissionsScreen parent) {
+    public PlayerList(int x, int y, int width, int height) {
         super(x, y, width, height);
         updateScissors(1, 24, -2, -25);
 
-        this.parent = parent;
         this.entryWidth = Math.min(width - scrollBar.getWidth() - 12, 174);
 
         // fix scrollbar y and height

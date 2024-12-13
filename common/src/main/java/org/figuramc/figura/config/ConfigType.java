@@ -5,10 +5,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.mojang.blaze3d.platform.InputConstants;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import org.figuramc.figura.CosmetiguraMod;
-import org.figuramc.figura.gui.screens.NetworkFilterScreen;
 import org.figuramc.figura.lua.api.net.NetworkingAPI;
 import org.figuramc.figura.math.vector.FiguraVec3;
 import org.figuramc.figura.utils.ColorUtils;
@@ -336,10 +334,7 @@ public abstract class ConfigType<T> {
     public static class NetworkFilterConfig extends ButtonConfig implements SerializableConfig {
         private final ArrayList<NetworkingAPI.Filter> filters = new ArrayList<>();
         public NetworkFilterConfig(String name, Category category) {
-            super(name, category, () -> {
-                Minecraft mc = Minecraft.getInstance();
-                mc.setScreen(new NetworkFilterScreen(mc.screen));
-            });
+            super(name, category, () -> {});
         }
         public ArrayList<NetworkingAPI.Filter> getFilters() {
             return filters;

@@ -15,7 +15,6 @@ import net.minecraft.world.entity.player.PlayerModelPart;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.ClipContext;
-
 import net.minecraft.world.level.levelgen.Heightmap;
 import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.animation.Animation;

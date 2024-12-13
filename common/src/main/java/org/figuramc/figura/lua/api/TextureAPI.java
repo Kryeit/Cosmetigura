@@ -14,7 +14,6 @@ import org.figuramc.figura.lua.docs.LuaTypeDoc;
 import org.figuramc.figura.mixin.render.MissingTextureAtlasSpriteAccessor;
 import org.figuramc.figura.mixin.render.TextureAtlasAccessor;
 import org.figuramc.figura.model.rendering.texture.FiguraTexture;
-import org.figuramc.figura.permissions.Permissions;
 import org.figuramc.figura.utils.ColorUtils;
 import org.figuramc.figura.utils.LuaUtils;
 import org.luaj.vm2.LuaError;
