@@ -24,7 +24,7 @@ public class CosmeticWidget extends AbstractContainerElement {
     public CosmeticWidget(int x, int y, CosmeticManager.WardrobeEntry cosmetic) {
         super(x, y, 125, 60);
         this.cosmetic = cosmetic;
-        this.thumbnail = new ResourceLocation("figura", "thumbnail_" + cosmetic.id());
+        this.thumbnail = new ResourceLocation("cosmetigura", "thumbnail_" + cosmetic.id());
 
         long[] cosmetics = CosmeticManager.getEquippedCosmetics(CosmetiguraMod.getLocalPlayerUUID());
         for (long id : cosmetics) {

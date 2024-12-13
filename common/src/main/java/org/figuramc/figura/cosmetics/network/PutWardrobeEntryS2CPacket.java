@@ -6,7 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import org.figuramc.figura.cosmetics.CosmeticManager;
 
 public class PutWardrobeEntryS2CPacket implements NetworkManager.NetworkReceiver {
-    public static final ResourceLocation ID = new ResourceLocation("figura", "wardrobe_entry");
+    public static final ResourceLocation ID = new ResourceLocation("cosmetigura", "wardrobe_entry");
 
     public static FriendlyByteBuf write(FriendlyByteBuf buf, long id, String name, CosmeticManager.CosmeticType type, byte[] previewImage) {
         buf.writeLong(id);

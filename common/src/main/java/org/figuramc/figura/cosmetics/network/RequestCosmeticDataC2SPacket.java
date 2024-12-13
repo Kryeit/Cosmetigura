@@ -8,7 +8,7 @@ import net.minecraft.server.level.ServerPlayer;
 import org.figuramc.figura.cosmetics.CosmeticBackend;
 
 public class RequestCosmeticDataC2SPacket implements NetworkManager.NetworkReceiver {
-    public static final ResourceLocation ID = new ResourceLocation("figura", "request_cosmetic_data");
+    public static final ResourceLocation ID = new ResourceLocation("cosmetigura", "request_cosmetic_data");
 
     public static FriendlyByteBuf write(FriendlyByteBuf buf, long id) {
         buf.writeLong(id);

@@ -8,7 +8,7 @@ import org.figuramc.figura.cosmetics.CosmeticManager;
 import java.util.UUID;
 
 public class SetCosmeticsS2CPacket implements NetworkManager.NetworkReceiver {
-    public static final ResourceLocation ID = new ResourceLocation("figura", "set_cosmetics");
+    public static final ResourceLocation ID = new ResourceLocation("cosmetigura", "set_cosmetics");
 
     public static FriendlyByteBuf write(FriendlyByteBuf buf, UUID targetPlayer, long[] cosmetics) {
         buf.writeUUID(targetPlayer);

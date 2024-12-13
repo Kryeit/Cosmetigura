@@ -11,7 +11,7 @@ import org.figuramc.figura.cosmetics.ServerSupplier;
 import java.util.List;
 
 public class SelectCosmeticsC2SPacket implements NetworkManager.NetworkReceiver {
-    public static final ResourceLocation ID = new ResourceLocation("figura", "select_cosmetics");
+    public static final ResourceLocation ID = new ResourceLocation("cosmetigura", "select_cosmetics");
 
     public static FriendlyByteBuf write(FriendlyByteBuf buf, long cosmeticId, boolean equipped) {
         buf.writeLong(cosmeticId);

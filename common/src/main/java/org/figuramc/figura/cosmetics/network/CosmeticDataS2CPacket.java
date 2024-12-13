@@ -6,7 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import org.figuramc.figura.cosmetics.CosmeticManager;
 
 public class CosmeticDataS2CPacket implements NetworkManager.NetworkReceiver {
-    public static final ResourceLocation ID = new ResourceLocation("figura", "cosmetic_data");
+    public static final ResourceLocation ID = new ResourceLocation("cosmetigura", "cosmetic_data");
 
     public static FriendlyByteBuf write(FriendlyByteBuf buf, long id, CosmeticManager.CosmeticData data) {
         buf.writeLong(id);
