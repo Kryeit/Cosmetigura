@@ -2,7 +2,6 @@ package org.figuramc.figura.lua.api.nameplate;
 
 import net.minecraft.network.chat.Component;
 import org.figuramc.figura.avatar.Badges;
-import org.figuramc.figura.font.Emojis;
 import org.figuramc.figura.lua.LuaWhitelist;
 import org.figuramc.figura.lua.docs.LuaMethodDoc;
 import org.figuramc.figura.lua.docs.LuaMethodOverload;
@@ -24,8 +23,6 @@ public class NameplateCustomization {
         Component component = TextUtils.tryParseJson(text);
         component = Badges.noBadges4U(component);
         component = TextUtils.removeClickableObjects(component);
-        component = Emojis.applyEmojis(component);
-        component = Emojis.removeBlacklistedEmojis(component);
         return component;
     }
 

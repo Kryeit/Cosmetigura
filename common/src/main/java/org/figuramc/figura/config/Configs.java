@@ -207,8 +207,6 @@ public class Configs {
             PANIC_BUTTON = new ConfigType.KeybindConfig("panic_button", MISC, "key.keyboard.unknown"),
             WARDROBE_BUTTON = new ConfigType.KeybindConfig("wardrobe_button", MISC, "key.keyboard.unknown");
     public static final ConfigType.EnumConfig
-            BUTTON_LOCATION = new ConfigType.EnumConfig("button_location", MISC, 0, 5),
-            UPDATE_CHANNEL = new ConfigType.EnumConfig("update_channel", MISC, 1, 3),
             DEFAULT_PERMISSION_LEVEL = new ConfigType.EnumConfig("default_permission_level", MISC, 2, Permissions.Category.values().length) {
                 {
                     List<Component> list = new ArrayList<>();

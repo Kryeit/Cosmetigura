@@ -17,7 +17,6 @@ import org.figuramc.figura.config.Configs;
 import org.figuramc.figura.cosmetics.CosmeticManager;
 import org.figuramc.figura.cosmetics.network.FiguraNetworkManager;
 import org.figuramc.figura.entries.EntryPointManager;
-import org.figuramc.figura.font.Emojis;
 import org.figuramc.figura.lua.FiguraLuaPrinter;
 import org.figuramc.figura.lua.docs.FiguraDocsManager;
 import org.figuramc.figura.mixin.SkullBlockEntityAccessor;
@@ -76,7 +75,6 @@ public class CosmetiguraMod {
     public static List<FiguraResourceListener> getResourceListeners() {
         List<FiguraResourceListener> listeners = new ArrayList<>();
         listeners.add(LocalAvatarLoader.AVATAR_LISTENER);
-        listeners.add(Emojis.RESOURCE_LISTENER);
         listeners.add(AvatarWizard.RESOURCE_LISTENER);
         listeners.add(AvatarManager.RESOURCE_RELOAD_EVENT);
         return listeners;
@@ -94,8 +92,6 @@ public class CosmetiguraMod {
         }
         popPushProfiler("chatPrint");
         FiguraLuaPrinter.printChatFromQueue();
-        popPushProfiler("emojiAnim");
-        Emojis.tickAnimations();
         popProfiler();
         ticks++;
     }

@@ -16,7 +16,6 @@ import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.config.Configs;
-import org.figuramc.figura.font.Emojis;
 import org.figuramc.figura.lua.api.action_wheel.Action;
 import org.figuramc.figura.lua.api.action_wheel.Page;
 import org.figuramc.figura.math.vector.FiguraVec3;
@@ -292,7 +291,7 @@ public class ActionWheel {
                 int textX = x + (int) (Math.round(xOff));
                 int textY = y + (int) (Math.round(yOff + (internal ? 9 * scale : -font.lineHeight / 2f)));
 
-                Component text = TextUtils.replaceInText(Emojis.applyEmojis(TextUtils.tryParseJson(title)), "\n|\\\\n", " ");
+                Component text = TextUtils.replaceInText(TextUtils.tryParseJson(title), "\n|\\\\n", " ");
                 int textWidth = font.width(text);
 
                 if (internal) {
@@ -316,7 +315,7 @@ public class ActionWheel {
             return;
 
         // vars
-        Component text = Emojis.applyEmojis(TextUtils.tryParseJson(selectedTitle));
+        Component text = TextUtils.tryParseJson(selectedTitle);
         List<Component> list = TextUtils.splitText(text, "\n");
         int height = font.lineHeight * list.size();
 

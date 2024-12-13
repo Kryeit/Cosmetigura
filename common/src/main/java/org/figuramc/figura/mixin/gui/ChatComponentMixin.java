@@ -12,7 +12,6 @@ import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.avatar.Badges;
 import org.figuramc.figura.config.Configs;
 import org.figuramc.figura.ducks.GuiMessageAccessor;
-import org.figuramc.figura.font.Emojis;
 import org.figuramc.figura.lua.api.nameplate.NameplateCustomization;
 import org.figuramc.figura.permissions.Permissions;
 import org.figuramc.figura.utils.EntityUtils;
@@ -68,10 +67,6 @@ public class ChatComponentMixin {
         // stop here if we should not parse messages
         if (!CosmetiguraMod.parseMessages)
             return message;
-
-        // emojis
-        if (Configs.EMOJIS.value > 0)
-            message = Emojis.applyEmojis(message);
 
         // nameplates
         int config = Configs.CHAT_NAMEPLATE.value;

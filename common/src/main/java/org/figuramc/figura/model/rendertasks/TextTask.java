@@ -10,7 +10,6 @@ import net.minecraft.network.chat.Component;
 import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.Badges;
-import org.figuramc.figura.font.Emojis;
 import org.figuramc.figura.lua.LuaNotNil;
 import org.figuramc.figura.lua.LuaWhitelist;
 import org.figuramc.figura.lua.docs.LuaMethodDoc;
@@ -113,8 +112,6 @@ public class TextTask extends RenderTask {
 
         Component component = TextUtils.tryParseJson(this.textCached);
         component = Badges.noBadges4U(component);
-        component = Emojis.applyEmojis(component);
-        component = Emojis.removeBlacklistedEmojis(component);
         this.text = TextUtils.formatInBounds(component, Minecraft.getInstance().font, width, wrap);
 
         Font font = Minecraft.getInstance().font;
