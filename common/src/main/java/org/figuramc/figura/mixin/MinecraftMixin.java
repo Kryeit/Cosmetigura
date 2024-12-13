@@ -10,7 +10,6 @@ import net.minecraft.world.entity.player.Player;
 import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
-import org.figuramc.figura.backend2.NetworkStuff;
 import org.figuramc.figura.config.Configs;
 import org.figuramc.figura.gui.ActionWheel;
 import org.figuramc.figura.gui.FiguraToast;
@@ -127,7 +126,6 @@ public abstract class MinecraftMixin {
     private void clearLevel(Screen screen, CallbackInfo ci) {
         AvatarManager.clearAllAvatars();
         FiguraLuaPrinter.clearPrintQueue();
-        NetworkStuff.unsubscribeAll();
     }
 
     @Inject(at = @At("HEAD"), method = "runTick")

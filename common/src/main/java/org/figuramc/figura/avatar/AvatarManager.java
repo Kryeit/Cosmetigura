@@ -13,7 +13,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.local.LocalAvatarLoader;
-import org.figuramc.figura.backend2.NetworkStuff;
 import org.figuramc.figura.gui.FiguraToast;
 import org.figuramc.figura.gui.widgets.lists.AvatarList;
 import org.figuramc.figura.lua.api.particle.ParticleAPI;
@@ -127,8 +126,6 @@ public class AvatarManager {
         if (panic || Minecraft.getInstance().level == null)
             return null;
 
-        fetchBackend(player);
-
         UserData user = LOADED_USERS.get(player);
         return user == null ? null : user.getMainAvatar();
     }
@@ -192,7 +189,6 @@ public class AvatarManager {
         UserData user = LOADED_USERS.get(id);
         if (user != null) user.clear();
 
-        NetworkStuff.clear(id);
         CosmetiguraMod.debug("Cleared avatars of " + id);
     }
 
@@ -258,24 +254,6 @@ public class AvatarManager {
         } catch (Exception e) {
             CosmetiguraMod.LOGGER.error("Failed to set avatar for " + id, e);
         }
-    }
-
-    // get avatar from the backend
-    private static void fetchBackend(UUID id) {
-        if (FETCHED_USERS.contains(id))
-            return;
-
-        FETCHED_USERS.add(id);
-
-        if (EntityUtils.checkInvalidPlayer(id)) {
-            CosmetiguraMod.debug("Voiding userdata for " + id);
-            return;
-        }
-
-        UserData user = LOADED_USERS.computeIfAbsent(id, UserData::new);
-
-        CosmetiguraMod.debug("Getting userdata for " + id);
-        NetworkStuff.getUser(user);
     }
 
     // -- badges -- // 

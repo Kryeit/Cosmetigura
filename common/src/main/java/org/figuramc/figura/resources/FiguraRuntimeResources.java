@@ -5,7 +5,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.minecraft.server.packs.PathPackResources;
 import org.figuramc.figura.CosmetiguraMod;
-import org.figuramc.figura.backend2.NetworkStuff;
 import org.figuramc.figura.config.Configs;
 import org.figuramc.figura.utils.IOUtils;
 
@@ -49,50 +48,6 @@ public class FiguraRuntimeResources {
 
             JsonObject hashes, oldHashes;
 
-            // get old hashes
-            Path hashesPath = getRootDirectory().resolve("hashes.json");
-            try (BufferedReader reader = Files.newBufferedReader(hashesPath)) {
-                oldHashes = JsonParser.parseReader(reader).getAsJsonObject();
-            } catch (Exception ignored) {
-                oldHashes = new JsonObject();
-            }
-
-            // get new hashes
-            try (InputStream stream = NetworkStuff.getResourcesHashes(getAssetsVersion())) {
-                byte[] bytes = stream.readAllBytes();
-                String s = new String(bytes);
-                hashes = JsonParser.parseString(s).getAsJsonObject();
-
-                // save new hashes
-                try (OutputStream fs = Files.newOutputStream(hashesPath)) {
-                    fs.write(bytes);
-                } catch (Exception e) {
-                    CosmetiguraMod.LOGGER.error("Failed to save resource hashes", e);
-                }
-            } catch (Exception ignored) {
-                CosmetiguraMod.LOGGER.warn("Failed to fetch backend resources");
-                return;
-            }
-
-            // compare hashes
-            for (Map.Entry<String, JsonElement> entry : hashes.entrySet()) {
-                String key = entry.getKey();
-                JsonElement oldHash = oldHashes.get(key);
-                try {
-                    if (oldHash == null || !oldHash.getAsString().equals(entry.getValue().getAsString())) {
-                        getAndSaveResource(key);
-                    }
-                } catch (Exception e) {
-                    CosmetiguraMod.debug("Failed to download resource \"" + key + "\"", e);
-                }
-            }
-            File assetsDirectoryFile = getAssetsDirectory().toFile();
-            JsonObject directoryJsonObject = constructAssetsDirectoryJsonObject(assetsDirectoryFile.listFiles());
-            for (Map.Entry<String, JsonElement> entry : directoryJsonObject.entrySet()) {
-                if (!hashes.has(entry.getKey()) && !Configs.LOCAL_ASSETS.value) {
-                    IOUtils.deleteFile(getAssetsDirectory().resolve(entry.getKey()));
-                }
-            }
         });
     }
 
@@ -108,15 +63,6 @@ public class FiguraRuntimeResources {
             }
         }
         return object;
-    }
-    private static void getAndSaveResource(String path) throws Exception {
-        if (Configs.LOCAL_ASSETS.value) return;
-        Path target = getAssetsDirectory().resolve(path);
-        IOUtils.createDirIfNeeded(target.getParent());
-        try (InputStream resource = NetworkStuff.getResource(getAssetsVersion(), path); OutputStream fs = Files.newOutputStream(target)) {
-            fs.write(resource.readAllBytes());
-            CosmetiguraMod.debug("Downloaded resource \"" + path + "\"");
-        }
     }
 
     public static void joinFuture() {

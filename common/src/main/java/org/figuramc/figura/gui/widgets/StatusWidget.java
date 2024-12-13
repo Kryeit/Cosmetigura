@@ -11,7 +11,6 @@ import net.minecraft.network.chat.Style;
 import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
-import org.figuramc.figura.backend2.NetworkStuff;
 import org.figuramc.figura.utils.FiguraText;
 import org.figuramc.figura.utils.MathUtils;
 import org.figuramc.figura.utils.ui.UIHelper;
@@ -60,20 +59,13 @@ public class StatusWidget implements FiguraWidget, FiguraTickable, GuiEventListe
         Avatar avatar = AvatarManager.getAvatarForPlayer(CosmetiguraMod.getLocalPlayerUUID());
         boolean empty = avatar == null || avatar.nbt == null;
 
-        status = empty ? 0 : avatar.fileSize > NetworkStuff.getSizeLimit() ? 1 : avatar.fileSize > NetworkStuff.getSizeLimit() * 0.75 ? 2 : 3;
-
+        status = empty ? 0 : 3;
         int texture = empty || !avatar.hasTexture ? 0 : 3;
         status += texture << 2;
 
         int script = empty ? 0 : avatar.scriptError ? 1 : avatar.luaRuntime == null ? 0 : avatar.versionStatus > 0 ? 2 : 3;
         status += script << 4;
         scriptError = script == 1 ? avatar.errorText.copy() : null;
-
-        int backend = NetworkStuff.backendStatus;
-        status += backend << 6;
-
-        String dc = NetworkStuff.disconnectedReason;
-        disconnectedReason = backend == 1 && dc != null && !dc.isBlank() ? Component.literal(dc) : null;
     }
 
     @Override
@@ -117,12 +109,7 @@ public class StatusWidget implements FiguraWidget, FiguraTickable, GuiEventListe
         String part = "gui.status." + STATUS_NAMES.get(i);
 
         MutableComponent info;
-        if (i == 0) {
-            double size = NetworkStuff.getSizeLimit();
-            info = FiguraText.of(part + "." + color, MathUtils.asFileSize(size));
-        } else {
-            info = FiguraText.of(part + "." + color);
-        }
+        info = FiguraText.of(part + "." + color);
 
         MutableComponent text = FiguraText.of(part).append("\n• ").append(info).setStyle(TEXT_COLORS.get(color));
 

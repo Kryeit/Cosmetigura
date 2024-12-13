@@ -31,7 +31,6 @@ import net.minecraft.world.phys.Vec3;
 import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.animation.Animation;
 import org.figuramc.figura.animation.AnimationPlayer;
-import org.figuramc.figura.backend2.NetworkStuff;
 import org.figuramc.figura.config.Configs;
 import org.figuramc.figura.lua.FiguraLuaPrinter;
 import org.figuramc.figura.lua.FiguraLuaRuntime;
@@ -991,7 +990,7 @@ public class Avatar {
     }
 
     private int getVersionStatus() {
-        if (version == null || (NetworkStuff.latestVersion != null && version.compareTo(NetworkStuff.latestVersion) > 0))
+        if (version == null)
             return 0;
         return version.compareTo(CosmetiguraMod.VERSION);
     }

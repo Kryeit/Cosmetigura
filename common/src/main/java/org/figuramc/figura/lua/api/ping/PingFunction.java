@@ -1,7 +1,6 @@
 package org.figuramc.figura.lua.api.ping;
 
 import org.figuramc.figura.avatar.Avatar;
-import org.figuramc.figura.backend2.NetworkStuff;
 import org.figuramc.figura.config.Configs;
 import org.figuramc.figura.lua.LuaWhitelist;
 import org.figuramc.figura.lua.docs.LuaTypeDoc;
@@ -60,7 +59,6 @@ public class PingFunction extends LuaFunction {
         boolean sync = Configs.SYNC_PINGS.value;
         byte[] data = new PingArg(args).toByteArray();
 
-        NetworkStuff.sendPing(id, sync, data);
         if (!sync) owner.runPing(id, data);
 
         return NIL;

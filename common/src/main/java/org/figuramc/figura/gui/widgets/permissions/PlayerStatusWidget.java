@@ -5,7 +5,6 @@ import net.minecraft.network.chat.MutableComponent;
 import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
-import org.figuramc.figura.backend2.NetworkStuff;
 import org.figuramc.figura.gui.widgets.StatusWidget;
 import org.figuramc.figura.permissions.Permissions;
 import org.figuramc.figura.utils.FiguraText;
@@ -55,7 +54,7 @@ public class PlayerStatusWidget extends StatusWidget {
         }
 
         // size
-        status = !CosmetiguraMod.isLocal(owner) ? 3 : avatar.fileSize > NetworkStuff.getSizeLimit() ? 1 : avatar.fileSize > NetworkStuff.getSizeLimit() * 0.75 ? 2 : 3;
+        status = 3;
 
         // complexity
         int complexity = avatar.renderer == null ? 0 : avatar.complexity.pre >= avatar.permissions.get(Permissions.COMPLEXITY) ? 1 : 3;

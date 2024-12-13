@@ -11,7 +11,6 @@ import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.avatar.local.CacheAvatarLoader;
 import org.figuramc.figura.avatar.local.LocalAvatarFetcher;
 import org.figuramc.figura.avatar.local.LocalAvatarLoader;
-import org.figuramc.figura.backend2.NetworkStuff;
 import org.figuramc.figura.compat.GeckoLibCompat;
 import org.figuramc.figura.compat.SimpleVCCompat;
 import org.figuramc.figura.config.Configs;
@@ -86,7 +85,6 @@ public class CosmetiguraMod {
 
     public static void tick() {
         pushProfiler("network");
-        NetworkStuff.tick();
         popPushProfiler("files");
         LocalAvatarLoader.tick();
         LocalAvatarFetcher.tick();

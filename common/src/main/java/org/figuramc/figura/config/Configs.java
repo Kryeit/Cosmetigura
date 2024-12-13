@@ -7,7 +7,6 @@ import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.avatar.local.CacheAvatarLoader;
 import org.figuramc.figura.avatar.local.LocalAvatarFetcher;
-import org.figuramc.figura.backend2.NetworkStuff;
 import org.figuramc.figura.entries.EntryPointManager;
 import org.figuramc.figura.gui.FiguraToast;
 import org.figuramc.figura.gui.screens.ConfigScreen;
@@ -209,13 +208,7 @@ public class Configs {
             WARDROBE_BUTTON = new ConfigType.KeybindConfig("wardrobe_button", MISC, "key.keyboard.unknown");
     public static final ConfigType.EnumConfig
             BUTTON_LOCATION = new ConfigType.EnumConfig("button_location", MISC, 0, 5),
-            UPDATE_CHANNEL = new ConfigType.EnumConfig("update_channel", MISC, 1, 3) {
-                @Override
-                public void onChange() {
-                    super.onChange();
-                    NetworkStuff.checkVersion();
-                }
-            },
+            UPDATE_CHANNEL = new ConfigType.EnumConfig("update_channel", MISC, 1, 3),
             DEFAULT_PERMISSION_LEVEL = new ConfigType.EnumConfig("default_permission_level", MISC, 2, Permissions.Category.values().length) {
                 {
                     List<Component> list = new ArrayList<>();
@@ -276,11 +269,6 @@ public class Configs {
     };
     public static final ConfigType.IPConfig
             SERVER_IP = new ConfigType.IPConfig("server_ip", DEV, "figura.moonlight-devs.org") {
-        @Override
-        public void onChange() {
-            super.onChange();
-            NetworkStuff.reAuth();
-        }
     };
     @SuppressWarnings("unused")
     public static final ConfigType.ButtonConfig

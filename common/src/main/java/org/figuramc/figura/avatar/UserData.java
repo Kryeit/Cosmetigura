@@ -4,7 +4,6 @@ import com.mojang.datafixers.util.Pair;
 import net.minecraft.nbt.CompoundTag;
 import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.local.CacheAvatarLoader;
-import org.figuramc.figura.backend2.NetworkStuff;
 
 import java.util.ArrayList;
 import java.util.BitSet;
@@ -20,17 +19,6 @@ public class UserData {
 
     public UserData(UUID id) {
         this.id = id;
-    }
-
-    public void loadData(ArrayList<Pair<String, Pair<String, UUID>>> avatars, Pair<BitSet,BitSet> badges) {
-        loadBadges(badges);
-        clear();
-        for (Pair<String, Pair<String, UUID>> avatar : avatars) {
-            if (!CacheAvatarLoader.checkAndLoad(avatar.getFirst(), this)) {
-                Pair<String, UUID> pair = avatar.getSecond();
-                NetworkStuff.getAvatar(this, pair.getSecond(), pair.getFirst(), avatar.getFirst());
-            }
-        }
     }
 
     public void loadAvatar(CompoundTag nbt) {

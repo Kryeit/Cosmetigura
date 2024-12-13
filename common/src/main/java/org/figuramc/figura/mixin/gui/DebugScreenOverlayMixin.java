@@ -5,7 +5,6 @@ import net.minecraft.client.gui.components.DebugScreenOverlay;
 import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
-import org.figuramc.figura.backend2.NetworkStuff;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -46,7 +45,6 @@ public class DebugScreenOverlayMixin {
                 lines.add(++i, color + String.format("World Render instructions: %d (W: %d PW: %d)", avatar.worldRender.getTotal(), avatar.worldRender.pre, avatar.worldRender.post) + ChatFormatting.RESET);
             }
         }
-        lines.add(++i, String.format("Pings per second: ↑%d, ↓%d", NetworkStuff.pingsSent, NetworkStuff.pingsReceived));
 
         lines.add(++i, "");
     }
