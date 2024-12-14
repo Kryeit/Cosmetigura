@@ -24,7 +24,6 @@
     "compat.GeckolibGeoArmorRendererMixin",
     "compat.GeckolibGeoRendererMixin",
     "compat.SimpleVCMixin",
-    "font.BitmapGlyphMixin",
     "gui.ChatComponentAccessor",
     "gui.ChatComponentMixin",
     "gui.ChatScreenAccessor",

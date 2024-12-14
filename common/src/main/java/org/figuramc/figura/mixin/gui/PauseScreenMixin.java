@@ -25,7 +25,7 @@ public class PauseScreenMixin extends Screen {
     @Inject(method = "createPauseMenu", at = @At("RETURN"))
     private void createTopButton(CallbackInfo ci) {
         int optionsButtonX = this.width / 2 - 100;
-        int optionsButtonY = this.height / 4 + 81;
+        int optionsButtonY = this.height / 4 + 80;
 
         int x = optionsButtonX - 25;
         int y = optionsButtonY;

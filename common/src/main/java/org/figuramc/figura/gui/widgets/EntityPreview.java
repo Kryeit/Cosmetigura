@@ -53,16 +53,6 @@ public class EntityPreview extends AbstractContainerElement {
         modelY = height / 2;
         angleX = pitch;
         angleY = yaw;
-
-        // button
-        children.add(button = new SwitchButton(
-                x + 4, y + 4, 16, 16,
-                0, 0, 16,
-                new CosmetiguraIdentifier("textures/gui/expand.png"),
-                48, 32,
-                FiguraText.of("gui.expand"),
-                bx -> Minecraft.getInstance().setScreen(parentScreen)
-        ));
     }
 
     @Override
@@ -75,12 +65,10 @@ public class EntityPreview extends AbstractContainerElement {
         int width = getWidth();
         int height = getHeight();
 
-        if (!button.isToggled()) {
-            // border
-            UIHelper.blitSliced(gui, x, y, width, height, UIHelper.OUTLINE_FILL);
-            // overlay
-            UIHelper.blit(gui, x + 1, y + 1, width - 2, height, OVERLAY);
-        }
+        // border
+        UIHelper.blitSliced(gui, x, y, width, height, UIHelper.OUTLINE_FILL);
+        // overlay
+        UIHelper.blit(gui, x + 1, y + 1, width - 2, height, OVERLAY);
 
         // scissors
         gui.enableScissor(x + 1, y + 1, x + width - 1, y + height - 1);

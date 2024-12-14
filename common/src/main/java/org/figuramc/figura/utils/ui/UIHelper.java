@@ -50,7 +50,6 @@ public final class UIHelper {
 
     public static final ResourceLocation OUTLINE_FILL = new CosmetiguraIdentifier("textures/gui/outline_fill.png");
     public static final ResourceLocation OUTLINE = new CosmetiguraIdentifier("textures/gui/outline.png");
-    public static final ResourceLocation TOOLTIP = new CosmetiguraIdentifier("textures/gui/tooltip.png");
     public static final ResourceLocation UI_FONT = new CosmetiguraIdentifier("ui");
     public static final ResourceLocation SPECIAL_FONT = new CosmetiguraIdentifier("special");
 
@@ -503,35 +502,12 @@ public final class UIHelper {
         gui.pose().pushPose();
         gui.pose().translate(0d, 0d, 999d);
 
-        if (background)
-            blitSliced(gui, x - 4, y - 4, width + 8, height + 8, TOOLTIP);
-
         for (int i = 0; i < text.size(); i++) {
             FormattedCharSequence charSequence = text.get(i);
             gui.drawString(font, charSequence, x, y + font.lineHeight * i, 0xFFFFFF);
         }
 
         gui.pose().popPose();
-    }
-
-    public static void renderScrollingText(GuiGraphics gui, Component text, int x, int y, int width, int color) {
-        Font font = Minecraft.getInstance().font;
-        int textWidth = font.width(text);
-        int textX = x;
-
-        // the text fit :D
-        if (textWidth <= width) {
-            gui.drawString(font, text, textX, y, color);
-            return;
-        }
-
-        // oh, no it doesn't fit
-        textX += getTextScrollingOffset(textWidth, width, false);
-
-        // draw text
-        gui.enableScissor(x, y, x + width, y + font.lineHeight);
-        gui.drawString(font, text, textX, y, color);
-        gui.disableScissor();
     }
 
     public static void renderCenteredScrollingText(GuiGraphics gui, Component text, int x, int y, int width, int height, int color) {

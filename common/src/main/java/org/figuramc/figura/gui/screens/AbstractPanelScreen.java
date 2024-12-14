@@ -116,11 +116,6 @@ public abstract class AbstractPanelScreen extends Screen {
             pose.popPose();
         }
 
-        // render tooltip
-        if (tooltip != null)
-            UIHelper.renderTooltip(gui, tooltip, mouseX, mouseY, true);
-
-        tooltip = null;
     }
 
     @Override
