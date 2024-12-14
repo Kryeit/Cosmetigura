@@ -17,7 +17,6 @@ import org.figuramc.figura.CosmetiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.config.ConfigManager;
-import org.figuramc.figura.config.forge.ModConfig;
 import org.figuramc.figura.gui.forge.GuiOverlay;
 import org.figuramc.figura.gui.forge.GuiUnderlay;
 import org.figuramc.figura.utils.forge.FiguraResourceListenerImpl;
@@ -33,7 +32,6 @@ public class CosmetiguraModClientForge extends CosmetiguraMod {
     @SubscribeEvent
     public static void onInitializeClient(FMLClientSetupEvent event) {
         onClientInit();
-        ModConfig.registerConfigScreen();
         for (VanillaGuiOverlay overlay : VanillaGuiOverlay.values()) {
             vanillaOverlays.add(overlay.type());
         }
